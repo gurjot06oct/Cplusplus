@@ -1,6 +1,6 @@
 #include <iostream>
 
-// Wrap around or Circular behavior in data types, like signed integers, refers to values looping within their range. When a value exceeds its maximum, it wraps to the minimum, and vice versa, creating a closed loop of possible values. This behavior arises due to two's complement representation, where incrementing past the maximum results in the minimum value, and decrementing below the minimum results in the maximum value. Thus, values are circularly connected, forming a continuous loop within the range of the data type.
+// Wrap around or Circular behavior in signed data types refers to values looping within their range. When a value exceeds its maximum, it wraps to the minimum, and vice versa, creating a closed loop of possible values. This behavior arises due to two's complement representation, where incrementing past the maximum results in the minimum value, and decrementing below the minimum results in the maximum value. Thus, values are circularly connected, forming a continuous loop within the range of the data type.
 
 int main()
 {

@@ -1,4 +1,10 @@
 #include <iostream>
+
+// Char macros
+#include <climits> // for CHAR_MIN, CHAR_MAX, UCHAR_MAX
+#include <cstdint> // for UINT16_MIN, UINT16_MAX, UINT32_MIN, UINT32_MAX
+#include <cwchar>  // for WCHAR_MIN, WCHAR_MAX
+
 int main()
 {
     // char: Range: -128 to 127 (8 bits)
