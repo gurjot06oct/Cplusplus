@@ -1,0 +1,7 @@
+`const_cast` is a C++ casting operator used to add or remove `const` (or `volatile`) qualifiers from a variable. It is the only cast that can be used to cast away `const`ness and `volatile`ness. This is typically used when you need to pass a `const` variable to a function that requires a non-const parameter, or when you need to modify a `const` variable within a specific scope. However, it should be used with caution because modifying a value that was originally declared as `const` is undefined behavior if the original object is truly constant.
+
+- **Purpose**: `const_cast` is used to add or remove `const` or `volatile` qualifiers from a variable.
+- **Removing `const`**: This allows modification of a `const` variable, but modifying a truly constant variable leads to undefined behavior.
+- **Adding `const`**: Less common, but it can be used to pass non-const variables to functions expecting `const` parameters.
+- **Safe Usage**: Use `const_cast` in cases where you are certain that the underlying object is not really constant or when dealing with logically mutable state.
+- **Caution**: Always ensure that modifying a `const` variable does not lead to undefined behavior, especially if the original object is declared as `const`.
