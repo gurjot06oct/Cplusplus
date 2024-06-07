@@ -1,0 +1,4 @@
+- `static_cast` is used for safe and well-defined conversions at compile-time.
+- It's commonly used for converting between numeric types, performing upcasting/downcasting in inheritance hierarchies, converting enum classes to integer types, and more.However, downcasting is not recommended as it is not safe in c++.
+- However, it doesn't perform runtime checks like `dynamic_cast`, so it's not suitable for polymorphic conversions.
+- Using `static_cast` ensures that the conversion is explicit and visible in the code, which can help in understanding and maintaining the codebase.
