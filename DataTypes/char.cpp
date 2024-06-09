@@ -1,12 +1,14 @@
 #include <iostream>
 
 // Char macros
-#include <climits> // for CHAR_MIN, CHAR_MAX, UCHAR_MAX
-#include <cstdint> // for UINT16_MIN, UINT16_MAX, UINT32_MIN, UINT32_MAX
-#include <cwchar>  // for WCHAR_MIN, WCHAR_MAX
+#include <limits.h> // for CHAR_MIN, CHAR_MAX, UCHAR_MAX
+#include <cstdint>  // for UINT16_MIN, UINT16_MAX, UINT32_MIN, UINT32_MAX
+#include <cwchar>   // for WCHAR_MIN, WCHAR_MAX
 
 int main()
 {
+    char alpha = 'A'; // for char, single quote only
+
     // char: Range: -128 to 127 (8 bits)
     // Negative values don't have a character to represent
     char myChar = -134; // Assigning character 'z'

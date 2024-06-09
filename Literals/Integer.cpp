@@ -4,7 +4,7 @@ int main()
 {
     // Decimal literals
     short decimal_short = 42;
-    unsigned short u_decimal_short = 42u;
+    unsigned short u_decimal_short = 42U;
     int decimal = 42;
     unsigned int u_decimal = 42u;
     long decimal_long = 42L;

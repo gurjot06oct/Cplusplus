@@ -1,0 +1,10 @@
+// ### Summary
+
+// - `cin >>`: Basic input, skips whitespace.
+// - `cin.get()`: Reads single character, includes whitespace.
+// - `cin.getline()`: Reads an entire line, includes spaces.
+// - `cin.ignore()`: Ignores characters in the input buffer.
+// - `cin.peek()`: Peeks at the next character without extracting it.
+// - `cin.putback()`: Puts a character back into the input buffer.
+// - `cin.unget()`: Puts the last character extracted back.
+// - `cin.read()`: Reads a specified number of characters into a buffer.

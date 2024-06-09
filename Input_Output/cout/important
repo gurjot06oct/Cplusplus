@@ -1,0 +1,11 @@
+// ### Summary
+
+// - `cout <<`: Basic output using the insertion operator.
+// - `cout.put()`: Outputs a single character.
+// - `cout.write()`: Outputs a block of characters.
+// - `cout.flush()`: Flushes the output buffer.
+// - `cout.precision()`: Sets the decimal precision for floating-point output.
+// - `cout.width()`: Sets the minimum field width for the next output.
+// - `cout.fill()`: Sets the fill character for width padding.
+// - `cout.setf()`: Sets format flags for output.
+// - `cout.unsetf()`: Unsets format flags.
