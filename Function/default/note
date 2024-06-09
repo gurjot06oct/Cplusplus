@@ -1,0 +1,17 @@
+Defining default parameters in C++ allows you to provide a default value for a function parameter, which can be used if the caller doesn't specify a value for that parameter. Here's a detailed explanation covering basic to advanced aspects of default parameters in C++:
+
+### 1. Default Parameters with Complex Types:
+
+You can use complex types (e.g., arrays, structures, classes) as default parameter values. However, be cautious with this approach, as it can lead to unexpected behavior due to object slicing.
+
+### 2. Default Parameters and Function Pointers:
+
+Default parameters can't be function pointers. However, you can use function overloading or default arguments with lambda functions in C++11 and later to achieve similar functionality.
+
+### Summary:
+
+- Default parameters provide a way to specify default values for function parameters.
+- They allow functions to be called with fewer arguments if default values are provided.
+- Default parameters must be specified from right to left and can't be in the middle of the parameter list.
+- They can be combined with function overloading to provide multiple versions of a function with different parameters.
+- Default parameters can't be function pointers, but you can use function overloading or lambda functions to achieve similar behavior.
