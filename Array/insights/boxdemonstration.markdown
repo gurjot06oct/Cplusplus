@@ -135,7 +135,7 @@ This formula helps us precisely locate any element within the 2D array based on 
    - Moving to the second element in the second row (`*(arr + 1) + 1`): `120 + 4 = 124`
    - This points to `arr[1][1]`, which has the value `7`.
 
-3. **`\*\*(arr + 1)`**:
+3. **`**(arr + 1)`**:
 
    - Base Address of `arr`: `100`
    - Offset to the second row (`arr + 1`): `1 * 20 = 20` bytes
@@ -143,7 +143,7 @@ This formula helps us precisely locate any element within the 2D array based on 
    - Dereferencing `**(arr + 1)` gives the value at `120`, which is `6`.
    - This is the value of `arr[1][0]`.
 
-4. **`\*\*(&arr + 2)`**:
+4. **`**(&arr + 2)`**:
 
    - Moving two blocks ahead from the base address (`&arr`): `100 + 2 * 100 = 300`
    - Dereferencing `**(&arr + 2)` leads to undefined behavior as it points outside the defined range of the array. It may yield garbage values or cause runtime errors.
