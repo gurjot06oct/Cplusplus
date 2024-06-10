@@ -96,7 +96,7 @@ To find the memory address of an element at position `(i, j)` in a 2D array `arr
 
 ### Simplified Formula:
 
-\[ \text{Memory Address of Element at position (i, j) } = \text{\*(arr+i)+j}= \text{Base Address of arr} + (i \times m \times \text{sizeof(int)}) + (j \times \text{sizeof(int)}) \]
+\[ \text{Memory Address of Element at position (i, j) = \*(arr+i)+j} = \text{Base Address of arr} + (i \times m \times \text{sizeof(int)}) + (j \times \text{sizeof(int)}) \]
 
 In this context:
 
