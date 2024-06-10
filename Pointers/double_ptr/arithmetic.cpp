@@ -7,7 +7,7 @@ int main()
     int **doublePtr = &ptr1; // Double pointer to ptr1
 
     std::cout << "Address of ptr1: " << (unsigned long)doublePtr << std::endl;
-    // Pointer arithmetic: Adding 1 to the double pointer adds 8 bytes to address as sizeof(pointer) = 8 Bytes
+    // Pointer arithmetic: Adding 1 to the double pointer adds 8 bytes to address as sizeof(pointer) = ( 8 bytes (64 bit systems)/ 4 bytes (32 bit systems) )
     doublePtr++;
 
     // Printing the addresses after pointer arithmetic

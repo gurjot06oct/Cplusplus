@@ -38,7 +38,7 @@ int main()
     *ptr = 20;                                   // Change the value of var using the pointer
     cout << "New value of var: " << var << endl; // Output the new value of var
 
-    // Size of Pointer ( 8 bytes )
+    // Size of Pointer ( 8 bytes (64 bit systems)/ 4 bytes (32 bit systems) )
     cout << "Size of ptr: " << sizeof(ptr) << endl; // Output : 8
     return 0;
 }
