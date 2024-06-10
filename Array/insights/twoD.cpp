@@ -53,9 +53,9 @@ int main()
 
     // Demonstrate the difference in addressing
 
-    // Pointer arithmetic: ptr + 1 moves to the previous consecutive integer value
+    // Pointer arithmetic: ptr - 1 moves to the previous consecutive integer value
     // Here, it's the value '9' in the array
-    std::cout << "\nValue at ptr + 1: " << *(ptr - 1) << std::endl;
+    std::cout << "\nValue at ptr - 1: " << *(ptr - 1) << std::endl;
 
     return 0;
 }
