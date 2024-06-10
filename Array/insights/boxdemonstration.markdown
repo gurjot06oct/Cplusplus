@@ -1,6 +1,6 @@
-### Explaining the Box Theory for Understanding 2D Arrays in C++
+### Explaining the Box Demonstration Theory for Understanding 2D Arrays in C++
 
-The box theory is a conceptual framework that helps understand how referencing and dereferencing work in 2D arrays. Let's explore this with an example array and visual representation.
+The box demonstration theory is a conceptual framework that helps understand how referencing and dereferencing work in 2D arrays. Let's explore this with an example array and visual representation.
 
 ### Example 2D Array
 
@@ -110,7 +110,7 @@ In this context:
 
 For a 5x5 array of integers (`int`), where each `int` occupies `4` bytes in memory:
 
-Memory Address of Element at position (i, j) = arr + i _ 20 + j _ 4
+Memory Address of Element at position (i, j) = arr + i \* 20 + j \* 4
 
 - arr is the starting memory address of the array.
 - 20 represents the rowSize in bytes, calculated as 5 \* sizeof(int).
