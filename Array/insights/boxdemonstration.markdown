@@ -130,16 +130,16 @@ This formula helps us precisely locate any element within the 2D array based on 
 2. **`*(arr + 1) + 1`**:
 
    - Base Address of `arr`: `100`
-   - Offset to the second row (`arr + 1`): `1 * 20 = 20` bytes
-   - Address of the first element in the second row (`*(arr + 1)`): `100 + 20 = 120`
+   - Offset to the second row (`arr + 1`): `1 * 5 * sizeof(int) = 20` bytes
+   - Address of the first element in the second row (`*(arr + 1)`): `100 + 5 * sizeof(int) = 120`
    - Moving to the second element in the second row (`*(arr + 1) + 1`): `120 + 4 = 124`
    - This points to `arr[1][1]`, which has the value `7`.
 
 3. **`**(arr + 1)`**:
 
    - Base Address of `arr`: `100`
-   - Offset to the second row (`arr + 1`): `1 * 20 = 20` bytes
-   - Address of the first element in the second row (`*(arr + 1)`): `100 + 20 = 120`
+   - Offset to the second row (`arr + 1`): `1 * 5 * sizeof(int) = 20` bytes
+   - Address of the first element in the second row (`*(arr + 1)`): `100 + 5 * sizeof(int) = 120`
    - Dereferencing `**(arr + 1)` gives the value at `120`, which is `6`.
    - This is the value of `arr[1][0]`.
 
