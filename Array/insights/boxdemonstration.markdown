@@ -96,9 +96,9 @@ To find the memory address of an element at position `(i, j)` in a 2D array `arr
 
 ### Simplified Formula:
 
-\[ \text{Memory Address of Element at position (i, j)} = \text{Base Address of arr} + \text{Offset for i-th row} + \text{Offset for j-th element in i-th row} \]
+Memory Address of Element at position (i, j) = Base Address of arr + Offset for i-th row + Offset for j-th element in i-th row
 
-\[ \text{Memory Address of Element at position (i, j)} = \text{arr} + i \times \text{rowSize} + j \times \text{elementSize} \]
+Memory Address of Element at position (i, j) = arr + i*m*sizeof(arr_type) + j\*sizeof(arr_type)
 
 In this context:
 
@@ -110,13 +110,11 @@ In this context:
 
 For a 5x5 array of integers (`int`), where each `int` occupies `4` bytes in memory:
 
-\[ \text{rowSize} = 5 \times \text{sizeof(int)} = 5 \times 4 = 20 \text{ bytes} \]
+Memory Address of Element at position (i, j) = arr + i _ 20 + j _ 4
 
-\[ \text{elementSize} = \text{sizeof(int)} = 4 \text{ bytes} \]
-
-So, the address calculation formula becomes:
-
-\[ \text{Memory Address of Element at position (i, j)} = \text{Base Address of arr} + i \times 20 + j \times 4 \]
+- arr is the starting memory address of the array.
+- 20 represents the rowSize in bytes, calculated as 5 \* sizeof(int).
+- 4 represents the elementSize in bytes, which is sizeof(int).
 
 This formula helps us precisely locate any element within the 2D array based on its row and column indices.
 
