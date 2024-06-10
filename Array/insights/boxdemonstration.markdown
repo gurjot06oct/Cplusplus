@@ -98,7 +98,7 @@ To find the memory address of an element at position `(i, j)` in a 2D array `arr
 
 Memory Address of Element at position (i, j) = Base Address of arr + Offset for i-th row + Offset for j-th element in i-th row
 
-Memory Address of Element at position (i, j) = arr + i*m*sizeof(arr_type) + j\*sizeof(arr_type)
+Memory Address of Element at position (i, j) = arr + i\*m\*sizeof(arr_type) + j\*sizeof(arr_type)
 
 In this context:
 
