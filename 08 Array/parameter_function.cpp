@@ -42,7 +42,7 @@ void Passsing2d(int (*_2d)[][3])
     for (int i = 0; i < 3; ++i)
     {
         for (int j = 0; j < 3; ++j)
-            std::cout << (*_2d)[i][j] << " "; // *(*(*_2d + i ) + j)
+            std::cout << (*_2d)[i][j] << " ";
         std::cout << std::endl;
     }
 }
