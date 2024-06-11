@@ -19,7 +19,8 @@ void Passsing0d(int *_0d)
 
 // - This function receives a pointer to an array of integers (1D pointer).
 // - It treats the pointer as a pointer to an array of integers and prints each element using array notation.
-// - Note that the size of the array doesn't need to be specified in the parameter, as the size is already known from the context.
+// - Note that the size of the array doesn't need to be specified in the parameter, but the size is must be known for the context.
+// - Inside the function, the elements can accessed using single dereferencing also because `_1d` is a pointer to a 1D array.
 
 void Passsing1d(int (*_1d)[])
 {
@@ -36,7 +37,7 @@ void Passsing1d(int (*_1d)[])
 // - This function receives a pointer to a 2D array of integers with 3 columns (2D pointer).
 // - It iterates over the rows and columns of the array, printing each element.
 // - The row size needs to be specified in the function parameter because the function expects a pointer to a 2D array where the row size is fixed but the column size can vary.
-// - Inside the function, the elements are accessed using double dereferencing because `_2d` is a pointer to a 2D array.
+// - Inside the function, the elements can accessed using double dereferencing also because `_2d` is a pointer to a 2D array.
 
 void Passsing2d(int (*_2d)[][3])
 {
