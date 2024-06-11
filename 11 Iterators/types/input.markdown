@@ -1,3 +1,5 @@
+### Input Iterators
+
 #### Overview
 
 Input iterators are considered the simplest and weakest among all iterator categories based on their functionality. They are used primarily for sequential input operations, where each value is read only once, and the iterator is incremented to move to the next element. Despite their limitations, input iterators are fundamental and underpin more powerful iterator types like forward, bidirectional, and random-access iterators.
