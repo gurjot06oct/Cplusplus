@@ -2,60 +2,43 @@
 
 int main()
 {
-    // The variable arr is a 2D array, and it uses a referential frame.
-    // This means that arr represents the base address of the entire array
-    // and its elements are accessed based on this base address.
-
-    // On the other hand, the pointer ptr is a normal pointer, and it doesn't
-    // have the concept of referential frame. It simply points to a memory address.
-
-    // When we use &arr, it gives the address of the entire array (referential frame).
-    // Adding 1 to this address would move to the next memory block after the array.
-
-    // On the other hand, ptr + 1 moves ptr to the next consecutive memory address,
-    // which is the address of the next integer element, because ptr is just a pointer.
-
-    // int(*ptr)[3][3] = &arr + 1;
-    // Therefore, *(&arr + 1) and *(ptr + 1) both give the same memory address,
-    // but they interpret it differently:
-    // *(&arr + 1) considers the referential frame and gives the value at that address
-    // *(ptr + 1) simply goes to the next integer value in memory.
-
     // Define a 2D array of integers
-    int arr[3][3] = {{1, 2, 3},
-                     {4, 5, 6},
-                     {7, 8, 9}};
+    int arr[3][3] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}};
 
-    // Define a pointer to an integer
-    int *ptr = (int *)(&arr + 1);
+    // 0D Pointer (ptr):
+    // - Refers to a single integer's memory address within the 2D array.
+    // - Converted from a 2D pointer using typecasting.
+    int *ptr = reinterpret_cast<int *>(&arr);
 
-    // Display the elements of the array using the pointer
-    std::cout << "Using Pointer:" << std::endl;
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            std::cout << *(ptr + i * 3 + j) << " ";
-        }
-        std::cout << std::endl;
-    }
+    // 1D Pointer (ptr1D):
+    // - Points to the first row (1D array) within the 2D array.
+    // - `arr` and `ptr1D` share the same memory address and frame of reference.
+    // int(*ptr1D)[3] = arr;
 
-    // Display the elements of the array using the array notation
-    std::cout << "\nUsing Array Notation:" << std::endl;
-    for (int i = 0; i < 3; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            std::cout << arr[i][j] << " ";
-        }
-        std::cout << std::endl;
-    }
+    // 2D Pointer (ptr2D):
+    // - Represents a pointer to the entire 2D array.
+    // - `&arr` and `ptr2D` both have the same memory address and frame of reference.
+    // int(*ptr2D)[3][3] = &arr;
 
-    // Demonstrate the difference in addressing
+    // `arr` is a 2D array, representing the base address of the entire array.
+    // Each element is accessed based on this base address.
 
-    // Pointer arithmetic: ptr - 1 moves to the previous consecutive integer value
-    // Here, it's the value '9' in the array
-    std::cout << "\nValue at ptr - 1: " << *(ptr - 1) << std::endl;
+    // `ptr` is a 0D pointer, simply pointing to a memory address without a referential frame.
+    // It does not represent the entire array like `arr`.
+
+    // Demonstrate the Difference in Addressing:
+
+    // Accessing the value at ptr + 1 points to the second element of the first row.
+    // Incrementing a 0D pointer moves to the next consecutive memory address.
+    std::cout << "\nValue at ptr + 1: " << *(ptr + 1) << std::endl; // Outputs: 2
+
+    // However, &arr + 1 returns the same address as &arr[2][2] + 1,
+    // which means it points to the memory address right after the last element of the last row.
+    // This is outside the array's defined range and may result in garbage values.
+    std::cout << "\nValue at &arr + 1: " << *(&arr + 1) << std::endl; // Outputs: Garbage value
 
     return 0;
 }
