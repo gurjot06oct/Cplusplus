@@ -8,10 +8,9 @@ In a 1D array, pointers and arrays behave similarly because they both reference 
 int arr[5] = {1, 2, 3, 4, 5};
 int *ptr = arr;
 
-// ptr vs arr
 std::cout << "Memory addresses after incrementing by 1:" << std::endl;
-std::cout << ptr + 1 << std::endl;
-std::cout << arr + 1 << std::endl;
+std::cout << ptr + 1 << std::endl; // Points to the memory location of the second element in the array.
+std::cout << arr + 1 << std::endl; // Points to the memory location of the second element in the array.
 std::cout << std::endl;
 ```
 
