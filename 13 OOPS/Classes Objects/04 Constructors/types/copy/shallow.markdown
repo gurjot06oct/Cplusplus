@@ -1,4 +1,4 @@
-## **Understanding Shallow Copy**
+## **Shallow Copy**
 
 In shallow copy, an object is created by directly copying the data of all variables from the original object. While this approach works well for variables residing in the stack memory, it poses challenges when variables are dynamically allocated from the heap memory. If some variables are allocated memory from the heap, then the copied object's variables will reference the same memory locations as the original object.
 

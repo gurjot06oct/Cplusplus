@@ -1,4 +1,4 @@
-**Understanding Deep Copy**
+## **Deep Copy**
 
 In deep copy, an object is created by copying data of all variables, including dynamically allocated memory resources, with identical values to the original object. To perform a deep copy, a custom copy constructor needs to be explicitly defined, ensuring proper allocation and copying of dynamic memory resources. Additionally, it's crucial to allocate memory dynamically to variables in other constructors to maintain consistency.
 
