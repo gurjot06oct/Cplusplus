@@ -7,7 +7,6 @@ This code dynamically allocates memory for a 2D array based on user-provided dim
 ```cpp
     int rows, cols;
 
-    // Taking dimensions from the user
     std::cout << "Enter the number of rows: ";
     std::cin >> rows;
     std::cout << "Enter the number of columns: ";
@@ -17,7 +16,6 @@ This code dynamically allocates memory for a 2D array based on user-provided dim
 ### Memory Allocation and Initialization
 
 ```cpp
-    // Dynamically allocate memory for the 2D array
     int **array = new int *[rows];
     for (int i = 0; i < rows; ++i)
         array[i] = new int[cols];
@@ -31,7 +29,6 @@ This code dynamically allocates memory for a 2D array based on user-provided dim
 ### Printing the Array
 
 ```cpp
-    // Print the array
     std::cout << "The 2D array is:" << std::endl;
     for (int i = 0; i < rows; ++i)
     {

@@ -10,34 +10,32 @@ className (parameters...) {
 }
 ```
 
-### **Examples of Parameterized Constructor**
+### **Error Caused by Not Defining an Explicit Default Constructor**
 
-**Note:**: When defining a parameterized constructor and no default constructor is explicitly defined, creating an object without passing any arguments will result in an error.
-
-**Error Caused by Not Defining an Explicit Default Constructor**
+When defining a parameterized constructor and no default constructor is explicitly defined, creating an object without passing any arguments will result in an error. When a class includes one or more non-default constructors (those with parameters), it's essential to explicitly define a default constructor (one without parameters). The compiler won't generate a default constructor automatically in such cases. While it's not mandatory, adhering to this practice is recommended for better code clarity and to avoid unexpected behavior.
 
 ```cpp
 #include <iostream>
 #include <string>
 using namespace std;
 
-class Student {
-    int rno;
-    string name;
-    double fee;
+class SchoolStudent {
+    int rollNumber;
+    string studentName;
+    double tuitionFee;
 
 public:
-    Student(int no, const string& n, double f) : rno(no), name(n), fee(f) {}
+    SchoolStudent(int rollNo, const string& name, double fee) : rollNumber(rollNo), studentName(name), tuitionFee(fee) {}
 };
 
 int main()
 {
-    Student s; // This will cause an error
+    // Attempting to create an instance of SchoolStudent without providing necessary arguments
+    // This will cause a compilation error since no default constructor is defined in SchoolStudent
+    SchoolStudent s;
     return 0;
 }
 ```
-
-**Note:** Whenever we define one or more non-default constructors (with parameters) for a class, a default constructor (without parameters) should also be explicitly defined, as the compiler will not provide a default constructor implicitly. However, it's not necessary, but it's considered best practice to always define a default constructor.
 
 ### **Uses of Parameterized Constructor**
 
@@ -80,56 +78,3 @@ int main()
 ```
 
 In this example, default values assigned to every argument of the parameterized constructor allow creating the object without passing any parameters, similar to default constructors. Thus, this type of constructor functions as both a default and parameterized constructor.
-
-**Default Constructor in C++**
-
-A default constructor in C++ is a constructor that doesn't require any arguments. It's essentially a constructor without parameters, often referred to as a zero-argument constructor.
-
-**Syntax:**
-
-```
-className() {
-    // constructor body
-}
-```
-
-**Explanation:**
-A default constructor is used to initialize the object's data members when no values are provided explicitly during object creation. It's automatically invoked upon object instantiation if no other constructor is explicitly called.
-
-**Examples:**
-
-**Example 1:**
-
-```
-// C++ program to illustrate the concept of default constructors
-#include <iostream>
-using namespace std;
-
-class Construct {
-public:
-    int a, b;
-
-    // Default Constructor
-    Construct() {
-        a = 10;
-        b = 20;
-    }
-};
-
-int main() {
-    // Default constructor called automatically
-    // when the object is created
-    Construct c;
-    cout << "a: " << c.a << endl << "b: " << c.b;
-    return 1;
-}
-```
-
-**Output:**
-
-```
-a: 10
-b: 20
-```
-
-**Note:** Even without explicitly defining any constructor, the compiler automatically provides a default constructor.
