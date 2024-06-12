@@ -88,7 +88,7 @@ int main() {
     cout << endl;
 
     // Creating second object using copy constructor
-    Sample secondObj(firstObj);
+    Sample secondObj(firstObj); // Sample secondObj = firstObj
     cout << "Second Object: ";
     secondObj.display();
 
@@ -271,9 +271,9 @@ Shallow copying creates a new object that is an exact replica of the original ob
 
 ```cpp
 // Shallow Copy using default copy constructor or assignment operator
-Geeks Obj1(Obj); // Copy Constructor
+Example Obj1(Obj); // Copy Constructor
 // or
-Geeks Obj1 = Obj; // Default assignment operator
+Example Obj1 = Obj; // Default assignment operator
 ```
 
 **2. Deep Copy:**
@@ -281,7 +281,7 @@ Deep copying, on the other hand, involves creating a new object with its own sep
 
 ```cpp
 // Deep Copy using custom copy constructor or assignment operator
-Geeks Obj2;
+Example Obj2;
 Obj2 = Obj1; // Default assignment operator
 ```
 

@@ -57,24 +57,31 @@ private:
     int initialData;
 
 public:
-    Example(int initialValue = 0) { initialData = initialValue; }
+    // Constructor with default parameter
+    Example(int initialValue = 0) {
+        initialData = initialValue;
+    }
 
-    int getData() { return initialData; }
+    int getData() {
+        return initialData;
+    }
 };
 
-int main()
-{
+int main() {
+    // Creating an object using the default constructor
+    Example firstInstance; // This will use the default value 0 instead of throwing error
+    // Creating an object with a specified initial value
+    Example secondInstance(25); // This will use the value 25
 
-    Example firstInstance; // will not throw error
+    // Example secondInstance{25};  // Uses uniform initialization
 
-    Example secondInstance(25);
-
+    // Displaying the data of both objects
     cout << "First Object Data: " << firstInstance.getData() << endl;
-    cout << "Second Object Data: " << secondInstance.getData()
-         << endl;
+    cout << "Second Object Data: " << secondInstance.getData() << endl;
 
     return 0;
 }
+
 ```
 
 In this example, default values assigned to every argument of the parameterized constructor allow creating the object without passing any parameters, similar to default constructors. Thus, this type of constructor functions as both a default and parameterized constructor.
