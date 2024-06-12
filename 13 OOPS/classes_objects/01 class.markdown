@@ -1,5 +1,7 @@
 ### Classes in C++
 
+A class in C++ is a blueprint for creating objects that defines the structure and behavior of those objects. It serves as a template or a prototype, encapsulating data members (variables) and member functions (methods) that operate on that data. Classes provide a way to organize and manage related data and functionality, promoting code reusability, modularity, and abstraction.
+
 #### How to Create a Class
 
 In C++, a class is created using the `class` keyword followed by the class name and a pair of curly braces `{}`. Inside the curly braces, you define the components of the class.
@@ -55,7 +57,7 @@ int main() {
 
 In this example, `Car` is a class with data members `make`, `model`, and `year`. It also has member functions `setMake()`, `setModel()`, and `setYear()` to set the values of these data members. In the `main()` function, an object of the `Car` class is created, and its member functions are called to set the values of its data members.
 
-Defining data members (variables) outside the class involves using the scope resolution operator `::` to link the member with the class. Here's how you can do it:
+Defining data members (variables) and member functions outside the class involves using the scope resolution operator `::` to link the member with the class. Here's how you can do it:
 
 ```cpp
 #include <iostream>
@@ -81,8 +83,8 @@ int MyClass::getData() {
     return dataMember;
 }
 
-// Definition of data member outside the class
-int MyClass::dataMember = 0;
+// Definition of data member outside the class is alllowed only if it is static
+// int MyClass::dataMember = 0;
 
 int main() {
     MyClass obj;
@@ -96,6 +98,6 @@ In this example:
 
 - The `dataMember` is declared inside the `MyClass` class as a private member.
 - It's defined outside the class using the scope resolution operator `::`. You also need to specify the data type.
-- Remember to initialize static data members outside the class definition.
+- Remember that data member can only be initialized outside the class definition if it is static.
 
 This separation allows you to keep the class declaration clean while defining member functions and data members separately.
