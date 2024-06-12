@@ -5,39 +5,33 @@ In C++, shallow copy and deep copy refer to how data is copied from one object t
 
 Sure! To address potential memory management issues in the deep copy program, we need to ensure that the memory allocated for each `DeepCopy` object is managed correctly, avoiding double deletion and ensuring proper resource cleanup.
 
-### Deep Copy Example with Proper Memory Management
+### Deep Copy Example
 
 ```cpp
 #include <iostream>
+#include <memory>
 
 class DeepCopy {
 public:
-    int* data;
+    std::shared_ptr<int> data;
 
     // Constructor
     DeepCopy(int value) {
-        data = new int(value);
+        data = std::make_shared<int>(value);
     }
 
     // Deep copy constructor
     DeepCopy(const DeepCopy& other) {
-        data = new int(*other.data);
+        data = std::make_shared<int>(*other.data);
     }
 
     // Copy assignment operator
     DeepCopy& operator=(const DeepCopy& other) {
         if (this != &other) {
-            // Free existing resource
-            delete data;
             // Allocate new memory and copy the data
-            data = new int(*other.data);
+            data = std::make_shared<int>(*other.data);
         }
         return *this;
-    }
-
-    // Destructor
-    ~DeepCopy() {
-        delete data;
     }
 
     // Display function
@@ -79,6 +73,7 @@ int main() {
 
     return 0;
 }
+
 ```
 
 ### Explanation

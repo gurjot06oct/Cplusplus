@@ -50,6 +50,7 @@ int main() {
     ResourceHolder originalResource(42);
 
     // Create a new ResourceHolder by moving resources from the originalResource
+    // Calls the move assignment operator
     ResourceHolder newResource(move(originalResource));
 
     cout << "newResource.resource: " << *newResource.resource << endl;
