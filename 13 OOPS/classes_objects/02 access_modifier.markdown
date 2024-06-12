@@ -76,6 +76,32 @@ int main() {
 }
 ```
 
+In C++, if you declare variables and functions within a class without specifying an access modifier, they are considered `private` by default. This means that they can only be accessed within the class and are not accessible from outside the class, including from derived classes.
+
+Here's an example to illustrate this:
+
+```cpp
+class MyClass {
+    int myVariable;  // Private by default
+
+    void myFunction() {
+        // Private by default
+    }
+public:
+    void setData(int value) {
+        myVariable = value;  // Accessing private member within the class
+    }
+};
+
+int main() {
+    MyClass obj;
+    // obj.myVariable = 10;  // This will cause a compilation error
+    // obj.myFunction();     // This will cause a compilation error
+    obj.setData(10);         // Accessing private member through public member function
+    return 0;
+}
+```
+
 ### Summary:
 
 - `public`: Accessible from anywhere.
