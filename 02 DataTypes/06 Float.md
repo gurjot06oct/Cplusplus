@@ -1,6 +1,6 @@
-### Understanding Float Characteristics and Operations in C++
+### Float in C++
 
-#### Float Characteristics
+#### Basic Characteristics
 
 ```cpp
 #include <iostream>

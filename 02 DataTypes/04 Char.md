@@ -1,6 +1,6 @@
 ## Character in C++
 
-In C++, characters are represented by various data types that allow programmers to handle different character sets and sizes. Let's delve into the specifics of each character type used in the provided code snippet.
+In C++, characters are represented by various data types that allow programmers to handle different character sets and sizes.
 
 ### `char` and `unsigned char`
 
@@ -56,3 +56,38 @@ std::wcout << "wchar_t: " << myWideChar << std::endl;
 In this example, `myWideChar` is initialized with the wide character `L'猫'`, which represents the Chinese character for "cat". The `std::wcout` is used to print wide characters.
 
 Understanding and utilizing these character types allows C++ programmers to work with diverse character sets, from basic ASCII characters to complex Unicode symbols, ensuring robust support for internationalization and diverse textual data.
+
+#### Comparison Behavior
+
+- When comparing `a` (signed `char`) and `b` (unsigned `char`), the comparison considers their types and their actual values.
+- In the code `if (a == b)`, despite both `a` and `b` having the same hexadecimal value `0xfb`, they are not considered equal.
+- This is because the signedness and the range of values that `a` and `b` can represent differ. Specifically:
+  - `a` as a signed `char` interprets `0xfb` as -5.
+  - `b` as an unsigned `char` interprets `0xfb` as 251.
+- Even though the bit pattern in memory for both `a` and `b` might be the same (`0xfb`), their effective values differ due to their signedness interpretation.
+
+```cpp
+#include <iostream>
+
+int main()
+{
+    char a = 0xfb;           // Signed char 'a' initialized with hexadecimal value 0xfb (-5 in decimal)
+    unsigned char b = 0xfb;  // Unsigned char 'b' initialized with hexadecimal value 0xfb (251 in decimal)
+
+    std::cout << "a = " << static_cast<int>(a);  // Output the decimal value of 'a'
+    std::cout << "\nb = " << static_cast<int>(b);  // Output the decimal value of 'b'
+
+    if (a == b)
+        std::cout << "\nSame";
+    else
+        std::cout << "\nNot Same";
+
+    // Output: Not Same
+    // int(a) = -5, int(b) = 251
+
+    return 0;
+}
+```
+
+- The output of the program demonstrates `Not Same` because, in C++, signed and unsigned types are treated differently in comparison operations.
+- Understanding the signedness of variables (`char`, `int`, etc.) is crucial to interpreting their values correctly, especially when performing comparisons or operations that rely on type-specific behavior.
