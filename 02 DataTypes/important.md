@@ -20,6 +20,7 @@
 | `pointer`             | 4 or 8        | N/A                                                                   | `%p`             |
 
 ### Notes:
+
 - The size of `long` and `unsigned long` can vary between 4 and 8 bytes depending on the platform (32-bit or 64-bit).
 - The range of `float`, `double`, and `long double` is approximate and depends on the implementation.
 - The size of `long double` can be 10, 12, or 16 bytes depending on the compiler and platform.

@@ -1,4 +1,4 @@
-### Understanding Static Data Members in C++
+### Static Data Members
 
 Static data members in C++ are class members declared using the `static` keyword. They possess special characteristics, as outlined below:
 
