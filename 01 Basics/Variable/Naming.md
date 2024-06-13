@@ -1,7 +1,3 @@
-Let's focus on the key parts of the code and provide explanations for each section.
-
----
-
 ## Variable Naming in C++
 
 ### Valid Variable Names
