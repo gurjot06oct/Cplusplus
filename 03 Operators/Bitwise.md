@@ -40,7 +40,7 @@ int complementOfNegativeFifteen = ~negativeFifteen; // complementOfNegativeFifte
 
 Here, `complementOfNegativeFifteen` complements all bits of `negativeFifteen`, resulting in `14`.
 
-#### Basic Bitwise Operators
+#### Bitwise Operators
 
 ##### Bitwise AND (`&`), OR (`|`), and XOR (`^`)
 

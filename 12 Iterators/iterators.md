@@ -1,8 +1,8 @@
-### 1. Introduction to Iterators
+## Introduction to Iterators
 
 An **iterator** is an object that allows traversal through a container, particularly in a sequential manner. Iterators abstract the idea of navigating through a collection of elements and provide a uniform interface to access elements without exposing the underlying representation of the container.
 
-### 2. Basic Operations
+### Basic Operations
 
 There are two fundamental operations that any iterator supports:
 
@@ -38,11 +38,11 @@ All iterators in C++ adhere to a set of basic properties, ensuring they can be u
    - **Post-increment**:
      a++; // Advances 'a' to the next element, but returns the old value
 
-### 3. Categories of Iterators
+### Categories of Iterators
 
 Iterators are categorized based on the functionality they support. These categories define the range of operations that can be performed on the iterators. Here are the five categories:
 
-#### 3.1 Input Iterators
+#### Input Iterators
 
 - **Purpose**: Used for reading data from a sequence.
 - **Operations**: Supports `*` for dereferencing and `++` for incrementing.
@@ -51,7 +51,7 @@ Iterators are categorized based on the functionality they support. These categor
   - Can be compared for equality.
   - Allows single-pass access (no backtracking).
 
-#### 3.2 Output Iterators
+#### Output Iterators
 
 - **Purpose**: Used for writing data to a sequence.
 - **Operations**: Supports `*` for dereferencing and `++` for incrementing.
@@ -60,7 +60,7 @@ Iterators are categorized based on the functionality they support. These categor
   - Can only be used for a single pass (cannot re-read or backtrack).
   - Often used in conjunction with algorithms that produce output, like `std::copy`.
 
-#### 3.3 Forward Iterators
+#### Forward Iterators
 
 - **Purpose**: Combine the capabilities of input and output iterators.
 - **Operations**: Supports `*` for dereferencing, `++` for incrementing.
@@ -69,7 +69,7 @@ Iterators are categorized based on the functionality they support. These categor
   - Supports multiple passes over the sequence.
   - Guarantees only forward movement (no decrementing).
 
-#### 3.4 Bidirectional Iterators
+#### Bidirectional Iterators
 
 - **Purpose**: Extend forward iterators by allowing backward traversal.
 - **Operations**: Supports `*` for dereferencing, `++` for incrementing, and `--` for decrementing.
@@ -77,7 +77,7 @@ Iterators are categorized based on the functionality they support. These categor
   - Read/write access.
   - Supports both forward and backward traversal.
 
-#### 3.5 Random Access Iterators
+#### Random Access Iterators
 
 - **Purpose**: Provide the highest level of iterator functionality, allowing direct access to any element in the sequence.
 - **Operations**: Supports all operations of bidirectional iterators, plus arithmetic operations like addition and subtraction.
@@ -86,7 +86,7 @@ Iterators are categorized based on the functionality they support. These categor
   - Constant time complexity for moving to any position (`it + n` or `it - n`).
   - Supports comparison operators (`<`, `>`, `<=`, `>=`).
 
-### 4. Examples of Iterators in Standard Containers
+### Examples of Iterators in Standard Containers
 
 - **Input Iterators**: `istream_iterator`
 - **Output Iterators**: `ostream_iterator`
@@ -94,12 +94,12 @@ Iterators are categorized based on the functionality they support. These categor
 - **Bidirectional Iterators**: `list`, `set`, `map` iterators
 - **Random Access Iterators**: `vector`, `deque`, `array` iterators
 
-### 5. Special Considerations
+### Special Considerations
 
 - **Iterator Validity**: Operations on iterators can invalidate them (e.g., modifying the container structure while iterating).
 - **Const Iterators**: `const_iterator` types provide read-only access, ensuring the elements are not modified.
 - **Algorithms**: Standard algorithms (e.g., `std::sort`, `std::copy`, `std::find`) work seamlessly with iterators, allowing flexible and efficient manipulation of containers.
 
-### 6. Custom Iterators
+### Custom Iterators
 
 Beyond standard library containers, custom iterators can be implemented to work with user-defined data structures. Implementing an iterator involves defining the iterator class with the appropriate operations (`*`, `++`, and optionally others) and ensuring it adheres to the iterator category requirements.

@@ -1,5 +1,3 @@
-Certainly! Let's clarify the concepts of multi-pass and single-pass algorithms:
-
 ### Single-Pass Algorithms
 
 Single-pass algorithms are algorithms that traverse a range of elements exactly once, typically from the beginning to the end. Once an element is processed, it's not revisited during the same traversal. In single-pass algorithms, each element in the sequence is processed in a linear manner, and the algorithm terminates after reaching the end of the range.
