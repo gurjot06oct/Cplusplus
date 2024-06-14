@@ -83,7 +83,7 @@ int MyClass::getData() {
     return dataMember;
 }
 
-// Definition of data member outside the class is alllowed only if it is static
+// Definition of data member outside the class is allowed only if it is static
 // int MyClass::dataMember = 0;
 
 int main() {
