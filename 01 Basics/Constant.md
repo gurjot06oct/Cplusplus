@@ -1,7 +1,5 @@
 ## Using Constants in C++
 
-This code demonstrates how to define and use constants in C++ using the `const` keyword. Constants are variables whose values cannot be changed after initialization.
-
 ### Defining Constants
 
 ```cpp

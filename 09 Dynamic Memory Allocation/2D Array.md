@@ -1,7 +1,5 @@
 ## Dynamic Memory Allocation for a 2D Array
 
-This code dynamically allocates memory for a 2D array based on user-provided dimensions and initializes the array with values.
-
 ### User Input for Dimensions
 
 ```cpp
