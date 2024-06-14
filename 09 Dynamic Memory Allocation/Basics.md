@@ -1,6 +1,6 @@
 ## Dynamic Memory Allocation
 
-Dynamic memory allocation in C++ provides the flexibility to allocate memory at runtime. This feature is particularly valuable when dealing with data structures whose size is unknown beforehand or may vary during program execution. In this article, we'll delve into the usage of the traditional C-style memory allocation functions: `malloc`, `realloc`, `free`, and `calloc`.
+Dynamic memory allocation in C++ provides the flexibility to allocate memory at runtime. This feature is particularly valuable when dealing with data structures whose size is unknown beforehand or may vary during program execution. In this demonstration, we'll delve into the usage of the traditional C-style memory allocation functions: `malloc`, `realloc`, `free`, and `calloc`.
 
 ### `malloc`: Memory Allocation
 

@@ -1,6 +1,6 @@
 ### Logical Operators in C++
 
-Logical operators in C++ are fundamental for evaluating conditions and controlling program flow based on boolean expressions. This article explores the logical AND (`&&`), logical OR (`||`), and logical NOT (`!`) operators, presenting truth tables and practical examples to illustrate their functionality.
+Logical operators in C++ are fundamental for evaluating conditions and controlling program flow based on boolean expressions.
 
 #### Logical AND (`&&`) Operator
 

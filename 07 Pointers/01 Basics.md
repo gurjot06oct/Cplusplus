@@ -89,7 +89,7 @@ cout << "Size of ptr_to_value: " << sizeof(ptr_to_value) << endl;
 
 #### Template Aliases in C++: Creating Pointers of Any Type
 
-In C++, template aliases provide a convenient way to create aliases for template instantiations, simplifying the declaration of complex types. This article explores the use of template aliases to manage pointers to different data types within a single program.
+In C++, template aliases provide a convenient way to create aliases for template instantiations, simplifying the declaration of complex types.
 
 ##### Creating pointers of different types using the template alias
 

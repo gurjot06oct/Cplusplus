@@ -1,6 +1,6 @@
 ### Comma Operator in C++
 
-In C++, the comma operator (`operator,`) serves multiple purposes beyond its traditional role of separating expressions in function arguments or variable initializations. It allows for sequential evaluation of expressions where each sub-expression is evaluated and its result discarded, except for the last one. This article explores various uses of the comma operator through practical examples.
+In C++, the comma operator (`operator,`) serves multiple purposes beyond its traditional role of separating expressions in function arguments or variable initializations. It allows for sequential evaluation of expressions where each sub-expression is evaluated and its result discarded, except for the last one.
 
 #### Basic Usage
 

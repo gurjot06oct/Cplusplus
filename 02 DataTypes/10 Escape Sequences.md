@@ -1,7 +1,5 @@
 ## Demonstrating Escape Sequences
 
-The provided code demonstrates various escape sequences in C++. I'll enhance the comments for better understanding and clarify any ambiguous points:
-
 ### Escape Sequences:
 
 1. **Bell sound**: `\a` generates a system-dependent alert (usually a sound).

@@ -1,6 +1,6 @@
 ### Void Pointers in Dynamic Memory Allocation
 
-Void pointers (`void*`) in C++ play a crucial role in managing memory dynamically, especially in scenarios where the exact data type is not known upfront or varies during program execution. This article explores how void pointers are used in conjunction with dynamic memory allocation functions (`malloc`, `realloc`, `free` in C, and `new`, `delete` in C++) to handle memory effectively.
+Void pointers (`void*`) in C++ play a crucial role in managing memory dynamically, especially in scenarios where the exact data type is not known upfront or varies during program execution. This demonstration explores how void pointers are used in conjunction with dynamic memory allocation functions (`malloc`, `realloc`, `free` in C, and `new`, `delete` in C++) to handle memory effectively.
 
 #### Dynamic Memory Allocation
 

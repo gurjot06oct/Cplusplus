@@ -1,6 +1,6 @@
 ## Dynamic Memory Allocation in C++ Using `new` and `delete`
 
-In C++, the `new` and `delete` operators are fundamental for dynamic memory allocation and deallocation. They offer a more flexible and type-safe approach compared to traditional C-style functions. This article will explore their usage, covering allocation and deallocation for both single objects and arrays of objects.
+In C++, the `new` and `delete` operators are fundamental for dynamic memory allocation and deallocation. They offer a more flexible and type-safe approach compared to traditional C-style functions. This demonstration will explore their usage, covering allocation and deallocation for both single objects and arrays of objects.
 
 ### Single Object Allocation and Deallocation
 

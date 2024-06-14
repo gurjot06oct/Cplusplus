@@ -1,6 +1,6 @@
 ## Typecasting `void` Pointers in Modern C++
 
-In modern C++, typecasting `void` pointers obtained from memory allocation functions (`malloc`, `realloc`, `calloc`) is best done using `static_cast` or `reinterpret_cast`, depending on the situation. This article discusses the usage of each cast and emphasizes modern C++ practices regarding memory management.
+In modern C++, typecasting `void` pointers obtained from memory allocation functions (`malloc`, `realloc`, `calloc`) is best done using `static_cast` or `reinterpret_cast`, depending on the situation. This demonstration discusses the usage of each cast and emphasizes modern C++ practices regarding memory management.
 
 ### Using `static_cast`
 
