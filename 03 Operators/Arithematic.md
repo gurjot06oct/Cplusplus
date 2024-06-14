@@ -1,6 +1,6 @@
 ## Arithmetic Operators
 
-Arithmetic operators in C++ perform mathematical operations on operands.:
+Arithmetic operators in C++ perform mathematical operations on operands.
 
 ### Unary Operators: Unary Plus (`+`) and Unary Minus (`-`)
 

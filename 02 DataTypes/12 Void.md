@@ -28,8 +28,6 @@ int *intPtr = static_cast<int *>(ptr); // cast void pointer back to int pointer
 std::cout << *intPtr << std::endl;     // Output: 10
 ```
 
-In the code snippet above:
-
 - `ptr` is declared as a `void*` and assigned the address of integer variable `x`.
 - To access the value pointed to by `ptr`, it must first be cast to a specific pointer type (`int*` in this case).
 - The `static_cast` operation allows `ptr` to be safely converted to `int*`, enabling dereferencing to retrieve and print the value of `x`.
