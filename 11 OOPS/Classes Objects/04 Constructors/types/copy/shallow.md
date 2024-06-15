@@ -5,7 +5,6 @@ In shallow copy, an object is created by directly copying the data of all variab
 This situation can lead to ambiguity and runtime errors, such as dangling pointers. Both objects end up pointing to the same memory location, causing changes made by one object to reflect in the other. Consequently, the purpose of creating a replica of the object is not fulfilled by shallow copy.
 
 It's important to note that the C++ compiler implicitly creates a copy constructor and overloads the assignment operator to perform shallow copy at compile time.
-Certainly! Let's provide a more complete example that showcases shallow copy in a C++ class.
 
 ### Shallow Copy Example
 

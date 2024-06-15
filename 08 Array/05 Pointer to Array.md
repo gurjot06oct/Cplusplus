@@ -71,8 +71,6 @@ int main()
 - **2D Pointer**: Points to the entire 2D array.
 
 Understanding these distinctions helps in effectively manipulating multi-dimensional arrays using pointers in C++. Each type of dimensional pointer provides a unique perspective on array traversal and memory access patterns, contributing to versatile programming techniques in C++.
-Certainly! Here's an improved version of the markdown with clearer explanations, better variable naming, and proper headings:
-Certainly! Here's the revised markdown to explicitly mention that the provided function descriptions are prototypes:
 
 ### Passing Arrays as Function Parameters Using Pointers
 

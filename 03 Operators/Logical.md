@@ -57,10 +57,6 @@ cout << "operand1 = " << operand1 << endl; // Output: 1 (unchanged)
 cout << "operand2 = " << operand2 << endl; // Output: 5 (unchanged)
 ```
 
-Certainly! Let's improve the variable naming to make them more descriptive and meaningful:
-
----
-
 #### Logical NOT (`!`) Operator
 
 ##### Basic Usage
