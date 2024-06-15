@@ -148,8 +148,11 @@ if (derived_ptr) {
 
 ```cpp
 std::shared_ptr<const int> const_ptr = std::make_shared<int>(30);
+
 // Removing the const qualifier from const_ptr
 std::shared_ptr<int> mutable_ptr = std::const_pointer_cast<int>(const_ptr);
+*mutable_ptr = 40;
+std::cout << *const_ptr << std::endl; // 40
 ```
 
 **Explanation:**

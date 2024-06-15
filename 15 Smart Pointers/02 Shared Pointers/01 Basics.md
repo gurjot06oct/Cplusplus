@@ -45,7 +45,7 @@ In this example:
 The `std::shared_ptr` can be constructed in various ways:
 
 ```cpp
-std::shared_ptr<MyStruct> ptr1(new MyStruct(10)); // Using new
+std::shared_ptr<MyStruct> ptr1(new MyStruct(10), std::default_delete<MyStruct[]>()); // Using new
 std::shared_ptr<MyStruct> ptr2 = std::make_shared<MyStruct>(20); // Using make_shared
 ```
 
@@ -137,11 +137,50 @@ if (ptr5) {
 
 #### `owner_before`
 
-Compares the ownership of two `std::shared_ptr` objects:
+The member function `owner_before` can be used to compare the ownership of two `std::shared_ptr` objects, not the objects they manage. It helps to determine the order in which two shared pointers would be destroyed.
+
+#### Creating Shared Pointers
 
 ```cpp
-std::shared_ptr<MyStruct> ptr7 = std::make_shared<MyStruct>(80);
-if (ptr5.owner_before(ptr7)) {
-    std::cout << "ptr5 owner before ptr7" << std::endl;
+// Create two shared pointers
+std::shared_ptr<int> sp1 = std::make_shared<int>(10);
+std::shared_ptr<int> sp2 = sp1;  // sp2 shares ownership with sp1
+
+// Create another shared pointer managing a different object
+std::shared_ptr<int> sp3 = std::make_shared<int>(20);
+```
+
+- `sp1` and `sp2` share ownership of the same object (value 10).
+- `sp3` manages a different object (value 20).
+
+#### Comparing Ownership of `sp1` and `sp2`
+
+```cpp
+if (sp1.owner_before(sp2)) {
+    std::cout << "sp1 is before sp2 in ownership order." << std::endl;
+} else if (sp2.owner_before(sp1)) {
+    std::cout << "sp2 is before sp1 in ownership order." << std::endl;
+} else {
+    std::cout << "sp1 and sp2 share ownership and are equivalent in ownership order." << std::endl;
 }
 ```
+
+- Since `sp1` and `sp2` manage the same object, they share ownership.
+- `sp1.owner_before(sp2)` and `sp2.owner_before(sp1)` both return false.
+- The output will indicate that they share ownership.
+
+#### Comparing Ownership of `sp1` and `sp3`
+
+```cpp
+if (sp1.owner_before(sp3)) {
+    std::cout << "sp1 is before sp3 in ownership order." << std::endl;
+} else if (sp3.owner_before(sp1)) {
+    std::cout << "sp3 is before sp1 in ownership order." << std::endl;
+} else {
+    std::cout << "sp1 and sp3 share ownership and are equivalent in ownership order." << std::endl;
+}
+```
+
+- `sp1` and `sp3` manage different objects.
+- `owner_before` compares the ownership order.
+- The output will indicate the relative ownership order of `sp1` and `sp3`.
