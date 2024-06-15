@@ -1,4 +1,4 @@
-Certainly! Below are 20 questions on Object-Oriented Programming (OOP) in C++ structured according to Bloom's Taxonomy levels.
+Below are 20 questions on Object-Oriented Programming (OOP) in C++ structured according to Bloom's Taxonomy levels.
 
 ### Level 1: Remembering
 
