@@ -29,7 +29,7 @@ public:
 - The constructor initializes the private member `friendAID` with a value of 101.
 - The `displayFriendBInfo` function attempts to access information held by FriendB using an object of class `FriendB`. However, this results in a compiler error because `FriendA` does not recognize `FriendB` as a friend, preventing access to its private members.
 
-### 2. FriendA Class Definition and Declaration
+### 2. FriendB Class Definition and Declaration
 
 ```cpp
 class FriendB {
