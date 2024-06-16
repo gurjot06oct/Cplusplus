@@ -19,8 +19,6 @@ In this syntax, `ClassName` denotes the name of the class, and `obj` represents 
 
 Similar to the default constructor, if an explicit copy constructor is not defined within a class, the C++ compiler automatically generates an implicit copy constructor. Unlike the default constructor, the presence of any explicit constructor, including a copy constructor or a move constructor, does not nullify the implicit copy constructor. It is always created by the compiler when an explicit copy constructor is absent.
 
-**Implicit Copy Constructor**
-
 ```cpp
 #include <iostream>
 using namespace std;

@@ -161,33 +161,6 @@ When a class includes pointers or dynamically allocated memory, defining a custo
 
 In classes with virtual functions, it's recommended to declare destructors as virtual to ensure the correct destructor is called for derived classes, preventing resource leaks.
 
-```cpp
-#include <iostream>
-using namespace std;
-
-class String {
-private:
-    char* str;
-    int size;
-
-public:
-    String(const char* inputStr) {
-        size = strlen(inputStr);
-        str = new char[size + 1];
-        strcpy(str, inputStr);
-    }
-    ~String() {
-        delete[] str;
-    }
-};
-
-int main() {
-    String myString("Hello, World!");
-    cout << "String: " << myString.str << endl;
-    return 0;
-}
-```
-
 Destructors play a vital role in C++ by ensuring proper cleanup of resources, particularly in classes that manage dynamic memory. Understanding how and when destructors are called, as well as their proper implementation, is essential for effective C++ programming.
 
 ### Private Destructors
