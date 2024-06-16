@@ -1,6 +1,6 @@
-### Dynamic Allocation of Array
+## Dynamic Allocation of Array
 
-#### Without Initialization
+### Without Initialization
 
 If you want to allocate an array without initializing its elements explicitly, you can still use `new`:
 
@@ -21,7 +21,7 @@ delete[] arr;
 - `new int[size]` allocates an array of `size` integers without initializing them.
 - The values in `arr` are not initialized, so accessing them without initialization leads to undefined behavior unless each element is explicitly initialized later.
 
-### With Initialization
+## With Initialization
 
 When you want to dynamically allocate an array and initialize its elements, you can use uniform initialization along with `new`. Here’s how you do it:
 
@@ -45,7 +45,7 @@ In this example:
 - `{1, 2, 3, 4, 5}` initializes the elements of the array with the specified values.
 - `delete[] arr` frees the memory allocated for the array.
 
-### Array Allocation and Deallocation
+## Array Allocation and Deallocation
 
 ```cpp
 // Dynamically allocate memory for an array of objects
@@ -57,7 +57,7 @@ delete[] arr;
 
 Similarly, when dynamically allocating memory for an array of objects using `new[]`, the constructors of the individual objects are called. Upon deallocation using `delete[]`, the destructors are invoked for each object in the array.
 
-### Memory Management Best Practices
+## Memory Management Best Practices
 
 1. **Single Object vs. Array Allocation**:
 
@@ -69,9 +69,9 @@ Similarly, when dynamically allocating memory for an array of objects using `new
 
 Understanding and mastering these concepts ensures efficient memory management in C++ programs, contributing to their flexibility and reliability.
 
-## Dynamic Memory Allocation for a 2D Array
+# Dynamic Memory Allocation for a 2D Array
 
-### User Input for Dimensions
+## User Input for Dimensions
 
 ```cpp
     int rows, cols;
@@ -82,7 +82,7 @@ Understanding and mastering these concepts ensures efficient memory management i
     std::cin >> cols;
 ```
 
-### Memory Allocation and Initialization
+## Memory Allocation and Initialization
 
 ```cpp
     int **array = new int *[rows];
@@ -95,7 +95,7 @@ Understanding and mastering these concepts ensures efficient memory management i
             array[i][j] = i * j;
 ```
 
-### Printing the Array
+## Printing the Array
 
 ```cpp
     std::cout << "The 2D array is:" << std::endl;
@@ -107,7 +107,7 @@ Understanding and mastering these concepts ensures efficient memory management i
     }
 ```
 
-### Memory Deallocation
+## Memory Deallocation
 
 ```cpp
     // Deallocate memory
