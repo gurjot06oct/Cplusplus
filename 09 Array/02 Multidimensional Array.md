@@ -185,8 +185,9 @@ int myArray3D[][4][5] = {
 
 Visualizing a 3D array can be a bit more complex because it adds an additional dimension. Here's how you can represent a 3D array visually, along with indexing:
 
+- **Layer 0:**
+
 ```
-Layer 0:
      0    1    2    3    4
    +----+----+----+----+----+
 0  |  1 |  2 |  3 |  4 |  5 |
@@ -197,8 +198,11 @@ Layer 0:
    +----+----+----+----+----+
 3  | 16 | 17 | 18 | 19 | 20 |
    +----+----+----+----+----+
+```
 
-Layer 1:
+- **Layer 1:**
+
+```
      0    1    2    3    4
    +----+----+----+----+----+
 0  | 21 | 22 | 23 | 24 | 25 |
@@ -210,7 +214,11 @@ Layer 1:
 3  | 36 | 37 | 38 | 39 | 40 |
    +----+----+----+----+----+
 
-Layer 2:
+```
+
+- **Layer 2:**
+
+```
      0    1    2    3    4
    +----+----+----+----+----+
 0  | 41 | 42 | 43 | 44 | 45 |

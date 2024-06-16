@@ -10,10 +10,16 @@ In C++, `new` and `delete` are operators designed for dynamic memory management,
    - `free`: Deallocates raw memory but does not call the destructor.
 
 2. **Type Safety**:
+
    - `new`: Does not require explicit type casting.
    - `malloc`: Returns a `void*` pointer, requiring explicit type casting.
    - `delete`: Does not require explicit type casting.
    - `free`: Requires explicit type casting if used with pointers to objects.
+
+3. **Initialization**:
+
+- `new`: Can be initialized with allocation.
+- `malloc`: Cannot be initialized with allocation .
 
 ```cpp
 #include <iostream>
@@ -21,9 +27,12 @@ In C++, `new` and `delete` are operators designed for dynamic memory management,
 
 class MyClass
 {
+    int x;
+
 public:
-    MyClass()
+    MyClass(int value)
     {
+        x = value;
         std::cout << "Constructor called!" << std::endl;
     }
     ~MyClass()
@@ -40,7 +49,7 @@ int main()
 {
     // Using new and delete
     std::cout << "Using new and delete:" << std::endl;
-    MyClass *obj1 = new MyClass(); // Constructor is called
+    MyClass *obj1 = new MyClass(10); // Constructor is called
     obj1->display();
     delete obj1; // Destructor is called
 
