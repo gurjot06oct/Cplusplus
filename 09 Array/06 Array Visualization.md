@@ -1,4 +1,4 @@
-## Array Visualization using the Box Demonstration Theory for Understanding 2D Arrays in C++
+## Array Visualization using the Box Demonstration Theory in C++
 
 The box demonstration theory is a conceptual framework that helps understand how referencing and dereferencing work in 2D arrays. Let's explore this with an example array and visual representation.
 

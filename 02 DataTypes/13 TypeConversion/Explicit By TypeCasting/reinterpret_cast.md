@@ -1,3 +1,5 @@
+## Using `reinterpret_cast` in C++
+
 In C++, `reinterpret_cast` is one of the four casting operators provided by the language, alongside `static_cast`, `dynamic_cast`, and `const_cast`. It is a powerful operator that allows you to reinterpret the bit pattern of an object or pointer to a new type, without performing any type checking or transformations of the values themselves. Here's a detailed exploration of `reinterpret_cast`:
 
 ### Purpose of `reinterpret_cast`
@@ -33,18 +35,20 @@ The primary purpose of `reinterpret_cast` is to reinterpret the meaning of a poi
 
 ### 2. Pointer to Array Pointer Conversion
 
-#### Convert `T*` of type `T(*)[]` or `T (*)[][]`
+#### Conversions between `T(*)[]`, `T (*)[][]` and `T*`
 
-- **Description**: This conversion involves converting a pointer to a type `T*` into a pointer to an array type `T(*)[]` or a pointer to a multi-dimensional array type `T(*)[][]`.
+- **Description**: This conversion involves converting a pointer to an array type `T(*)[]` or a pointer to a multi-dimensional array type `T(*)[][]` into a pointer to a type `T*`.
 
 - **Example**:
 
   ```cpp
-  int* intPtr = new int[10];
-  int (*arrayPtr)[10] = reinterpret_cast<int(*)[10]>(intPtr);
+  int (*int1DPtr)[10] = new int[10][10];
+  int* int0DPtr = reinterpret_cast<int *>(intPtr);
   ```
 
-  Here, `intPtr` is a pointer to an array of `int` (with dynamic allocation), and `arrayPtr` is interpreted as a pointer to an array of 10 `int`s. This reinterpretation can help in treating contiguous memory blocks as arrays of specified dimensions.
+  Here, `int1DPtr` is pointing to an array of `int` (with dynamic allocation), and `int0DPtr` is interpreted as a pointer to an `int`. This reinterpretation can help in treating arrays of specified dimensions as contiguous memory blocks.
+
+  `Refer to Dimensional Pointer (Pointer to an Array) Conversions for additional information.`
 
 - **Usage**:
   - When manipulating memory blocks that are logically structured as arrays.

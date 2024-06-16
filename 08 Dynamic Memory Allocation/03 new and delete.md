@@ -37,27 +37,3 @@ int main()
 ```
 
 When dynamically allocating memory for a single object using `new`, the constructor of the class is called to initialize the object. Similarly, when deallocating memory using `delete`, the destructor is invoked to perform any necessary cleanup.
-
-### Array Allocation and Deallocation
-
-```cpp
-// Dynamically allocate memory for an array of objects
-MyClass *arr = new MyClass[5];
-
-// Deallocate memory
-delete[] arr;
-```
-
-Similarly, when dynamically allocating memory for an array of objects using `new[]`, the constructors of the individual objects are called. Upon deallocation using `delete[]`, the destructors are invoked for each object in the array.
-
-### Memory Management Best Practices
-
-1. **Single Object vs. Array Allocation**:
-
-   - Use `delete` for single objects allocated with `new`.
-   - Use `delete[]` for arrays of objects allocated with `new[]`.
-
-2. **Type Safety**:
-   - Unlike C-style functions, `new` and `delete` operators do not require explicit type casting.
-
-Understanding and mastering these concepts ensures efficient memory management in C++ programs, contributing to their flexibility and reliability.

@@ -70,8 +70,6 @@ int main()
 - **1D Pointer**: Points to rows or single arrays.
 - **2D Pointer**: Points to the entire 2D array.
 
-Understanding these distinctions helps in effectively manipulating multi-dimensional arrays using pointers in C++. Each type of dimensional pointer provides a unique perspective on array traversal and memory access patterns, contributing to versatile programming techniques in C++.
-
 ### Passing Arrays as Function Parameters Using Pointers
 
 #### Function Prototypes:
