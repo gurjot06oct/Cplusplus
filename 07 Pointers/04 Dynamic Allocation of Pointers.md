@@ -1,6 +1,6 @@
-Certainly! Let's go through the dynamic allocation of a 3D array in direct order, first allocating the single pointer, then double pointer, and finally the triple pointer. Here’s how you can manage memory allocation for a 3D array in this order in C++:
+## Dynamic Allocation of Pointers
 
-### Steps for Dynamic Allocation:
+### Types for Dynamic Allocation:
 
 1. **Single Pointer Allocation**: Allocate memory for the `type T`.
 2. **Double Pointer Allocation**: Allocate memory for the pointer to `type T`.

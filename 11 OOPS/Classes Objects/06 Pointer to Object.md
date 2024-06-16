@@ -1,4 +1,4 @@
-## Pointer to an object
+# Pointer to an object
 
 ```cpp
 #include <iostream>

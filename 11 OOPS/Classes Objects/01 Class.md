@@ -14,13 +14,11 @@ A class in C++ consists of two main components:
 
 2. **Member Functions (Methods)**: These are functions declared within the class. They define the behavior or actions that objects of the class can perform.
 
-#### Example
+### Understanding the Class
+
+#### 1. Define the `Car` class
 
 ```cpp
-#include <iostream>
-#include <string>
-
-// Define the Car class
 class Car {
     // Data Members
     std::string make;
@@ -41,28 +39,46 @@ public:
         year = carYear;
     }
 } obj1, obj2; // Objects can also be created like this
-
-int main() {
-    // Create an object of the Car class
-    Car myCar;
-
-    // Access and modify object data members
-    myCar.setMake("Toyota");
-    myCar.setModel("Corolla");
-    myCar.setYear(2020);
-
-    return 0;
-}
 ```
 
-In this example, `Car` is a class with data members `make`, `model`, and `year`. It also has member functions `setMake()`, `setModel()`, and `setYear()` to set the values of these data members. In the `main()` function, an object of the `Car` class is created, and its member functions are called to set the values of its data members.
+#### Class Structure and Data Members
 
-Defining data members (variables) and member functions outside the class involves using the scope resolution operator `::` to link the member with the class. Here's how you can do it:
+The `Car` class encapsulates three private data members:
+
+- `make` (type `std::string`): Represents the make of the car.
+- `model` (type `std::string`): Represents the model of the car.
+- `year` (type `int`): Represents the manufacturing year of the car.
+
+#### Public Member Functions
+
+The class provides three public member functions (`setMake`, `setModel`, and `setYear`) to modify the private data members:
+
+- `setMake`: Assigns a value to the `make` member variable.
+- `setModel`: Assigns a value to the `model` member variable.
+- `setYear`: Assigns a value to the `year` member variable.
+
+These functions enable the user to set or update the details of a car object after its instantiation.
+
+#### Object Instantiation and Usage
 
 ```cpp
-#include <iostream>
-#include <string>
+// Create an object of the Car class
+Car myCar;
 
+// Access and modify object data members
+myCar.setMake("Toyota");
+myCar.setModel("Corolla");
+myCar.setYear(2020);
+```
+
+Here:
+
+- An object `myCar` of the `Car` class is instantiated.
+- Using the `setMake`, `setModel`, and `setYear` functions, the attributes of `myCar` are set to "Toyota" (make), "Corolla" (model), and 2020 (year), respectively.
+
+#### 2. Define the `MyClass` class
+
+```cpp
 class MyClass {
 public:
     // Declaration of member functions
@@ -73,8 +89,18 @@ private:
     // Declaration of data members
     int dataMember;
 };
+```
 
-// Definition of member functions outside the class
+- **Class `MyClass`**: This defines a class named `MyClass` which encapsulates functionality related to manipulating an integer data member.
+- **Public Member Functions**:
+  - `setData`: This function takes an integer parameter `value` and sets the private member `dataMember` to this value.
+  - `getData`: This function returns the current value of the private member `dataMember`.
+- **Private Data Member**:
+  - `dataMember`: An integer variable that holds the data within an instance of `MyClass`. It is private, meaning it can only be accessed or modified through the public member functions of the class.
+
+#### Definition of Member Functions Outside the Class
+
+```cpp
 void MyClass::setData(int value) {
     dataMember = value;
 }
@@ -82,22 +108,27 @@ void MyClass::setData(int value) {
 int MyClass::getData() {
     return dataMember;
 }
-
-// Definition of data member outside the class is allowed only if it is static
-// int MyClass::dataMember = 0;
-
-int main() {
-    MyClass obj;
-    obj.setData(42);
-    std::cout << "Data member value: " << obj.getData() << std::endl;
-    return 0;
-}
 ```
 
-In this example:
+- These lines define the implementation of the member functions `setData` and `getData` outside the class definition. They provide the functionality previously declared in the class.
 
-- The `dataMember` is declared inside the `MyClass` class as a private member.
-- It's defined outside the class using the scope resolution operator `::`. You also need to specify the data type.
-- Remember that data member can only be initialized outside the class definition if it is static.
+#### Error in the Code
 
-This separation allows you to keep the class declaration clean while defining member functions and data members separately.
+```cpp
+int MyClass::dataMember = 0; // Error! Definitions of data members outside the class are allowed only if they are static.
+```
+
+- This line attempts to initialize `dataMember` outside of the class, which is incorrect because `dataMember` is not declared as a static member. Non-static data members must be initialized inside a constructor or through member functions, not directly outside the class.
+
+#### Object Instantiation and Usage
+
+```cpp
+MyClass obj;
+obj.setData(42);
+std::cout << "Data member value: " << obj.getData() << std::endl;
+return 0;
+```
+
+- An object `obj` of type `MyClass` is created.
+- The `setData` function is used to set the value of `dataMember` to 42.
+- The `getData` function retrieves the current value of `dataMember`, which is then printed out.
