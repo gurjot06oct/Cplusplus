@@ -1,4 +1,4 @@
-## Allocating Arrays using pointer-to-pointer (Level Pointer)
+## Allocating Arrays using pointer-to-pointers (Level Pointer)
 
 #### 1. 1D Array using `int*`
 

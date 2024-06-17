@@ -14,18 +14,18 @@ In C++, pointers can be cast to different pointer types to reinterpret the memor
    - **1D Pointer**: Points to rows or single arrays.
    - **2D Pointer**: Points to the entire 2D array.
 
-<!-- 2. **Memory Layout:**
+2. **Memory Layout:**
 
-   - **1D Array**: A contiguous block of memory. They return a zero-dimensional pointer.
-   - **2D Array**: Interpreted as an array of arrays. They return a one-dimensional pointer.
-   - **3D Array**: Interpreted as an array of arrays of arrays. They return a two-dimensional pointer. -->
+   - **1D Array**: A contiguous block of memory. It delays to return a 0D pointer.
+   - **2D Array**: Interpreted as an array of arrays. It delays to return a 1D pointer.
+   - **3D Array**: Interpreted as an array of arrays of arrays. It delays to return a 2D pointer.
 
-2. **Pointer Casting:**
+3. **Pointer Casting:**
 
    - **`reinterpret_cast<type>`**: Changes the type of the pointer without modifying the actual data in memory.
    - Allows for reinterpretation of the memory layout, treating a block of memory as a different type or structure.
 
-3. **Index Calculation:**
+4. **Index Calculation:**
    - Accessing elements in multi-dimensional arrays involves calculating the offset from the base pointer.
    - **1D Array**: `int0DPtr[i]` accesses the `i`th element.
    - **2D Array**: `int1DPtr[i][j]` accesses the `i`th row and `j`th column.
