@@ -25,9 +25,6 @@ Pointer arithmetic changes the addresses stored in pointers. For `T*`, `T**`, an
    - Decrementing (`ptr--`) moves to the previous `type T**` in memory.
    - The address changes by `sizeof(type T**)` bytes.
 
-   - Adding an integer (`ptr + n`) moves the pointer forward by `n * sizeof(type T)` bytes.
-   - Subtracting an integer (`ptr - n`) moves the pointer backward by `n * sizeof(type T)` bytes.
-
 4. **Pointer Addition and Subtraction:**
    - Adding an integer to a pointer (`ptr + n`) moves it forward by `n` times the size of type it points to.
    - Subtracting an integer from a pointer (`ptr - n`) moves it backward by `n` times the size of type it points to.
