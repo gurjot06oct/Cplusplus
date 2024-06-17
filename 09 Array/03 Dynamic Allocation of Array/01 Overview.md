@@ -1,6 +1,6 @@
-## Dynamic Allocation of an Array using Pointers
+## Dynamic Allocation of an Array
 
-### 1D or Single Dimension
+### 1D or Single-Dimensional Arrays
 
 #### without Initialization
 
@@ -65,4 +65,9 @@ delete[] arr;
   - With initialization using `{}` or `()` syntax initializes the elements with specified values.
 - **Memory Deallocation:** `delete[] arr;` deallocates the dynamically allocated memory to avoid memory leaks.
 
-### Multi Dimension
+### Multi-Dimensional Arrays
+
+Multi-dimensional arrays can be allocated dynamically in two ways:
+
+1. Using pointer-to-pointer (level pointer).
+2. Using pointer-to-array (dimensional pointer).

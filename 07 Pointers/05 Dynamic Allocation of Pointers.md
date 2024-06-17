@@ -7,7 +7,7 @@
 1. **Single Allocation**: Allocate memory for the `type T`.
 2. **Multi Allocation**: Allocate memory for an array of `type T`.
 
-### On the Basis of Type:
+### On the Basis of Level:
 
 1. **Single Pointer Allocation**: Allocate memory for the `type T`.
 2. **Double Pointer Allocation**: Allocate memory for a pointer to `type T`.
