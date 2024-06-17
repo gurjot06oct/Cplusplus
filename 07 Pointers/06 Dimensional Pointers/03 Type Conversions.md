@@ -1,5 +1,11 @@
 ## Conversions between `T(*)[]`, `T(*)[][]` and `T*`
 
+### Conversion and Typecasting
+
+To convert pointers to arrays (e.g., `int (*)[]` and `int (*)[][]`) to `int*`, typecasting is used:
+
+- `reinterpret_cast<int *>(p)` or `(int *) p` can be used to cast pointers `p` of type `int (*)[]` or `int (*)[][]` to `int *`.
+
 ### Description:
 
 In C++, pointers and arrays can be used interchangeably in many contexts, but sometimes, we need to convert between different types of pointers to work with multi-dimensional arrays. Here is how to convert between zero-dimensional, one-dimensional, and two-dimensional pointers using `reinterpret_cast`.
