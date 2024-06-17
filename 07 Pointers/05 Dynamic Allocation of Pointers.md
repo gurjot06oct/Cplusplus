@@ -134,7 +134,7 @@ Allocate memory for an array of pointers to type `T`.
 ```cpp
 T** ptr2ptrArray = new T*[size];
 for (int i = 0; i < size; ++i) {
-    *(ptr2ptrArray + i) = new T;
+    ptr2ptrArray[i] = new T;
 }
 ```
 
