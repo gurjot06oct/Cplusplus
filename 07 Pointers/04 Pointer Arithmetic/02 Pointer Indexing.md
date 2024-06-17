@@ -12,7 +12,7 @@ In C and C++, when `ptr` is of type `T*`, the expressions `*(ptr + i)` and `ptr[
 
      ```cpp
      T arr[] = {value1, value2, value3};
-     T* ptr = arr;
+     T* ptr = &arr[0];
 
      // Using *(ptr + i)
      T element1 = *(ptr + 1); // Accesses the second element
