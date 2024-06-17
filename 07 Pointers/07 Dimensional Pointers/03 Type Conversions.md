@@ -1,18 +1,12 @@
 ## Conversions between `T(*)[]`, `T(*)[][]` and `T*`
 
-### Conversion and Typecasting
-
-To convert pointers to arrays (e.g., `int (*)[]` and `int (*)[][]`) to `int*`, typecasting is used:
-
-- `reinterpret_cast<int *>(p)` or `(int *) p` can be used to cast pointers `p` of type `int (*)[]` or `int (*)[][]` to `int *`.
-
 ### Description:
 
 In C++, pointers and arrays can be used interchangeably in many contexts, but sometimes, we need to convert between different types of pointers to work with multi-dimensional arrays. Here is how to convert between zero-dimensional, one-dimensional, and two-dimensional pointers using `reinterpret_cast`.
 
-### Conversion Theory:
+### Conversion and Typecasting
 
-In C++, pointers can be cast to different pointer types to reinterpret the memory they point to. This is particularly useful when dealing with arrays of different dimensions. The process involves the following:
+In C++, pointers can be cast to different pointer types to reinterpret the memory they point to. This is particularly useful when dealing with arrays of different dimensions.
 
 1. **Pointer Types:**
 
@@ -20,18 +14,18 @@ In C++, pointers can be cast to different pointer types to reinterpret the memor
    - **1D Pointer**: Points to rows or single arrays.
    - **2D Pointer**: Points to the entire 2D array.
 
-2. **Memory Layout:**
+<!-- 2. **Memory Layout:**
 
    - **1D Array**: A contiguous block of memory. They return a zero-dimensional pointer.
    - **2D Array**: Interpreted as an array of arrays. They return a one-dimensional pointer.
-   - **3D Array**: Interpreted as an array of arrays of arrays. They return a two-dimensional pointer.
+   - **3D Array**: Interpreted as an array of arrays of arrays. They return a two-dimensional pointer. -->
 
-3. **Pointer Casting:**
+2. **Pointer Casting:**
 
    - **`reinterpret_cast<type>`**: Changes the type of the pointer without modifying the actual data in memory.
    - Allows for reinterpretation of the memory layout, treating a block of memory as a different type or structure.
 
-4. **Index Calculation:**
+3. **Index Calculation:**
    - Accessing elements in multi-dimensional arrays involves calculating the offset from the base pointer.
    - **1D Array**: `int0DPtr[i]` accesses the `i`th element.
    - **2D Array**: `int1DPtr[i][j]` accesses the `i`th row and `j`th column.

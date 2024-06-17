@@ -11,9 +11,7 @@ In C++, dimensional pointers refer to pointers that point to arrays of different
 - **2D Pointer (`T (*)[][]`)**:
   - Points to entire 2D arrays within dynamically allocated 3D arrays (`int[][][]`).
 
-Let's explain the relationship between dimensional pointers (`T*`, `T (*)[]`, `T (*)[][]`, etc.) and dynamic arrays (`int[]`, `int[][]`, `int[][][]`) in C++:
-
-### Relationship with Dimensional Pointers and Dynamic Arrays
+### Dimensional Pointers Types
 
 #### 1. 0D Pointer (`T*`)
 
@@ -22,7 +20,7 @@ Let's explain the relationship between dimensional pointers (`T*`, `T (*)[]`, `T
   - Memory for `int[]` is allocated in a contiguous block, ensuring that all elements (`int`) are stored sequentially in memory.
   - Example:
     ```cpp
-    int* ptr = new int;
+    int* ptr = new int; // new int[1]
     ```
     This allocates memory for a single `int` element, ensuring it is stored contiguously.
 
