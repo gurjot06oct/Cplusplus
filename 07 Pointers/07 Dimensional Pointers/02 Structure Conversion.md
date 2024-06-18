@@ -1,6 +1,6 @@
 ## Structure Conversion
 
-Structure conversion in arrays involves reinterpretation of array pointers to change the way elements are accessed, effectively altering the apparent dimensions of the array while preserving its underlying structure. This process is particularly useful when adapting array data for different computational requirements or when interfacing with libraries that expect specific data shapes.
+Structure conversion in arrays involves reinterpretation of array pointers to change the way elements are accessed, effectively altering the apparent structure of the array while preserving its underlying dimensions. This process is particularly useful when adapting array data for different computational requirements or when interfacing with libraries that expect specific data shapes.
 
 ### 2D Structure Conversion
 
