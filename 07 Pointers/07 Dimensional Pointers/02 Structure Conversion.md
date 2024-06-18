@@ -1,8 +1,8 @@
-## Dimension Conversion of Arrays
+## Structure Conversion
 
-Dimension conversion in arrays involves reinterpretation of array pointers to change the way elements are accessed, effectively altering the apparent dimensions of the array while preserving its underlying structure. This process is particularly useful when adapting array data for different computational requirements or when interfacing with libraries that expect specific data shapes.
+Structure conversion in arrays involves reinterpretation of array pointers to change the way elements are accessed, effectively altering the apparent dimensions of the array while preserving its underlying structure. This process is particularly useful when adapting array data for different computational requirements or when interfacing with libraries that expect specific data shapes.
 
-### 2D Array Conversion
+### 2D Structure Conversion
 
 1. **Declaration and Allocation**:
 
@@ -62,7 +62,7 @@ Reinterpreted as `[2][10]`:
 11 12 13 14 15 16 17 18 19 20
 ```
 
-### 3D Array Conversion
+### 3D Structure Conversion
 
 #### Step-by-Step Explanation
 
