@@ -14,12 +14,12 @@ Dimension conversion in arrays involves reinterpretation of array pointers to ch
 2. **Initialization**:
 
    ```cpp
-   for (int row = 0; row < rows; row++)
+   for (int i = 0; i < rows; i++)
    {
-       for (int col = 0; col < columns; col++)
+       for (int j = 0; j < columns; j++)
        {
-           array2D[row][col] = row * columns + 1 + col;
-           std::cout << array2D[row][col] << " ";
+           array2D[i][j] = i * columns + j + 1;
+           std::cout << array2D[i][j] << " ";
        }
        std::cout << std::endl;
    }
@@ -34,11 +34,11 @@ Dimension conversion in arrays involves reinterpretation of array pointers to ch
 
 4. **Printing the Reinterpreted Array**:
    ```cpp
-   for (int row = 0; row < newrows; row++)
+   for (int i = 0; i < newrows; i++)
    {
-       for (int col = 0; col < newcolumns; col++)
+       for (int j = 0; j < newcolumns; j++)
        {
-           std::cout << reinterpretedArray2D[row][col] << " ";
+           std::cout << reinterpretedArray2D[i][j] << " ";
        }
        std::cout << std::endl;
    }
@@ -74,14 +74,14 @@ Reinterpreted as `[2][10]`:
 2. **Initialization**:
 
    ```cpp
-   for (int layer = 0; layer < depth; layer++)
+   for (int i = 0; i < depth; i++)
    {
-       for (int row = 0; row < rows; row++)
+       for (int j = 0; j < rows; j++)
        {
-           for (int col = 0; col < columns; col++)
+           for (int k = 0; k < columns; k++)
            {
-               array3D[layer][row][col] = layer * depth * columns + row * columns + 1 + col;
-               std::cout << array3D[layer][row][col] << " ";
+               array3D[i][j][k] = i * rows * columns + j * columns + 1 + k;
+               std::cout << array3D[i][j][k] << " ";
            }
            std::cout << std::endl;
        }
@@ -92,18 +92,19 @@ Reinterpreted as `[2][10]`:
 3. **Reinterpretation**:
 
    ```cpp
-   int(*reinterpretedArray3D)[8][4] = reinterpret_cast<int(*)[8][4]>(array3D);
+   const unsigned newdepth=2, newrows = 8, newcolumns = 4;
+   int(*reinterpretedArray3D)[newrows][newcolumns] = reinterpret_cast<int(*)[newrows][newcolumns]>(array3D);
    ```
 
 4. **Printing the Reinterpreted Array**:
    ```cpp
-   for (int layer = 0; layer < 2; layer++)
+   for (int i = 0; i < newdepth; i++)
    {
-       for (int row = 0; row < 8; row++)
+       for (int j = 0; j < newrows; j++)
        {
-           for (int col = 0; col < 4; col++)
+           for (int k = 0; k < newcolumns; k++)
            {
-               std::cout << reinterpretedArray3D[layer][row][col] << " ";
+               std::cout << reinterpretedArray3D[i][j][k] << " ";
            }
            std::cout << std::endl;
        }

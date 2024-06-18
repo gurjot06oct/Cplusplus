@@ -1,4 +1,4 @@
-### Structure Conversion
+## Structure Conversion
 
 In C++, converting between different dimensional structures, involves careful memory management and reinterpretation of pointers. Here, we'll explore how to convert arrays between 1D, 2D, and 3D structures step by step.
 
@@ -182,25 +182,16 @@ In C++, converting between different dimensional structures, involves careful me
    - Allocate memory for a 3D array and copy data from 2D to 3D.
 
    ```cpp
-   const int depth = 2; // Depth of 3D array
-   int (*array3D)[rows][cols] = new int[depth][rows][cols];
-
-   // Copy data from 2D array to 3D array
-   for (int k = 0; k < depth; ++k) {
-       for (int i = 0; i < rows; ++i) {
-           for (int j = 0; j < cols; ++j) {
-               array3D[k][i][j] = array2D[i][j];
-           }
-       }
-   }
+   const int depth = 2, newrows = 2, newcols = 3;
+    int (*array3D)[newrows][newcols] = reinterpret_cast<int(*)[newrows][newcols]>(array2D);
    ```
 
 4. **Printing the Reinterpreted Array**:
    - Access and print the elements of the 3D array.
    ```cpp
    for (int k = 0; k < depth; ++k) {
-       for (int i = 0; i < rows; ++i) {
-           for (int j = 0; j < cols; ++j) {
+       for (int i = 0; i < newrows; ++i) {
+           for (int j = 0; j < newcols; ++j) {
                std::cout << array3D[k][i][j] << " ";
            }
            std::cout << std::endl;
@@ -212,7 +203,7 @@ In C++, converting between different dimensional structures, involves careful me
 #### Output Explanation
 
 - **Initialization**: The 2D array `[3][4]` is filled with values `1` to `12`.
-- **Reinterpretation**: The 2D array `array2D` is converted to a 3D array `array3D` with dimensions `[2][3][4]`.
+- **Reinterpretation**: The 2D array `array2D` is converted to a 3D array `array3D` with dimensions `[2][2][3]`.
 - **Printing**: The reinterpreted 3D array is printed layer by layer, each layer is printed row by row.
 
 ### 3D to 1D Conversion
