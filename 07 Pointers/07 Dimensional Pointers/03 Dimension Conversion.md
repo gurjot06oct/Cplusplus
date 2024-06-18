@@ -64,8 +64,6 @@ Reinterpreted as `[2][10]`:
 
 ### 3D Dimension Conversion
 
-#### Step-by-Step Explanation
-
 1. **Declaration and Allocation**:
 
    ```cpp
