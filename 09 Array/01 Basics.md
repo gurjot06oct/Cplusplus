@@ -74,13 +74,15 @@ int arraySize = sizeof(initializedNumbers) / sizeof(initializedNumbers[0]);
 
 To find out the number of elements in an array at runtime, divide the total size of the array by the size of one element.
 
-### **Array Name Decay to Pointer:**
+### **Array Decay to Pointer:**
 
-In most contexts, the name of the array `arr` will decay to a pointer to its first element. This means `arr` is equivalent to `&arr[0]`.
+In most contexts, the array `arr` returns address of its base (first) element. This means `arr` is equivalent to `&arr[0]`.
 
 ```c
-int *p = arr; // Here, arr decays to a pointer to its first element.
+int *p = arr;
 ```
+
+Here, arr decays to a pointer to its first element.
 
 ### Character Arrays (C-style Strings)
 

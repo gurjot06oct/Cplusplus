@@ -79,13 +79,14 @@ The theory categorizes arrays into different dimensions:
 
 - **Referencing (Going Out of a Box `&`)**: Pointing the address of the outer array that encompasses the current array or element. It signifies moving outward from a specific element or sub-array to access the encompassing structure.
 
-### Referencing (`&`) at the Main Frame
+- **Analogous to Physical Boxes**:
 
-- **Last Level Clarification**: At the outermost dimension (main frame), referencing (`&`) behaves uniquely because there are no further outer dimensions to reference.
+  - Each dereferencing step (`*`) is like opening a box to look inside and retrieve a value.
+  - Each Referencing step (`&`) is like closing an open box which you where observing.
 
-- **Address of Array and Referencing**: The address of an N-dimensional array points to the address of its first element. Deferencing (`*`) at each level of dimensionality returns the address of the first element within that dimension.
+- **Referencing (`&`) at the Main Frame (Last Level)**: At the outermost dimension (main frame), referencing (`&`) behaves uniquely because there are no further outer dimensions to reference, meaning no further enclosing box to close.
 
-- **Recursive Process**: Dereferencing continues recursively through each dimension of the array. At each step, it returns the address of the first element of the array at that particular dimension.
+- **Address of Array and Referencing**: Each level of dimensionality returns the base address of that dimension. Dereferencing continues recursively through each dimension of the array. At each step, it returns the base address of the array at that particular dimension.
 
 ## Array Structures
 
