@@ -13,38 +13,6 @@ In C++, dimensional pointers refer to pointers that point to arrays of different
 - **ND Pointer (`T (*)[][][]...[]`)**:
   - Points to entire ND array within (N+1)D arrays (`int[][][]....[]`).
 
-### Dimensional Pointers Types
-
-#### 1. 0D Pointer (`T*`) to 1D Dynamic Array (`int[]`)
-
-- A 0D pointer (`T*`) dynamically allocates memory for a single element of type `T` (`int` in this case).
-- Memory for `int[]` is allocated in a contiguous block, ensuring that all elements (`int`) are stored sequentially in memory.
-- Example:
-  ```cpp
-  int* ptr = new int; // new int[1]
-  ```
-  This allocates memory for a single `int` element, ensuring it is stored contiguously.
-
-#### 2. 1D Pointer (`T (*)[]`) to 2D Dynamic Array (`int[][]`)
-
-- A 1D pointer (`T (*)[]`) points to rows or single arrays within a dynamically allocated 2D array (`int[][]`).
-- Memory for `int[][]` is allocated such that each row (`int[]`) is allocated independently but the array of pointers (`T (*)[]`) to these rows is stored contiguously.
-- Example:
-  ```cpp
-  int (*ptr)[cols] = new int[rows][cols];
-  ```
-  Here, `ptr` is a pointer to an array of `cols` integers within an array of `rows` such arrays, ensuring each row is contiguous in memory.
-
-#### 3. 2D Pointer (`T (*)[][]`) to 3D Dynamic Array (`int[][][]`)
-
-- A 2D pointer (`T (*)[][]`) points to entire 2D arrays (`int[][]`) within a dynamically allocated 3D array (`int[][][]`).
-- Memory for `int[][][]` is allocated in a way that each 2D slice (`int[][]`) maintains its own contiguous memory layout, and the array of pointers (`T (*)[][]`) to these 2D slices is stored contiguously.
-- Example:
-  ```cpp
-  int (*ptr)[rows][cols] = new int[layers][rows][cols];
-  ```
-  In this case, `ptr` is a pointer to a 2D array (`rows` rows and `cols` columns) within an array of `layers` such 2D arrays, ensuring each 2D slice is contiguous.
-
 ### Pointer Decay and Dimensionality
 
 ### Static Array of `n` Dimensions (`arr[][]...[]`):
@@ -88,3 +56,45 @@ In C++, dimensional pointers refer to pointers that point to arrays of different
 
 2. **Usage**:
    - When dealing with arrays of arrays (`int[][]...[]`), you often work with pointers to arrays, especially when passing arrays to functions or managing them dynamically.
+
+### Dimensional Pointers Types
+
+#### 1. 0D Pointer (`T*`) to 1D Dynamic Array (`int[]`)
+
+- A 0D pointer (`T*`) dynamically allocates memory for a single element of type `T` (`int` in this case).
+- Memory for `int[]` is allocated in a contiguous block, ensuring that all elements (`int`) are stored sequentially in memory.
+- Example:
+  ```cpp
+  int arr1d[n];
+  int* ptr = arr1d;
+   // or
+  int* ptr = new int[n];
+  ```
+  This allocates memory for a n `int` element, ensuring it is stored contiguously.
+  Here, `ptr` is a 0D pointer to first element of an array of `rows` integers, ensuring element is contiguous in memory.
+
+#### 2. 1D Pointer (`T (*)[]`) to 2D Dynamic Array (`int[][]`)
+
+- A 1D pointer (`T (*)[]`) points to rows or single arrays within a dynamically allocated 2D array (`int[][]`).
+- Memory for `int[][]` is allocated such that each row (`int[]`) is allocated independently but the array of pointers (`T (*)[]`) to these rows is stored contiguously.
+- Example:
+  ```cpp
+  int arr2d[rows][cols];
+  int (*ptr)[cols] = arr2d;
+   // or
+  int (*ptr)[cols] = new int[rows][cols];
+  ```
+  In this case, `ptr` is a 1D pointer to a 1D array (size `cols`) within an array of `rows` such 1D arrays, ensuring each 2D slice is contiguous. In essence, `ptr` points to first element of this 2D array which is a 1D array.
+
+#### 3. 2D Pointer (`T (*)[][]`) to 3D Dynamic Array (`int[][][]`)
+
+- A 2D pointer (`T (*)[][]`) points to entire 2D arrays (`int[][]`) within a dynamically allocated 3D array (`int[][][]`).
+- Memory for `int[][][]` is allocated in a way that each 2D slice (`int[][]`) maintains its own contiguous memory layout, and the array of pointers (`T (*)[][]`) to these 2D slices is stored contiguously.
+- Example:
+  ```cpp
+  int arr3d[layers][rows][cols];
+  int (*ptr)[rows][cols] = arr3d;
+   // or
+  int (*ptr)[rows][cols] = new int[layers][rows][cols];
+  ```
+  In this case, `ptr` is a 2D pointer to a 2D array (`rows` rows and `cols` columns) within an array of `layers` such 2D arrays, ensuring each 2D slice is contiguous. In essence, `ptr` points to first element of this 3D array which is a 2D array.
