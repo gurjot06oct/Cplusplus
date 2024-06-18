@@ -74,7 +74,8 @@ int arraySize = sizeof(initializedNumbers) / sizeof(initializedNumbers[0]);
 
 To find out the number of elements in an array at runtime, divide the total size of the array by the size of one element.
 
-**Array Name Decay to Pointer:**
+### **Array Name Decay to Pointer:**
+
 In most contexts, the name of the array `arr` will decay to a pointer to its first element. This means `arr` is equivalent to `&arr[0]`.
 
 ```c

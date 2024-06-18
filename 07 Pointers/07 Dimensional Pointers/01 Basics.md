@@ -15,38 +15,35 @@ In C++, dimensional pointers refer to pointers that point to arrays of different
 
 ### Dimensional Pointers Types
 
-#### 1. 0D Pointer (`T*`)
+#### 1. 0D Pointer (`T*`) to 1D Dynamic Array (`int[]`)
 
-- **1D Dynamic Array (`int[]`)**:
-  - A 0D pointer (`T*`) dynamically allocates memory for a single element of type `T` (`int` in this case).
-  - Memory for `int[]` is allocated in a contiguous block, ensuring that all elements (`int`) are stored sequentially in memory.
-  - Example:
-    ```cpp
-    int* ptr = new int; // new int[1]
-    ```
-    This allocates memory for a single `int` element, ensuring it is stored contiguously.
+- A 0D pointer (`T*`) dynamically allocates memory for a single element of type `T` (`int` in this case).
+- Memory for `int[]` is allocated in a contiguous block, ensuring that all elements (`int`) are stored sequentially in memory.
+- Example:
+  ```cpp
+  int* ptr = new int; // new int[1]
+  ```
+  This allocates memory for a single `int` element, ensuring it is stored contiguously.
 
-#### 2. 1D Pointer (`T (*)[]`)
+#### 2. 1D Pointer (`T (*)[]`) to 2D Dynamic Array (`int[][]`)
 
-- **2D Dynamic Array (`int[][]`)**:
-  - A 1D pointer (`T (*)[]`) points to rows or single arrays within a dynamically allocated 2D array (`int[][]`).
-  - Memory for `int[][]` is allocated such that each row (`int[]`) is allocated independently but the array of pointers (`T (*)[]`) to these rows is stored contiguously.
-  - Example:
-    ```cpp
-    int (*ptr)[cols] = new int[rows][cols];
-    ```
-    Here, `ptr` is a pointer to an array of `cols` integers within an array of `rows` such arrays, ensuring each row is contiguous in memory.
+- A 1D pointer (`T (*)[]`) points to rows or single arrays within a dynamically allocated 2D array (`int[][]`).
+- Memory for `int[][]` is allocated such that each row (`int[]`) is allocated independently but the array of pointers (`T (*)[]`) to these rows is stored contiguously.
+- Example:
+  ```cpp
+  int (*ptr)[cols] = new int[rows][cols];
+  ```
+  Here, `ptr` is a pointer to an array of `cols` integers within an array of `rows` such arrays, ensuring each row is contiguous in memory.
 
-#### 3. 2D Pointer (`T (*)[][]`)
+#### 3. 2D Pointer (`T (*)[][]`) to 3D Dynamic Array (`int[][][]`)
 
-- **3D Dynamic Array (`int[][][]`)**:
-  - A 2D pointer (`T (*)[][]`) points to entire 2D arrays (`int[][]`) within a dynamically allocated 3D array (`int[][][]`).
-  - Memory for `int[][][]` is allocated in a way that each 2D slice (`int[][]`) maintains its own contiguous memory layout, and the array of pointers (`T (*)[][]`) to these 2D slices is stored contiguously.
-  - Example:
-    ```cpp
-    int (*ptr)[rows][cols] = new int[layers][rows][cols];
-    ```
-    In this case, `ptr` is a pointer to a 2D array (`rows` rows and `cols` columns) within an array of `layers` such 2D arrays, ensuring each 2D slice is contiguous.
+- A 2D pointer (`T (*)[][]`) points to entire 2D arrays (`int[][]`) within a dynamically allocated 3D array (`int[][][]`).
+- Memory for `int[][][]` is allocated in a way that each 2D slice (`int[][]`) maintains its own contiguous memory layout, and the array of pointers (`T (*)[][]`) to these 2D slices is stored contiguously.
+- Example:
+  ```cpp
+  int (*ptr)[rows][cols] = new int[layers][rows][cols];
+  ```
+  In this case, `ptr` is a pointer to a 2D array (`rows` rows and `cols` columns) within an array of `layers` such 2D arrays, ensuring each 2D slice is contiguous.
 
 ### Pointer Decay and Dimensionality
 

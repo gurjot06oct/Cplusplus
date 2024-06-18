@@ -1,3 +1,5 @@
+## Dimension Conversion Arithmetic
+
 ### 2D Array Dimension Conversion
 
 #### Original Array:
@@ -74,8 +76,8 @@ To convert coordinates \( (i, j ,k) \) from the original array to \( (x, y, z) \
 - **Conversion Formulas:**
   - $\text{flat\_index} = i \times n \times o + j \times o + k$
   - $x = \frac{\text{flat\_index}}{q \times r}$
-  - $y = \left( \frac{\text{flat\_index}}{r} \right) \% q$
-  - $z = \text{flat\_index} \% r$
+  - $y = \frac{\left(\text{flat\_index}\% (q \times r)\right)}{r} = \left( \frac{\text{flat\_index}}{r} \right) \% q$
+  - $z = \left(\text{flat\_index}\% (q \times r)\right) \% r = \text{flat\_index} \% r$
 
 ### Example Code:
 
