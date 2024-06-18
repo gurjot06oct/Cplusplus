@@ -1,4 +1,4 @@
-## Conversions between `T(*)[]`, `T(*)[][]` and `T*`
+## Dimension Conversions
 
 ### Description:
 
@@ -16,9 +16,9 @@ In C++, pointers can be cast to different pointer types to reinterpret the memor
 
 2. **Memory Layout:**
 
-   - **1D Array**: A contiguous block of memory. It delays to return a 0D pointer.
-   - **2D Array**: Interpreted as an array of arrays. It delays to return a 1D pointer.
-   - **3D Array**: Interpreted as an array of arrays of arrays. It delays to return a 2D pointer.
+   - **1D Array**: A contiguous block of memory. It decays to return a 0D pointer.
+   - **2D Array**: Interpreted as an array of arrays. It decays to return a 1D pointer.
+   - **3D Array**: Interpreted as an array of arrays of arrays. It decays to return a 2D pointer.
 
 3. **Pointer Casting:**
 
