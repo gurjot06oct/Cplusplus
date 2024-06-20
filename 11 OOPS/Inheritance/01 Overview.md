@@ -32,8 +32,53 @@ Inheritance is a fundamental concept in Object-Oriented Programming (OOP) that a
    - Example: `Class B` and `Class C` both inherit from `Class A`.
 
 5. **Hybrid Inheritance**:
+
    - A combination of two or more types of inheritance.
    - Example: A mix of multilevel and multiple inheritance patterns.
+
+6. **Multipath inheritance**:
+
+   - A scenario in multiple inheritance where a class inherits from two or more classes that share a common base class. Example: `Class D` inherits from both `Class B` and `Class C`, which both inherit from `Class A`, creating a diamond-shaped inheritance structure.
+
+   ```
+      A
+     / \
+    B   C
+     \ /
+      D
+
+   ```
+
+### Mode of Inheritance vs Type of Data Member
+
+| Mode of Inheritance | Type of Data Member | Inherited Mode | Accessibility in Derived Class |
+| ------------------- | ------------------- | -------------- | ------------------------------ |
+| **Public**          | Public              | Public         | Yes                            |
+|                     | Protected           | Protected      | Yes                            |
+|                     | Private             | Not Inherited  | No                             |
+| **Protected**       | Public              | Protected      | Yes                            |
+|                     | Protected           | Protected      | Yes                            |
+|                     | Private             | Not Inherited  | No                             |
+| **Private**         | Public              | Private        | Yes                            |
+|                     | Protected           | Private        | Yes                            |
+|                     | Private             | Not Inherited  | No                             |
+
+1. **Public Inheritance**:
+
+   - **Public Variable**: Remains public in the derived class.
+   - **Protected Variable**: Remains protected in the derived class.
+   - **Private Variable**: Not accessible in the derived class.
+
+2. **Protected Inheritance**:
+
+   - **Public Variable**: Becomes protected in the derived class.
+   - **Protected Variable**: Remains protected in the derived class.
+   - **Private Variable**: Not accessible in the derived class.
+
+3. **Private Inheritance**:
+   - **Public Variable**: Becomes private in the derived class.
+   - **Protected Variable**: Becomes private in the derived class.
+   - **Private Variable**: Not accessible in the derived class.
 
 ### Benefits of Inheritance:
 
