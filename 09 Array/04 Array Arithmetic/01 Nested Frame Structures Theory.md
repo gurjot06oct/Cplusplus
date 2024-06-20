@@ -84,9 +84,9 @@ The theory categorizes arrays into different dimensions:
 
 ### Dereferencing (`*`) and Referencing (`&`)
 
-- **Dereferencing (Going Into a Frame `*`)**: Pointing to elements or sub-arrays within a specific dimension. It involves navigating deeper into the nested frames to retrieve values.
+- **Dereferencing (Going Into a Frame `*`)**: Pointing to elements or sub-arrays within a specific dimension. It involves navigating deeper into the nested frames to retrieve values. Once you go inside a frame by dereferencing, you cannot go back out to an outer frame using referencing (`&`).
 
-- **Referencing (Going Out of a Frame `&`)**: Pointing to the address of the outer frame that encompasses the current array or element. It signifies moving outward from a specific element or sub-array to access the encompassing structure.
+- **Referencing (Going Out of a Frame `&`)**: Pointing to the address of the outer frame that encompasses the current array or element. It signifies moving outward from a specific element or sub-array to access the encompassing structure. If you have gone outside a frame using referencing, you can go back inside by dereferencing.
 
 - **Analogous to Physical Frames**:
 
