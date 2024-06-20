@@ -12,17 +12,10 @@ The Nested Frame Model Representation is a conceptual framework for understandin
 
 1. **Frame**: A frame is a conceptual representation of a single dimension in an array. Each frame contains sub-frames representing the next dimension, until the innermost frames contain the actual values.
 
-2. **Base Address**: The memory address of the first element in the array. For an array `arr`, the base address is `&arr[0]`.
-
-3. **Offset**: A positional index that moves the pointer within a frame. For example, `arr + i` moves the pointer to the `i`-th element in the array `arr`.
-
-4. **Dereferencing (`*`)**: Accessing the value stored at a specific memory address pointed to by a pointer. Each level of dereferencing corresponds to accessing a deeper level in the nested frames.
-
-### Basic Elements and Notation for different `Frame` types
-
-- **Elementary Frame (Cell)**: Represents a single element within the array structure.
-- **Frame**: A collection of cells or sub-frames, analogous to a row in 2D arrays.
-- **Main Frame**: Encapsulates the elements of the highest dimension, serving as the outermost layer of the array structure.
+2. **Element**: Represents a value.
+3. **Base Address**: The memory address of the first element in the array. For an array `arr`, the base address is `&arr[0]`, which can be an element, sub-array etc.
+4. **Offset**: A positional index that moves the pointer within a frame. For example, `arr + i` moves the pointer to the `i`-th element in the array `arr`.
+5. **Dereferencing (`*`)**: Accessing the value stored at a specific memory address pointed to by a pointer. Each level of dereferencing corresponds to accessing a deeper level in the nested frames.
 
 ### Dimensions and Levels
 
@@ -116,6 +109,6 @@ Dynamic arrays can be represented in different ways:
 
 - **Method 1: Level Pointers**: In this method, dynamic arrays do not utilize a nested frame structure.
 
-- **Method 2: Two-Dimensional Pointer**: Here, dynamic arrays utilize a nested frame structure partially.
+- **Method 2: Dimensional Pointer**: Here, dynamic arrays utilize a nested frame structure partially.
 
 The Theory of Nested Frame Structures helps in visualizing and understanding the complex organization of elements in multidimensional arrays, providing a clear framework for accessing and manipulating these structures effectively.

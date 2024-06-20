@@ -1,8 +1,20 @@
-### Visualizing Multidimensional Arrays as Nested Frames
+## Static Array as Nested Frames
 
-#### **0D Array (Scalar)**
+Imagine a multidimensional array as a stack of nested frames, where each frame represents a dimension in the array. The concept of nested dereferencing (`*`) and adding offsets (`m`, `n`, etc.) can be visualized as follows:
 
-A scalar is a single value represented as a frame:
+**Note**: As we know, the array `arr` will pointer to its base element (first element). This means address of `arr` is equivalent address of `&arr[0]`.For arrays of different dimensions, such as 1D, 2D, and 3D:
+
+- The array variable, like `arrNd`, does not directly point to the base element of the array.
+- Instead, it points to a nested structure where each level represents a progressively lower dimension of the array.
+- For example, a 1-dimensional array (`arr1D`) points directly to its elements.
+- A 2-dimensional array (`arr2D`) points to rows of elements, where each row is itself an array of elements.
+- In `arr2D`, each row array further points to its base elements.
+- Similarly, a 3-dimensional array (`arr3D`) points to matrices of elements, where each matrix is a 2-dimensional array of elements.
+- In `arr3D`, each matrix array further points to its rows of elements, and each row array points to its base elements.
+
+This nested structure continues recursively for higher-dimensional arrays (`arr4D`, `arr5D`, etc.). This hierarchical arrangement allows for efficient accessing, manipulating, and understanding of multi-dimensional arrays through nested frames, where each frame encapsulates a different level of array dimensionality.
+
+### **0D Array**:
 
 ```
 +--+
@@ -10,9 +22,9 @@ A scalar is a single value represented as a frame:
 +--+
 ```
 
-#### **1D Array**
+- A zero-dimensional array, or scalar, directly returns its contained value.
 
-A one-dimensional array is a single frame containing multiple scalar values:
+### **1D Array**:
 
 ```cpp
 int arr[] = {1, 2, 3, 4, 5};
@@ -26,50 +38,97 @@ int arr[] = {1, 2, 3, 4, 5};
 +----------------------------+
 ```
 
-- **Base Frame (`arr`)**: Represents the entire 1D array.
-- **Element Frame (`*arr`)**: Accesses individual elements within the base frame.
+1. **arr**:
 
-#### **2D Array**
+   - `arr` points to the base address of the entire 1D array (`&arr[0]`)(address of `1`).
+   - Visually, `arr` represents the frame enclosing the base element in the array (`1`).
 
-A two-dimensional array is a frame containing multiple 1D arrays:
+2. **\*arr**:
+
+   - `*arr` dereferences the `arr`, meaning going in the frame, accessing the value at the base address (`arr[0]`).
+   - Visually, `*arr` directly represents `1`, which is the base element in the array.
+
+3. **&arr**:
+
+   - `&arr` points to the address of the entire 1D array, encompassing all elements (`1`, `2`, `3`, `4`, `5`).
+   - Visually, `&arr` represents the outermost frame of the 1D array structure, containing all its elements (`1` to `5`).
+
+### Visualizing Movement:
+
+- **Using Offset (`arr + i`)**:
+  - Adding an offset `i` to `arr` moves the pointer to the `i`-th index element in the array.
+  - For instance, `arr + 2` points to `arr[2]`, which is `3` in the array `{1, 2, 3, 4, 5}`.
+  - When we add an offset `i` to `arr`, we're metaphorically moving from one frame to another:
+    - `arr` represents frame of `arr[0]` (`1`)
+    - `arr + 1` represents frame of `arr[1]` (`2`)
+    - `arr + 2` represents frame of `arr[2]` (`3`)
+    - and so on...
+    - Dereferencing (`*`) them accesses the value stored at the memory address it points to, akin to opening the box and retrieving its contents. For instance, `*(arr + 1)` accesses the value `2`.
+
+### **2D Array**:
 
 ```cpp
-int arr2D[3][4] = {
-    {1, 2, 3, 4},
-    {5, 6, 7, 8},
-    {9, 10, 11, 12}
+int arr2D[2][5] = {
+    {1, 2, 3, 4, 5},
+    {6, 7, 8, 9, 10},
 };
 ```
 
 ```
-+----------------------------+
-|  +----------------------+  |
-|  |  +--+ +--+ +--+ +--+ |  |
-|  |  | 1| | 2| | 3| | 4| |  |
-|  |  +--+ +--+ +--+ +--+ |  |
-|  +----------------------+  |
-|                            |
-|  +----------------------+  |
-|  |  +--+ +--+ +--+ +--+ |  |
-|  |  | 5| | 6| | 7| | 8| |  |
-|  |  +--+ +--+ +--+ +--+ |  |
-|  +----------------------+  |
-|                            |
-|  +----------------------+  |
-|  |  +--+ +--+ +--+ +--+ |  |
-|  |  | 9| |10| |11| |12| |  |
-|  |  +--+ +--+ +--+ +--+ |  |
-|  +----------------------+  |
-+----------------------------+
+  +------------------------------------------------------------------+
+  |  +----------------------------+  +----------------------------+  |
+  |  |  +--+ +--+ +--+ +--+ +--+  |  |  +--+ +--+ +--+ +--+ +--+  |  |
+  |  |  | 1| | 2| | 3| | 4| | 5|  |  |  | 6| | 7| | 8| | 9| |10|  |  |
+  |  |  +--+ +--+ +--+ +--+ +--+  |  |  +--+ +--+ +--+ +--+ +--+  |  |
+  |  +----------------------------+  +----------------------------+  |
+  +------------------------------------------------------------------+
 ```
 
-- **Base Frame (`arr2D`)**: Represents the entire 2D array.
-- **Row Frame (`*arr2D`)**: Accesses individual 1D arrays within the base frame.
-- **Element Frame (`**arr2D`)\*\*: Accesses individual elements within each 1D array.
+### Key Concepts:
 
-#### **3D Array**
+1. **arr2D**:
 
-A three-dimensional array is a frame containing multiple 2D arrays:
+   - `arr2D` points to the base address of the entire 2D array. Technically, it returns the address of the first element (`1`) in the 2D array, but it points to the base 1D array (`{1, 2, 3, 4, 5}`).
+   - Visually, `arr2D` represents the frame of the first row of the 2D array: `{1, 2, 3, 4, 5}`.
+
+2. **\*arr2D**:
+
+   - `*arr2D` dereferences the `arr2D`, allowing access to the elements of the entire 1D array (`{1, 2, 3, 4, 5}`). This means it goes into the frame represented by the first row of the 2D array, and pointing the first element of the row.
+   - `*arr2D` points to the base address of the first row of 2D array.
+   - Technically, `*arr2D` points to the address of the first element (`1`) in the 1D array (first row of the 2D array).
+   - Visually, `*arr2D` represents the frame of the first element (`1`) in the first row (`{1, 2, 3, 4, 5}`) of the 2D array.
+
+3. **\*\*arr2D**:
+
+   - `**arr2D` double dereferences the `arr2D`, which metaphorically means going two layers deep into the frames, and accesses the value at the base address of the first element (`arr2D[0][0]`), which is `1`.
+   - Technically and Visually, `**arr2D` directly represents `1`, the first element in the 2D array.
+
+4. **&arr2D**:
+
+   - `&arr2D` points to the address of the entire 2D array, encompassing all elements (`1` to `10`). It represents the outermost frame of the 2D array structure, containing all its elements.
+   - Technically, `*arr2D` points to the address of the first element (`1`) in the first row of the 2D array.
+   - Visually, `&arr2D` represents the outermost frame enclosing the entire 2D array structure (`1` to `10`).
+
+### Visualizing Movement
+
+- **Using Single Offset (`arr2D + i`)**:
+
+  - Adding an offset `i` to `arr2D` moves the pointer to the `i`-th index row of the 2D array (`arr2D[i]`).
+  - When using a single offset, we can move through rows of the 2D array:
+
+    - `arr2D + 0` represents frame of the first row (`{1, 2, 3, 4, 5}`)
+    - `arr2D + 1` represents frame of the second row (`{5, 6, 7, 8, 5}`)
+
+- **Using Double Offset (`*(arr2D + i) + j`)**:
+  - Adding an offset `j` to `*(arr2D + i)` accesses the `j`-th index element in the `i`-th index row of the 2D array (`arr2D[i][j]`).
+  - When using double offset, we can access any element in the 2D array:
+    - `*(arr2D + 0) + 0` represents the frame of `arr2D[0][0]` which is akin to pointing to `1` directly.
+    - `*(arr2D + 0) + 1` represents the frame of `arr2D[0][1]` which is akin to pointing to `2` directly.
+    - `*(arr2D + 1) + 0` represents the frame of `arr2D[1][0]` which is akin to pointing to `6` directly.
+    - `*(arr2D + 1) + 1` represents the frame of `arr2D[1][1]` which is akin to pointing to `7` directly.
+  - Dereferencing (`*`) them accesses the value stored at the memory address it points to, akin to opening the box and retrieving its contents. For instance, `*(*(arr2D + 1) + 1)` accesses the value `7`.
+
+### **3D Array**:
 
 ```cpp
 int arr3D[2][2][5] = {
@@ -105,52 +164,63 @@ int arr3D[2][2][5] = {
 +------------------------------------------------------------------------+
 ```
 
-- **Base Frame (`arr3D`)**: Represents the entire 3D array.
-- **2D Frame (`*arr3D`)**: Accesses individual 2D arrays within the base frame.
-- **Row Frame (`**arr3D`)\*\*: Accesses individual 1D arrays within each 2D array.
-- **Element Frame (`\***arr3D`)\*\*: Accesses individual elements within each 1D array.
+#### Key Concepts:
 
-### Navigating Through Frames
+1. **arr3D**:
 
-#### **Single Offset (`arr + i`)**
+   - `arr3D` points to the base address of the entire 3D array. Technically, it returns the address of the first element (`1`) in the 3D array, but it points to the base 2D array (`{{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}`).
+   - Visually, `arr3D` represents the frame of the first 2D array (`{{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}`) in the 3D array.
 
-- **1D Array**: Moves the pointer to the `i`-th element in the array.
-  - `arr + 2` points to `arr[2]`, which is `3`.
-- **2D Array**: Moves the pointer to the `i`-th row in the 2D array.
-  - `arr2D + 1` points to `arr2D[1]`, which is `{5, 6, 7, 8}`.
-- **3D Array**: Moves the pointer to the `i`-th 2D array in the 3D array.
-  - `arr3D + 1` points to `arr3D[1]`, which is `{{11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}}`.
+2. **\*arr3D**:
 
-#### **Double Offset (`*(arr + i) + j`)**
+   - `*arr3D` dereferences `arr3D`, allowing access to the elements of the entire first 2D array (`{{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}`). This means it points to the base address of the first 2D array.
+   - Technically, `*arr3D` points to the address of the first 1D array (`{1, 2, 3, 4, 5}`) in the first 2D array.
+   - Visually, `*arr3D` represents the frame of the first 1D array (`{1, 2, 3, 4, 5}`) of the first 2D array (`{{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}`).
 
-- **2D Array**: Moves the pointer to the `j`-th element in the `i`-th row.
-  - `*(arr2D + 1) + 2` points to `arr2D[1][2]`, which is `7`.
-- **3D Array**: Moves the pointer to the `j`-th row in the `i`-th 2D array.
-  - `*(arr3D + 1) + 1` points to `arr3D[1][1]`, which is `{16, 17, 18, 19, 20}`.
+3. **\*\*arr3D**:
 
-#### **Triple Offset (`*(*(arr + i) + j) + k`)**
+   - `**arr3D` double dereferences `arr3D`, which metaphorically means going two layers deep into the frames, and pointing the first element (`arr3D[0][0][0]`), which is `1`.
+   - Technically, `**arr3D` points to the address of the first element (`1`) of 1D array (`{1, 2, 3, 4, 5}`) in the first 2D array.
+   - Visually, `**arr3D` represents the frame of the first element (`1`) of first 1D array (`{1, 2, 3, 4, 5}`) of the first 2D array (`{{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}`).
 
-- **3D Array**: Moves the pointer to the `k`-th element in the `j`-th row of the `i`-th 2D array.
-  - `*(*(arr3D + 1) + 1) + 3` points to `arr3D[1][1][3]`, which is `19`.
+4. **\*\*\*arr3D**:
 
-### Dereferencing and Accessing Values
+   - `***arr3D` triple dereferences `arr3D`, meaning it goes three layers deep into the frames, and accesses the value at the base address of the first element (`arr3D[0][0][0]`), which is `1`.
+   - Technically and visually, `***arr3D` directly represents `1`, emphasizing that it accesses the innermost element in the 3D array structure.
 
-- **Single Dereference (`*`)**: Accesses the value at the current pointer level.
+5. **&arr3D**:
 
-  - **1D Array**: `*arr` accesses the first element, `1`.
-  - **2D Array**: `*arr2D` accesses the first row, `{1, 2, 3, 4}`.
-  - **3D Array**: `*arr3D` accesses the first 2D array, `{{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}`.
+   - `&arr3D` points to the address of the entire 3D array, encompassing all elements (`1` to `20`). It represents the outermost frame of the 3D array structure, containing all its elements.
+   - Technically, `&arr3D` points to the address of the first element (`1`) in the 3D array.
+   - Visually, `&arr3D` represents the outermost frame enclosing the entire 3D array structure (`1` to `20`).
 
-- **Double Dereference (`**`)\*\*: Accesses the value one level deeper.
-  - **2D Array**: `
+#### Visualizing Movement
 
-\*\*arr2D`accesses the first element of the first row,`1`.
+- **Using Single Offset (`arr3D + i`)**:
 
-- **3D Array**: `**arr3D` accesses the first row of the first 2D array, `{1, 2, 3, 4, 5}`.
+  - Adding an offset `i` to `arr3D` moves the pointer to the `i`-th index 2D array (`arr3D[i]`).
+  - When using a single offset, we can move through the 2D arrays in the 3D array:
 
-- **Triple Dereference (`\***`)\*\*: Accesses the value two levels deeper.
-  - **3D Array**: `***arr3D` accesses the first element of the first row of the first 2D array, `1`.
+    - `arr3D + 0` represents the frame of the first 2D array (`{{1, 2, 3, 4, 5}, {6, 7, 8, 9, 10}}`)
+    - `arr3D + 1` represents the frame of the second 2D array (`{{11, 12, 13, 14, 15}, {16, 17, 18, 19, 20}}`)
 
-### Conclusion
+- **Using Double Offset (`*(arr3D + i) + j`)**:
 
-The Nested Frame Model Representation provides a structured way to visualize and understand the behavior of multidimensional arrays. By treating each dimension as a nested frame, it becomes easier to comprehend how pointers, offsets, and dereferencing operations interact to access elements within complex data structures. This theory can be extended to higher-dimensional arrays by adding additional layers of frames and dereferencing levels, maintaining the same principles outlined above.
+  - Adding an offset `j` to `*(arr3D + i)` accesses the `j`-th index 1D array in the `i`-th index 2D array (`arr3D[i][j]`).
+  - When using double offset, we can access any element in the 3D array:
+
+    - `*(arr3D + 0) + 0` represents the frame of the first 1D array of first 2D array `arr3D[0][0]` (`{1, 2, 3, 4, 5}`).
+    - `*(arr3D + 0) + 1` represents the frame of the first 1D array of second 2D array `arr3D[0][1]` (`{6, 7, 8, 9, 10}`).
+    - `*(arr3D + 1) + 0` represents the frame of the second 1D array of first 2D array `arr3D[1][0]` (`{11, 12, 13, 14, 15}`).
+    - `*(arr3D + 1) + 1` represents the frame of the second 1D array of second 2D array `arr3D[1][4]` (`{16, 17, 18, 19, 20}`).
+
+- **Using Triple Offset (`*(*(arr3D + i) + j) + k`)**:
+
+  - Adding an offset `k` to `*(*(arr3D + i) + j)` accesses the `k`-th index element in the `j`-th index 1D array of the `i`-th index 2D array (`arr3D[i][j][k]`).
+  - When using triple offset, we can access any element in the 3D array:
+
+    - `*(*(arr3D + 0) + 0) + 0` represents the frame of `arr3D[0][0][0]` which is akin to pointing to `1` directly.
+    - `*(*(arr3D + 0) + 1) + 2` represents the frame of `arr3D[0][1][2]` which is akin to pointing to `8` directly.
+    - `*(*(arr3D + 1) + 1) + 3` represents the frame of `arr3D[1][1][3]` which is akin to pointing to `19` directly.
+
+  - Each offset (`i`, `j`, `k`) moves through the corresponding dimensions of the 3D array, akin to navigating through nested frames, and dereferencing (`*`) them accesses the value stored at the memory address it points to, akin to opening the box and retrieving its contents.For instance, `*(*(*(arr2D + 1) + 1) + 3)` accesses the value `19`.
