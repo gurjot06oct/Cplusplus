@@ -1,134 +1,58 @@
-Certainly! Let's explore the relationships between dimensional pointers (`int*`, `int**`, `int***`) and dynamic arrays (`int[]`, `int[][]`, `int[][][]`) in C++ and how they are essentially equivalent in terms of usage and access.
+# Why Method 1 do not utilize a nested frame structure
 
-### Relationship Between Dimensional Pointers and Dynamic Arrays
+let's create a visualization for a 3D array with dimensions [2][2][5]. Here, we'll focus on showing how the memory addresses are not contiguous due to the different levels of pointers involved.
 
-#### 1. `int*` Pointer and `int[]` Array
+### 3D Array Explanation and Visualization
 
-- **`int*` Pointer**:
+#### Memory Allocation
 
-  - Points to a single element of type `int`.
-  - Example:
-    ```cpp
-    int* ptr = new int;
-    ```
-    Dynamically allocates memory for a single `int` and `ptr` points to that location.
+1. **Top-Level Pointer (p)**:
+   - `p` points to an array of 2 pointers to pointers (`p1`).
+2. **Second-Level Pointers (p1)**:
 
-- **`int[]` Array**:
+   - Each `p1` points to an array of 2 pointers to integers (`p2`).
 
-  - Represents a 1-dimensional array of integers.
-  - Example:
-    ```cpp
-    int* arr = new int[size];
-    ```
-    Allocates memory for `size` integers, stored contiguously.
+3. **Third-Level Pointers (p2)**:
+   - Each `p2` points to an array of 5 integers.
 
-- **Relationship**:
-  - A `int*` pointer (`ptr`) can point to the first element of an `int[]` array (`arr`).
-  - The pointer (`ptr`) and the array (`arr`) are used interchangeably for accessing elements.
-  - Accessing elements:
-    - Using pointer arithmetic: `*(ptr + i)` or `*(arr + i)`
-    - Using array subscript: `ptr[i]` or `arr[i]`
+#### Diagram
 
-#### 2. `int**` Pointer and `int[][]` Array
+We'll represent the pointers and their allocated memory visually, using hypothetical memory addresses to demonstrate non-contiguous allocation.
 
-- **`int**` Pointer\*\*:
+- Assuming size(`int*`) is 8 bytes and size(`int`) is 4 bytes.
 
-  - Points to an array of `int*` pointers, each pointing to a 1-dimensional array (`int[]`).
-  - Example:
-    ```cpp
-    int** ptr = new int*[rows];
-    for (int i = 0; i < rows; ++i) {
-        ptr[i] = new int[cols];
-    }
-    ```
-    Allocates memory for a 2-dimensional array (`rows` rows and `cols` columns).
+```
+p (Address: 101)
+|
+|----> (Address: 1001)
+|       |
+|       |----> (Address: 2001)
+|       |       |----> [0, 1, 2, 3, 4] (int array) (Addresses: 3001 to 3020)
+|       |
+|       |----> (Address: 2009)
+|               |----> [5, 6, 7, 8, 9] (int array) (Addresses: 4001 to 4020)
+|
+|----> (Address: 1009)
+        |
+        |----> (Address: 2017)
+        |       |----> [10, 11, 12, 13, 14] (int array) (Addresses: 5001 to 5020)
+        |
+        |----> (Address: 2025)
+                |----> [15, 16, 17, 18, 19] (int array) (Addresses: 6001 to 6020)
+```
 
-- **`int[][]` Array**:
+#### Detailed Memory Layout
 
-  - Represents a 2-dimensional array of integers.
-  - Example:
-    ```cpp
-    int** arr = new int*[rows];
-    for (int i = 0; i < rows; ++i) {
-        arr[i] = new int[cols];
-    }
-    ```
-    Allocates memory for `rows` rows of `cols` integers each, stored contiguously.
+Let's use specific memory addresses for clarity:
 
-- **Relationship**:
-  - An `int**` pointer (`ptr`) manages an array of `int*` pointers, each pointing to a separate row in the `int[][]` array (`arr`).
-  - The pointer (`ptr`) and the array (`arr`) are used interchangeably for accessing elements.
-  - Accessing elements:
-    - Using double pointer dereferencing: `ptr[i][j]`
-    - Using array subscript: `arr[i][j]`
+- `p` is allocated at `101`
+- `p[0]` points to `1001` and `2009`
+  - `p[0][0]` points to `3001` to `3020`
+  - `p[0][1]` points to `4001` to `4020`
+- `p[1]` points to `2017` and `2025`
+  - `p[1][0]` points to `5001` to `5020`
+  - `p[1][1]` points to `6001` to `6020`
 
-#### 3. `int***` Pointer and `int[][][]` Array
+This shows that the pointers at each level have different memory addresses, and the integers at the lowest level are contiguous within their own allocation blocks, but not across different blocks.
 
-- **`int\***` Pointer\*\*:
-
-  - Points to an array of `int**` pointers, each pointing to a 2-dimensional array (`int[][]`).
-  - Example:
-    ```cpp
-    int*** ptr = new int**[depth];
-    for (int i = 0; i < depth; ++i) {
-        ptr[i] = new int*[rows];
-        for (int j = 0; j < rows; ++j) {
-            ptr[i][j] = new int[cols];
-        }
-    }
-    ```
-    Allocates memory for a 3-dimensional array (`depth` layers, each with `rows` rows and `cols` columns).
-
-- **`int[][][]` Array**:
-
-  - Represents a 3-dimensional array of integers.
-  - Example:
-    ```cpp
-    int*** arr = new int**[depth];
-    for (int i = 0; i < depth; ++i) {
-        arr[i] = new int*[rows];
-        for (int j = 0; j < rows; ++j) {
-            arr[i][j] = new int[cols];
-        }
-    }
-    ```
-    Allocates memory for `depth` layers of `rows` rows of `cols` integers each, stored contiguously.
-
-- **Relationship**:
-  - An `int***` pointer (`ptr`) manages an array of `int**` pointers, each pointing to a separate `int[][]` array (`arr`).
-  - The pointer (`ptr`) and the array (`arr`) are used interchangeably for accessing elements.
-  - Accessing elements:
-    - Using triple pointer dereferencing: `ptr[i][j][k]`
-    - Using array subscript: `arr[i][j][k]`
-
-### Continuous Memory Allocation
-
-- **`int[]`**:
-
-  - Allocates a single block of contiguous memory for `size` elements.
-  - Efficient for linear access and operations on 1-dimensional data.
-
-- **`int[][]`**:
-
-  - When using a single allocation (`new int[rows][cols]`), it allocates a single contiguous block of memory for a 2D array.
-  - Each row is stored contiguously, and rows are stored sequentially.
-  - Alternatively, using multiple allocations (`new int*[rows]` + `new int[cols]` for each row) allocates memory in separate blocks, one for each row.
-
-- **`int[][][]`**:
-  - When using a single allocation (`new int[depth][rows][cols]`), it allocates a single contiguous block of memory for a 3D array.
-  - Each 2D slice is stored contiguously, and slices are stored sequentially.
-  - Alternatively, using multiple allocations (`new int**[depth]` + `new int*[rows]` + `new int[cols]` for each layer and row) allocates memory in separate blocks, one for each row and layer.
-
-### Summary
-
-- **Pointer Levels (`int*`, `int**`, `int**\*`)**:
-  - Correspond to 1D, 2D, and 3D arrays (`int[]`, `int[][]`, `int[][][]`) respectively.
-- **Memory Allocation**:
-  - Each level of pointer manages increasing levels of indirection and complexity in memory allocation.
-- **Access Patterns**:
-  - Each level of arrays allows for multi-dimensional data access using nested indexing (`ptr[i][j][k]` or `arr[i][j][k]`).
-- **Interchangeability**:
-  - Pointers (`ptr`) and arrays (`arr`) are used interchangeably for accessing elements.
-  - They both provide the same functionality and can be accessed using either pointer arithmetic or array subscripting.
-
-Understanding these relationships and the continuous nature of memory allocation helps in designing efficient data structures and algorithms in C++, optimizing memory usage, and ensuring efficient data access and manipulation in complex applications.
+This visualization effectively demonstrates how 3D arrays and pointers work in C/C++, highlighting the non-contiguous nature of the memory allocation due to which they do not utilize a nested frame structure.
