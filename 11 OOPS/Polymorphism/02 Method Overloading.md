@@ -1,92 +1,98 @@
-## Method Overloading in Object-Oriented Programming
+## Method Overriding
 
-Method overloading in object-oriented programming (OOP) is analogous to function overloading in traditional procedural programming languages. The key difference lies in how it relates to classes and objects.
+### Compile-time Method Overriding
 
-### Similarity to Function Overloading
+Compile-time method overriding, also known as static method binding or early binding, occurs when the compiler determines which function to call based on the type of the pointer or reference at compile time. This is typical when the function in the derived class has the same signature (name and parameters) as the function in the base class.
 
-Just like function overloading in non-OOP languages:
-
-- **Multiple Definitions**: Method overloading allows a class to have multiple methods with the same name but different parameter lists.
-- **Same Name**: Methods in a class can share the same name, but each method must have a unique parameter list (number, type, or order of parameters).
-- **Compile-Time Resolution**: The compiler determines which method to call based on the number and types of arguments provided during the function call.
-
-In C++, you can overload functions based on whether the parameter is a constant or not. This feature allows you to provide different implementations depending on whether the input argument should be modifiable or not. Here’s how you can use const and non-const parameters for overloading:
-
-### Overloading Based on Const Methods
-
-In C++, member functions can be overloaded based on the const-qualification of the `this` pointer. This means you can have different implementations depending on whether the member function is called on a const or non-const object.
-
-```cpp
-class Example {
-public:
-    void show() {
-        cout << "Non-const show function called" << endl;
-    }
-    void show() const {
-        cout << "Const show function called" << endl;
-    }
-};
-```
-
-### Explanation
-
-- **Non-const member function**: `void show()`
-  - This function can be called on non-const objects and can modify the object.
-- **Const member function**: `void show() const`
-  - This function can be called on const objects and cannot modify the object.
-
-### `mutable` Keyword
-
-The `mutable` keyword in C++ is used to modify a member of a `const` class object. By marking a data member as `mutable`, you're essentially telling the compiler that this particular member can be modified even if the object itself is `const`.
-
-### Use Cases for `mutable` in `const` Class Objects
+#### Example of Compile-time Method Overriding:
 
 ```cpp
 #include <iostream>
 using namespace std;
 
-class Counter {
-private:
-    mutable int count; // Mutable member variable
-
+class Parent {
 public:
-    Counter(int initialCount) : count(initialCount) {}
-
-    // Method to increment count
-    void increment() const {
-        count++; // Allowed because 'count' is mutable
+    void display() {
+        cout << "Display function of Parent class" << endl;
     }
+};
 
-    // Method to get current count
-    int getCount() const {
-        return count;
+class Child : public Parent {
+public:
+    void display() {
+        cout << "Display function of Child class" << endl;
     }
 };
 
 int main() {
-    const Counter c(5); // Declare a const Counter object
+    Child obj;
+    obj.display();  // Calls Child's display() method
+    return 0;
+}
+```
 
-    cout << "Initial Count: " << c.getCount() << endl; // Output: Initial Count: 5
-    // We can still modify 'count' inside 'c' using the mutable keyword
-    c.increment();
+**Explanation**:
 
-    cout << "Count after increment: " << c.getCount() << endl; // Output: Count after increment: 6
+- In the example above, both `Parent` and `Child` classes have a method named `display()`.
+- When `obj.display()` is called in `main()`, the compiler binds this call to `Child` class's `display()` method because `obj` is of type `Child`.
+- This demonstrates compile-time method overriding because the decision of which `display()` method to call is made statically by the compiler based on the type of `obj`.
+
+**Output**:
+
+```
+Display function of Child class
+```
+
+### Runtime Polymorphism using Virtual Functions
+
+Runtime polymorphism in C++ is achieved using virtual functions and dynamic dispatch. Virtual functions enable the function call to be resolved at runtime, based on the actual type of object pointed to or referenced, rather than the type of the pointer or reference itself.
+
+#### Example of Runtime Polymorphism using Virtual Functions:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Parent {
+public:
+    virtual void display() {
+        cout << "Display function of Parent class" << endl;
+    }
+};
+
+class Child : public Parent {
+public:
+    void display() override {
+        cout << "Display function of Child class" << endl;
+    }
+};
+
+int main() {
+    Parent* ptr;
+    Child obj;
+    ptr = &obj;
+
+    ptr->display();  // Calls Child's display() method due to virtual function
 
     return 0;
 }
 ```
 
-### Explanation:
+**Explanation**:
 
-- **Class `Counter`**: Represents a simple counter with a `count` member variable.
-- **`mutable int count;`**: This member variable is marked as `mutable`, which means it can be modified even within `const` member functions.
-- **Method `increment()`**: Increments the `count` variable. Despite being called within a `const` member function (`increment()`), it can modify `count` because `count` is `mutable`.
-- **Usage in `main()`**:
-  - We create a `const Counter` object `c` with an initial count of 5.
-  - `count` is `mutable` , allowing us to call `increment()` directly.
-  - After incrementing, we retrieve and print the updated count using `c.getCount()`.
+- In this example, `Parent` class's `display()` method is declared as `virtual`.
+- When `ptr->display()` is called in `main()`, even though `ptr` is of type `Parent*`, it points to an object of type `Child`.
+- Due to dynamic dispatch (enabled by the `virtual` keyword), the call to `display()` is resolved at runtime, and `Child` class's `display()` method is executed.
 
-### Purpose and Uses
+**Output**:
 
-- **Purpose of `mutable`**: Allows modifying specific member variables of a `const` object without violating the `const` correctness principle.
-- **Use Case**: Useful for maintaining internal state or caching within `const` objects without exposing this behavior externally.
+```
+Display function of Child class
+```
+
+### Key Differences:
+
+- **Compile-time Method Overriding**: The method to be called is determined by the type of the pointer or reference at compile time. It does not depend on the actual object type but on the type of the variable used to access the object.
+- **Runtime Polymorphism**: The method to be called is determined by the type of the object pointed to or referenced at runtime. This allows for more flexible and dynamic behavior based on the actual object's type.
+
+In summary, while both compile-time method overriding and runtime polymorphism (using virtual functions) involve inheritance and method overriding, they differ in when and how the decision of which method to call is made: statically at compile time versus dynamically at runtime.
