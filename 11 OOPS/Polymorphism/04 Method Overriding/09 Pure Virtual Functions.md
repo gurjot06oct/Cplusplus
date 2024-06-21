@@ -1,4 +1,4 @@
-### Pure Virtual Functions and Abstract Classes in C++
+### Pure Virtual Functions and Abstract Classes
 
 In C++, an abstract class is a class that cannot be instantiated and is typically used as a base class. Abstract classes are created when we cannot provide implementations for all functions in the base class because the exact implementation depends on the derived classes. A classic example is a `Shape` class with a pure virtual function `draw()`. While the `Shape` class itself cannot define how to draw a shape, every derived class like `Circle` or `Square` will have its own implementation of `draw()`.
 

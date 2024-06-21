@@ -1,4 +1,4 @@
-### Virtual Copy Constructor in C++
+### Virtual Copy Constructor
 
 #### What is it?
 
