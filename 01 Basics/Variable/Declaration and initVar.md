@@ -5,10 +5,10 @@ In C++, declaration and initialization are fundamental concepts with distinct pu
 ### Declaration
 
 - **Declaration** introduces the variable to the compiler, specifying its type and name.
-- It does not assign any initial value, and memory allocation may not occur immediately.
+- It's initial value is garbage value, and memory allocation may not occur immediately.
 
 ```cpp
-int declared_only; // Declares an integer variable 'declared_only' without initializing it
+typename declared_only; // Declares an `typename` variable 'declared_only' without initializing it
 ```
 
 ### Initialization
@@ -18,10 +18,10 @@ int declared_only; // Declares an integer variable 'declared_only' without initi
 
 ```cpp
 // Declaration with Initialization
-int value1 = 10; // Copy initialization
-int value2(20);  // Direct initialization
-int value3{30};  // List initialization
-int zero_init{}; // Zero initialization
+typename value1 = 10; // Copy initialization
+typename value2(20);  // Direct initialization
+typename value3{30};  // List initialization
+typename zero_init{}; // Zero initialization
 ```
 
 ### Types of Initialization
@@ -57,25 +57,27 @@ int zero_init{}; // Zero initialization
     std::cout << "List Initialization: c = " << c << std::endl;
 ```
 
+4. **Zero Initialization**
+   - Uses empty curly braces to initialize the variable to zero.
+   - Example: `int d{};`
+
+```cpp
+    // Zero Initialization
+    int d{};
+    std::cout << "Zero Initialization: d = " << d << std::endl;
+```
+
 ---
 
 ### Complete Code
 
 ```cpp
 #include <iostream>
-
-// ### Key Differences
-
-// 1. **Declaration**:
-//    - Introduces the variable to the compiler.
-//    - Specifies the variable's type and name.
-//    - Does not assign any initial value.
-//    - Memory allocation may not occur immediately.
-
-// 2. **Initialization**:
-//    - Assigns an initial value to the variable at the time of declaration.
-//    - Ensures the variable has a defined value from the start.
-//    - Allocates memory and stores the initial value in that memory.
+struct my_struct
+{
+    int i;
+    char c;
+};
 
 int main()
 {
@@ -99,6 +101,27 @@ int main()
     // List Initialization
     int c{value3};
     std::cout << "List Initialization: c = " << c << std::endl;
+
+    // Zero Initialization
+
+    int d{};
+    // zero-initialized to 0
+
+    static float f1;
+    // zero-initialized to 0.000000000
+
+    double d{};
+    // zero-initialized to 0.00000000000000000
+
+    int *ptr{};
+    // initialized to nullptr
+
+    char s_array[3]{'a', 'b'};     // the third char is initialized to '\0'
+    int int_array[5] = {8, 9, 10}; // the fourth and fifth ints are initialized to 0
+
+    my_struct a_struct{};
+    // i = 0, c = '\0'
+    std::cout << "Zero Initialization: d = " << d << std::endl;
 
     return 0;
 }
