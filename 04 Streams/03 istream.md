@@ -1,4 +1,6 @@
-## `cin >>` methods
+## `istream`
+
+The `istream` class in C++ is a part of the iostream library and is used for handling input streams, which are streams from which you can read data. It provides a variety of member functions for reading and manipulating input data.
 
 ### `get()`
 
@@ -203,6 +205,25 @@
       cin.read(buffer, 100); // Reads up to 100 characters into buffer
       cout << "You entered: " << buffer << endl;
 
+      return 0;
+  }
+  ```
+
+### `gcount` - Get Character Count
+
+Returns the number of characters extracted by the last unformatted input operation performed on the stream.
+
+- **Example for `streamsize gcount()` overload:**
+
+  ```cpp
+  #include <iostream>
+  using namespace std;
+
+  int main() {
+      char buffer[20];
+      cin.read(buffer, 10);
+      streamsize count = cin.gcount();
+      cout << "Characters read: " << count << endl;
       return 0;
   }
   ```

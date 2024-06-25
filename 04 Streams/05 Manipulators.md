@@ -1,191 +1,3 @@
-## Basic Manipulators
-
-### `std::setiosflags`
-
-This manipulator sets specific format flags on a stream.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-using namespace std;
-
-int main() {
-    cout << setiosflags(ios::showpos | ios::uppercase);
-    cout << hex << 255 << endl;  // Outputs "+FF"
-    return 0;
-}
-```
-
-### `std::resetiosflags`
-
-This manipulator resets specific format flags on a stream.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-using namespace std;
-
-int main() {
-    cout << setiosflags(ios::showpos) << 255 << endl;  // Outputs "+255"
-    cout << resetiosflags(ios::showpos) << 255 << endl;  // Outputs "255"
-    return 0;
-}
-```
-
-### `std::setbase`
-
-This manipulator sets the numerical base (decimal, octal, or hexadecimal) for integer input/output.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-using namespace std;
-
-int main() {
-    cout << setbase(16) << 255 << endl;  // Outputs "ff"
-    return 0;
-}
-```
-
-### `std::setfill`
-
-This manipulator sets the fill character used for padding in output.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-using namespace std;
-
-int main() {
-    cout << setfill('*') << setw(10) << 123 << endl;  // Outputs "*******123"
-    return 0;
-}
-```
-
-### `std::setprecision`
-
-This manipulator sets the number of digits to be used for floating-point output.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-using namespace std;
-
-int main() {
-    double pi = 3.141592653589793;
-    cout << setprecision(5) << pi << endl;  // Outputs "3.1416"
-    return 0;
-}
-```
-
-### `std::setw`
-
-This manipulator sets the width of the next input/output field.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-using namespace std;
-
-int main() {
-    cout << setw(10) << 123 << endl;  // Outputs "       123" (7 leading spaces)
-    return 0;
-}
-```
-
-### `std::get_money`
-
-This manipulator extracts a monetary value from an input stream.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-#include <sstream>
-using namespace std;
-
-int main() {
-    istringstream iss("$123.45");
-    long double money;
-    iss >> get_money(money);
-    cout << "Extracted money: " << money << endl;  // Outputs "Extracted money: 123.45"
-    return 0;
-}
-```
-
-### `std::put_money`
-
-This manipulator inserts a monetary value into an output stream.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-using namespace std;
-
-int main() {
-    long double money = 123.45;
-    cout << put_money(money) << endl;  // Outputs "$123.45"
-    return 0;
-}
-```
-
-### `std::get_time`
-
-This manipulator extracts a time value from an input stream.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-#include <sstream>
-#include <ctime>
-using namespace std;
-
-int main() {
-    istringstream iss("12:34:56");
-    tm time;
-    iss >> get_time(&time, "%H:%M:%S");
-    cout << "Extracted time: " << put_time(&time, "%H:%M:%S") << endl;  // Outputs "Extracted time: 12:34:56"
-    return 0;
-}
-```
-
-### `std::put_time`
-
-This manipulator inserts a time value into an output stream.
-
-**Usage:**
-
-```cpp
-#include <iostream>
-#include <iomanip>
-#include <ctime>
-using namespace std;
-
-int main() {
-    time_t t = time(0);
-    tm* now = localtime(&t);
-    cout << put_time(now, "%Y-%m-%d %H:%M:%S") << endl;  // Outputs the current date and time
-    return 0;
-}
-```
-
 ## `ios` Manipulators
 
 ### Independent Flags (Switch On)
@@ -594,3 +406,46 @@ int main() {
 ```
 
 These manipulators provide extensive control over the formatting and display of output in C++ programs, making it easier to create neatly formatted and readable output for various types of data.
+
+## `istream` Manipulator
+
+### `std::ws`
+
+`std::ws` is a manipulator in C++ that consumes and discards leading whitespace from an input stream. This can be particularly useful when you need to ensure that any extraneous whitespace characters (spaces, tabs, newlines) are ignored before reading actual data from the stream.
+
+**Usage:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    string firstInput, secondInput;
+
+    // Example without std::ws
+    cout << "Enter a string: ";
+    cin >> firstInput;
+    cin.ignore(); // To consume the newline character left by cin
+
+    cout << "Enter another string: ";
+    getline(cin, secondInput);
+
+    cout << "First input without ws: " << firstInput << endl;
+    cout << "Second input without ws: " << secondInput << endl;
+
+    // Example with std::ws
+    string thirdInput, fourthInput;
+
+    cout << "Enter a string: ";
+    cin >> thirdInput;
+    cin.ignore(); // To consume the newline character left by cin
+
+    cout << "Enter another string: ";
+    getline(cin >> ws, fourthInput); // Using std::ws
+
+    cout << "Third input with ws: " << thirdInput << endl;
+    cout << "Fourth input with ws: " << fourthInput << endl;
+
+    return 0;
+}
+```

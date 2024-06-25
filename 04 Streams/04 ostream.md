@@ -1,6 +1,8 @@
-## `cout <<` methods
+## `ostream`
 
-### `cout.put()`
+The `std::ostream` class in C++ is part of the iostream library and is used for handling output streams, which are streams to which you can write data. It provides a variety of member functions for writing and manipulating output data.
+
+### `put()`
 
 - Outputs a single character.
 - **Example for `put(char c)` overload:**
@@ -17,7 +19,7 @@
   }
   ```
 
-### `cout.write()`
+### `write()`
 
 - Outputs a block of characters.
 - **Example for `write(const char* s, streamsize n)` overload:**
@@ -34,7 +36,7 @@
   }
   ```
 
-### `cout.precision()`
+### `precision()`
 
 - Sets the decimal precision for floating-point output.
 - **Example for `precision(int n)` overload:**
@@ -52,7 +54,7 @@
   }
   ```
 
-### `cout.width()`
+### `width()`
 
 - Sets the minimum field width for the next output.
 - **Example for `width(int n)` overload:**
@@ -70,7 +72,7 @@
   }
   ```
 
-### `cout.fill()`
+### `fill()`
 
 - Sets the fill character for width padding.
 - **Example for `fill(char c)` overload:**
@@ -89,7 +91,7 @@
   }
   ```
 
-### `cout.setf()`
+### `setf()`
 
 - Sets format flags for output.
 - **Example for `setf(ios_base::fmtflags flags)` overload:**
@@ -124,7 +126,7 @@
   }
   ```
 
-### `cout.unsetf()`
+### `unsetf()`
 
 - Unsets format flags.
 - **Example for `unsetf(ios_base::fmtflags mask)` overload:**
