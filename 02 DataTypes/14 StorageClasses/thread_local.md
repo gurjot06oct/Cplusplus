@@ -1,12 +1,13 @@
-// The `thread_local` storage class in C++11 allows variables to have a separate instance for each thread that uses them. Here's an explanation of the six properties of the `thread_local` storage class based on the provided information and the example code:
+The `thread_local` storage class in C++11 allows variables to have a separate instance for each thread that uses them. Here's an explanation of the six properties of the `thread_local` storage class based on the provided information and the example code:
 
-// - **Scope**: Local to the defining block.
-// - **Lifetime**: Created on block entry, destroyed on exit.
-// - **Access**: Cannot take address directly.
-// - **Memory Location**: RAM.
-// - **Initialization**: Can be initialized during declaration.
-// - **Thread Safety**: Independent instance for each thread.
+- **Scope**: Local to the defining block.
+- **Lifetime**: Created on block entry, destroyed on exit.
+- **Access**: Cannot take address directly.
+- **Memory Location**: RAM.
+- **Initialization**: Can be initialized during declaration.
+- **Thread Safety**: Independent instance for each thread.
 
+```cpp
 #include <iostream>
 #include <thread>
 using namespace std;
@@ -41,3 +42,4 @@ int main()
 
     return 0;
 }
+```
