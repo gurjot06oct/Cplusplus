@@ -6,7 +6,7 @@ In C++, the `double` data type is used to represent double-precision floating-po
 
 - **Size**: Typically occupies 8 bytes (64 bits) in memory.
 - **Precision**: Approximately 15-17 decimal digits.
-- **Range**: About \(1.7 \times 10^{-308}\) to \(1.7 \times 10^{+308}\).
+- **Range**: About $ 1.7 \times 10^{-308} $ to $1.7 \times 10^{+308} $.
 
 #### Memory Representation
 

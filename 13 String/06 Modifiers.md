@@ -106,7 +106,7 @@ The `std::string` class in C++ provides several member functions to modify the c
   ```cpp
   std::string str = "GeeksforGeeks";
   str.erase(5, 3); // str becomes "GeeksGeeks"
-  str.erase(str.begin() + 5); // str becomes "GeeksGeeks"
+  str.erase(str.begin() + 5); // str becomes "Geekseeks"
   ```
 
 ### 7. `replace`

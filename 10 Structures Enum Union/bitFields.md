@@ -2,11 +2,13 @@ Bitfields in C++ provide a way to efficiently use memory by specifying the numbe
 
 ### Syntax:
 
+```cpp
 struct BitFieldStruct {
 type member1 : width1;
 type member2 : width2;
 // More members...
 };
+```
 
 - `type`: Data type of the member.
 - `member`: Name of the member.

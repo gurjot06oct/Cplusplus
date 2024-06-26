@@ -128,7 +128,7 @@ The `std::string` class in C++ provides a variety of member functions for perfor
 - **Usage**:
   ```cpp
   std::string str = "GeeksforGeeks";
-  size_t found = str.find_first_not_of("Gekosr"); // found is 7 (first character not 'G', 'e', 'k', 'o', 's', or 'r')
+  size_t found = str.find_first_not_of("Gekosr"); // found is 5 (character not 'G', 'e', 'k', 'o', 's', or 'r')
   ```
 
 ### 10. `find_last_not_of`
@@ -143,7 +143,7 @@ The `std::string` class in C++ provides a variety of member functions for perfor
 - **Usage**:
   ```cpp
   std::string str = "GeeksforGeeks";
-  size_t found = str.find_last_not_of("Gekosr"); // found is 9 (last character not 'G', 'e', 'k', 'o', 's', or 'r')
+  size_t found = str.find_last_not_of("Gekosr"); // found is 5 (character not 'G', 'e', 'k', 'o', 's', or 'r')
   ```
 
 ### 11. `substr`
@@ -218,9 +218,7 @@ int main() {
     size_t found_last_of = str.find_last_of("kG");
     std::cout << "Last of 'k' or 'G' found at index: " << found_last_of << std::endl;
 
-    //
-
- find_first_not_of
+    // find_first_not_of
     size_t found_first_not_of = str.find_first_not_of("Gekosr");
     std::cout << "First character not in 'Gekosr' found at index: " << found_first_not_of << std::endl;
 
