@@ -113,3 +113,12 @@ std::cout << "Third character: " << greeting[2] << std::endl;
 ```
 
 Access individual characters in a string array using square brackets and the zero-based index (`greeting[0]` for the first character, `greeting[2]` for the third).
+
+#### Array Reference
+
+```cpp
+int numbers[] = {1, 2, 3, 4, 5};
+int (&refNumbers)[5] = numbers; // Creating a reference to the array
+```
+
+You can create a reference to an array and access its elements using the same zero-based index. Here, `refNumbers` is a reference to the `numbers` array. 
