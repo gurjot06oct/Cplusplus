@@ -168,9 +168,3 @@ Type traits are often used with class templates to provide compile-time informat
 Function templates can participate in function overloading. When a function template and a non-template function match equally well for a given function call, the non-template function is preferred.
 
 Function templates in C++ are fundamental for generic programming and allow for flexible and reusable code that operates seamlessly across different types. Understanding these aspects helps in effectively leveraging the power of templates in C++ development.
-
-## **Template and Overloading**
-
-Function templates can participate in function overloading. When a function template and a non-template function match equally well for a given function call, the non-template function is preferred.
-
-Function templates in C++ are fundamental for generic programming and allow for flexible and reusable code that operates seamlessly across different types. Understanding these aspects helps in effectively leveraging the power of templates in C++ development.
