@@ -132,3 +132,78 @@ x = 18
 ```
 
 This chaining technique can make the code more concise and readable, especially when performing multiple operations on the same object.
+
+## Using Scope Resolution
+
+Using the scope operator `::` with class member pointers and variable access can be a bit complex but it's a powerful feature of C++ that allows for dynamic member access and manipulation. Here's a detailed explanation and an example to illustrate its usage.
+
+### Basics
+
+1. **Scope Operator (`::`)**: Used to access static members of a class or a namespace.
+
+2. **Class Member Pointers**: Pointers that can point to a member (variable or function) of a class.
+
+### Example
+
+Consider the following class:
+
+```cpp
+#include <iostream>
+
+class MyClass {
+public:
+    int myVar;
+    void myFunction() {
+        std::cout << "myFunction called\n";
+    }
+};
+
+int main() {
+    MyClass obj;
+    obj.myVar = 10;
+
+    // Pointer to member variable
+    int MyClass::*pVar = &MyClass::myVar;
+
+    // Accessing member variable using the pointer
+    std::cout << "Value of myVar: " << obj.*pVar << std::endl;
+
+    // Pointer to member function
+    void (MyClass::*pFunc)() = &MyClass::myFunction;
+
+    // Calling member function using the pointer
+    (obj.*pFunc)();
+
+    return 0;
+}
+```
+
+### Explanation
+
+1. **Pointer to Member Variable**:
+
+   - `int MyClass::*pVar = &MyClass::myVar;`: This creates a pointer `pVar` that points to the member variable `myVar` of `MyClass`.
+   - `obj.*pVar`: This accesses the value of `myVar` in the object `obj` using the pointer `pVar`.
+
+2. **Pointer to Member Function**:
+   - `void (MyClass::*pFunc)() = &MyClass::myFunction;`: This creates a pointer `pFunc` that points to the member function `myFunction` of `MyClass`.
+   - `(obj.*pFunc)();`: This calls the member function `myFunction` in the object `obj` using the pointer `pFunc`.
+
+### Detailed Steps
+
+1. **Define the Class**: `MyClass` with a member variable `myVar` and a member function `myFunction`.
+
+2. **Create an Object**: `MyClass obj;` creates an instance of `MyClass`.
+
+3. **Assign Values**: `obj.myVar = 10;` assigns a value to the member variable.
+
+4. **Pointer to Member Variable**:
+
+   - `int MyClass::*pVar = &MyClass::myVar;` declares a pointer to a member variable of `MyClass`.
+   - `std::cout << "Value of myVar: " << obj.*pVar << std::endl;` accesses the value using the pointer.
+
+5. **Pointer to Member Function**:
+   - `void (MyClass::*pFunc)() = &MyClass::myFunction;` declares a pointer to a member function of `MyClass`.
+   - `(obj.*pFunc)();` calls the function using the pointer.
+
+By understanding and utilizing these pointers, you can dynamically access and manipulate class members in a powerful and flexible way.
