@@ -1,10 +1,10 @@
-### Input Iterators
+# Input Iterators
 
-#### Overview
+## Overview
 
 Input iterators are considered the simplest and weakest among all iterator categories based on their functionality. They are used primarily for sequential input operations, where each value is read only once, and the iterator is incremented to move to the next element. Despite their limitations, input iterators are fundamental and underpin more powerful iterator types like forward, bidirectional, and random-access iterators.
 
-#### Salient Features
+## Salient Features
 
 1. **Usability**:
 
@@ -42,7 +42,7 @@ Input iterators are considered the simplest and weakest among all iterator categ
 5. **Swappable**:
    - The values pointed to by input iterators can be swapped.
 
-#### Practical Implementation
+## Practical Implementation
 
 Let's explore some practical implementations to understand how input iterators are used in STL algorithms.
 
@@ -98,7 +98,7 @@ Let's explore some practical implementations to understand how input iterators a
      }
      ```
 
-#### Limitations
+## Limitations
 
 Input iterators have several limitations that make them the weakest type of iterator:
 

@@ -1,10 +1,10 @@
-### Output Iterators
+# Output Iterators
 
-#### Overview
+## Overview
 
 Output iterators are the exact opposite of input iterators. While input iterators allow you to read elements sequentially, output iterators allow you to write elements sequentially. They can be assigned values in a sequence but cannot be used to access values. This makes input and output iterators complementary to each other.
 
-#### Salient Features
+## Salient Features
 
 1. **Usability**:
 
@@ -40,7 +40,7 @@ Output iterators are the exact opposite of input iterators. While input iterator
 5. **Swappable**:
    - The values pointed to by these iterators can be exchanged or swapped.
 
-#### Practical Implementation
+## Practical Implementation
 
 Let's look at practical implementations using output iterators in STL algorithms:
 
@@ -95,7 +95,7 @@ Let's look at practical implementations using output iterators in STL algorithms
      }
      ```
 
-#### Limitations
+## Limitations
 
 Output iterators have several limitations that restrict their use:
 
@@ -136,7 +136,7 @@ Output iterators have several limitations that restrict their use:
      A - 1; // Not allowed with output iterators
      ```
 
-### Example Code
+# Example Code
 
 Here is an example demonstrating the use of output iterators:
 
@@ -159,7 +159,7 @@ int main() {
 }
 ```
 
-### Explanation
+# Explanation
 
 - `std::ostream_iterator` is an output iterator that writes to an output stream (`std::cout` in this case).
 - The loop assigns each value from the vector to the output iterator, which writes it to the standard output.

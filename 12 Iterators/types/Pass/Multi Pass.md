@@ -1,8 +1,8 @@
-### Multi-Pass Iterators
+# Multi-Pass Iterators
 
 Multi-pass iterators are those that allow multiple passes over the data they point to without affecting the ability to dereference the iterators after they have been incremented. In other words, you can copy the iterator, advance one of the copies, and still be able to use both the original and the copy to access their respective elements. This property is essential for algorithms that need to traverse the data more than once or keep multiple references to different positions in the data.
 
-### Properties of Multi-Pass Iterators
+## Properties of Multi-Pass Iterators
 
 To understand multi-pass iterators, let's break down the key property mentioned:
 
@@ -17,7 +17,7 @@ The code snippet `{ b=a; *a++; *b; }` demonstrates this property. Here's a detai
 - `*a++;`: This dereferences `a`, then increments it to point to the next element.
 - `*b;`: This dereferences `b`, which should still be valid and point to the same element as before `a` was incremented.
 
-### Example in C++
+## Example in C++
 
 Here's an example using forward iterators (which are multi-pass iterators) to illustrate this concept:
 
@@ -42,13 +42,13 @@ int main() {
 }
 ```
 
-### Explanation
+## Explanation
 
 - Initially, both `a` and `b` point to the first element of the vector.
 - After incrementing `a`, it points to the second element, while `b` still points to the first element.
 - Dereferencing `b` after `a` has been incremented still yields the first element, demonstrating that the operation on `a` does not affect `b`.
 
-### Multi-Pass and Single-Pass Algorithms
+## Multi-Pass and Single-Pass Algorithms
 
 Multi-pass iterators are essential for algorithms that need to traverse the data multiple times or need multiple references to different parts of the data at the same time. Examples include sorting algorithms, certain types of searches, and more complex data manipulations.
 

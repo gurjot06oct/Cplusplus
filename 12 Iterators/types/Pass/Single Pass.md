@@ -1,8 +1,8 @@
-### Single-Pass Iterators
+# Single-Pass Iterators
 
 Single-pass iterators are iterators that allow only a single traversal over the data they point to. Once an element is accessed or processed by the iterator, it may not be possible to revisit or access the same element again using the same iterator. This property restricts algorithms to a linear, one-time traversal of the data.
 
-### Properties of Single-Pass Iterators
+# Properties of Single-Pass Iterators
 
 To grasp single-pass iterators, let's analyze their key property:
 
@@ -11,7 +11,7 @@ To grasp single-pass iterators, let's analyze their key property:
 1. **Dereferencing**: Accessing the element pointed to by the iterator using the `*` operator might affect the iterator's ability to dereference it again.
 2. **Incrementing**: Moving the iterator to the next element using the `++` operator might invalidate other copies of the iterator or affect their dereferenceability.
 
-### Example in C++
+# Example in C++
 
 Let's illustrate single-pass iterators using an example with input iterators:
 
@@ -36,7 +36,7 @@ int main() {
 }
 ```
 
-### Explanation
+# Explanation
 
 - Initially, both `a` and `b` point to the first element of the vector.
 - After incrementing `a`, it points to the second element.

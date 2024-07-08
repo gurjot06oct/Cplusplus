@@ -1,10 +1,10 @@
-### Forward Iterators
+# Forward Iterators
 
-#### Overview
+## Overview
 
 Forward iterators combine the functionalities of both input and output iterators. They allow both accessing and modifying values in a sequence. While they support features from both input and output iterators, they still maintain their unidirectional nature.
 
-#### Salient Features
+## Salient Features
 
 1. **Usability**:
 
@@ -40,7 +40,7 @@ Forward iterators combine the functionalities of both input and output iterators
 5. **Swappable**:
    - The values pointed to by forward iterators can be exchanged or swapped.
 
-#### Practical Implementation
+## Practical Implementation
 
 Let's explore how forward iterators are practically implemented in STL algorithms:
 
@@ -94,7 +94,7 @@ Let's explore how forward iterators are practically implemented in STL algorithm
      }
      ```
 
-#### Limitations
+## Limitations
 
 Forward iterators have some limitations:
 
@@ -129,7 +129,7 @@ Forward iterators have some limitations:
      i1[3]; // Not allowed
      ```
 
-### Example Code
+# Example Code
 
 Here's an example demonstrating the use of forward iterators:
 
