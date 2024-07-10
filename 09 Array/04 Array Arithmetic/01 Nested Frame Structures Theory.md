@@ -80,7 +80,7 @@ The theory categorizes arrays into different dimensions:
   +------------------------------------------------------------------------+
   ```
 
-- **nD Array**: \( n \)-dimensional collection of \( (n-1) \)-dimensional arrays.
+- **nD Array**: $ n $-dimensional collection of $ (n-1) $-dimensional arrays.
 
 ### Dereferencing (`*`) and Referencing (`&`)
 

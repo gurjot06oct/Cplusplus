@@ -5,16 +5,16 @@
 #### Original Array:
 
 - Dimensions: `[m][n]`
-- Index variables: \( i \) (row index), \( j \) (column index)
-- Product of dimensions: \( m \times n \)
+- Index variables: $ i $ (row index), $ j $ (column index)
+- Product of dimensions: $ m \times n $
 
 #### Reinterpreted Array:
 
 - Dimensions: `[p][q]`
-- Index variables: \( x \) (row index), \( y \) (column index)
-- Product of dimensions: \( p \times q = m \times n \)
+- Index variables: $ x $ (row index), $ y $ (column index)
+- Product of dimensions: $ p \times q = m \times n $
 
-To convert coordinates \( (i, j) \) from the original array to \( (x, y) \) in the reinterpreted array:
+To convert coordinates $ (i, j) $ from the original array to $ (x, y) $ in the reinterpreted array:
 
 - **Conversion Formulas:**
   - $\text{flat\_index} = i \times n + j$
@@ -62,16 +62,16 @@ int main() {
 #### Original Array:
 
 - Dimensions: `[m][n][o]`
-- Index variables: \( i \) (layer index), \( j \) (row index), \( k \) (column index)
-- Product of dimensions: \( m \times n \times o \)
+- Index variables: $ i $ (layer index), $ j $ (row index), $ k $ (column index)
+- Product of dimensions: $ m \times n \times o $
 
 #### Reinterpreted Array:
 
 - Dimensions: `[p][q][r]`
-- Index variables: \( x \) (layer index), \( y \) (row index), \( z \) (column index)
-- Product of dimensions: \( p \times q \times r = m \times n \times o \)
+- Index variables: $ x $ (layer index), $ y $ (row index), $ z $ (column index)
+- Product of dimensions: $ p \times q \times r = m \times n \times o $
 
-To convert coordinates \( (i, j ,k) \) from the original array to \( (x, y, z) \) in the reinterpreted array:
+To convert coordinates $ (i, j ,k) $ from the original array to $ (x, y, z) $ in the reinterpreted array:
 
 - **Conversion Formulas:**
   - $\text{flat\_index} = i \times n \times o + j \times o + k$

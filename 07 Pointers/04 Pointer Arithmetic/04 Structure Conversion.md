@@ -5,17 +5,17 @@
 ### 1D Array:
 
 - Dimension: `[m]`
-- Index variable: \( i \)
+- Index variable: $ i $
 
 ### 2D Array:
 
 - Dimension: `[p][q]`
-- Index variables: \( x \) (row index), \( y \) (column index)
+- Index variables: $ x $ (row index), $ y $ (column index)
 
 ### 3D Array:
 
 - Dimension: `[r][s][t]`
-- Index variables: \( l \) (layer index), \( u \) (row index), \( v \) (column index)
+- Index variables: $ l $ (layer index), $ u $ (row index), $ v $ (column index)
 
 ---
 
