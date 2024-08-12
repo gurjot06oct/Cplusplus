@@ -142,3 +142,51 @@ int main() {
 ```
 
 - In `[=]`, all variables (`x` and `y`) are captured by value. Modifications to `x` or `y` inside the lambda would result in compilation errors since they are captured as constants.
+
+
+### Use of `mutable` with Lambda Functions
+
+In C++, lambda functions can capture variables from their surrounding scope in two ways: by value or by reference. By default, variables captured by value are immutable within the lambda. However, if you need to modify a captured variable, you can use the `mutable` keyword.
+
+When a lambda function captures variables by value, the `mutable` keyword allows you to modify the captured variables inside the lambda. Without `mutable`, any attempt to modify the captured variable would result in a compilation error because the captured variable is treated as `const` by default.
+
+### Example
+```cpp
+#include <iostream>
+
+int main() {
+    int x = 10;
+
+    // Lambda capturing x by value (immutable by default)
+    auto lambda1 = [x]() {
+        // x++; // This would cause a compilation error
+        std::cout << "x (inside lambda1): " << x << std::endl;
+    };
+
+    lambda1(); // Outputs: x (inside lambda1): 10
+
+    // Lambda capturing x by value but with mutable
+    auto lambda2 = [x]() mutable {
+        x++; // Allowed because of mutable
+        std::cout << "x (inside lambda2): " << x << std::endl;
+    };
+
+    lambda2(); // Outputs: x (inside lambda2): 11
+
+    // Outside the lambda, x remains unchanged
+    std::cout << "x (outside lambda): " << x << std::endl; // Outputs: x (outside lambda): 10
+
+    return 0;
+}
+```
+
+### Explanation
+- **`lambda1`:** Captures `x` by value. The variable `x` inside the lambda is immutable, so trying to modify it (e.g., `x++`) would result in a compilation error.
+  
+- **`lambda2`:** Captures `x` by value but uses the `mutable` keyword. This allows the lambda to modify the captured value. However, these modifications are local to the lambda and do not affect the original variable `x` outside the lambda.
+
+### Key Points
+- **Mutable lambdas** are useful when you need to modify captured values within the lambda function.
+- The changes made to the captured variables inside a mutable lambda do not affect the original variables outside the lambda.
+
+Would you like further clarification or more examples on this topic?
