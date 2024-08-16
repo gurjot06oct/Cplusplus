@@ -19,7 +19,7 @@ public:
     FriendA() : friendAID(101) {}
 
     void displayFriendBInfo(FriendB& objFriendB) {
-        // Compiler Error! FriendA does not recognize FriendB as a friend, so it cannot access its private members
+        // No compiler error here
         cout << "Information accessed by FriendA from FriendB: " << objFriendB.info << endl;
     }
 };
@@ -42,7 +42,7 @@ public:
     friend class FriendA; // FriendA is declared as a friend of FriendB
 
     void displayFriendAID(FriendA& objFriendA) {
-        // No compiler error here
+        // Compiler Error! FriendA does not recognize FriendB as a friend, so it cannot access its private members
         cout << "FriendA ID accessed by FriendB: " << objFriendA.friendAID << endl;
     }
 };

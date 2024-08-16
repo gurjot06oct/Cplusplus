@@ -1,3 +1,4 @@
+## Friend Functions
 Friend functions and classes in C++ offer a mechanism for accessing private and protected members of different classes. Here's a clear breakdown of their functionality and usage:
 
 ### Friend Function:

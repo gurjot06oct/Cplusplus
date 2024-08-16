@@ -1,4 +1,4 @@
-### Classes in C++
+## Classes in C++
 
 A class in C++ is a blueprint for creating objects that defines the structure and behavior of those objects. It serves as a template or a prototype, encapsulating data members (variables) and member functions (methods) that operate on that data. Classes provide a way to organize and manage related data and functionality, promoting code reusability, modularity, and abstraction.
 
