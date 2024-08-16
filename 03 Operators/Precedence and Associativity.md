@@ -34,7 +34,7 @@
 |            | `co_yield`                        | Yield-expression (C++20)                             |                 |
 | 17         | `=`                               | Direct assignment                                    |                 |
 |            | `+=`, `-=`, `*=`, `/=`, `%=`      | Compound assignment by sum, difference, product, quotient, remainder |                 |
-|            | `<<=`, `>>=`, `&=`, `^=`, `|=`    | Compound assignment by bitwise operations            |                 |
+|            | `<<=`, `>>=`, `&=`, `^=`    | Compound assignment by bitwise operations            |                 |
 | 18         | `,`                               | Comma                                                | Left-to-right   |
 
 ### Notes:

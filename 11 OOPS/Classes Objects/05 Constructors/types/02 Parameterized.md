@@ -26,17 +26,18 @@ class SchoolStudent {
 
 public:
     SchoolStudent(int rollNo, const string& name, double fee) : rollNumber(rollNo), studentName(name), tuitionFee(fee) {}
+    // SchoolStudent() = default; // Defaulted constructor
 };
 
 int main()
 {
     // Attempting to create an instance of SchoolStudent without providing necessary arguments
     // This will cause a compilation error since no default constructor is defined in SchoolStudent
+    // Use Defaulted Constructor for such Issues.
     SchoolStudent s;
     return 0;
 }
 ```
-
 ### **Uses of Parameterized Constructor**
 
 - Used to initialize the various data elements of different objects with different values when they are created.

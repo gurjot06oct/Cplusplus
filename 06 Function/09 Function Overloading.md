@@ -431,3 +431,131 @@ Functions cannot be overloaded based only on whether a parameter is a const valu
 void bar(const int a);
 void bar(int a);
 ```
+
+
+## Ambiguity
+Overloading functions where one function accepts an `int` and another accepts an `int&` can lead to ambiguity and errors in some cases. Let’s dive into why this happens and how to handle it.
+
+### Overloading with `int` and `int&`
+
+Here’s a classic example of function overloading that can lead to ambiguity:
+
+```cpp
+void func(int x) {
+    std::cout << "func(int x)" << std::endl;
+}
+
+void func(int& x) {
+    std::cout << "func(int& x)" << std::endl;
+}
+```
+
+### Ambiguity and Errors
+
+**Problem:**
+The ambiguity arises because, in C++, when you pass an `int` variable to the function, the compiler has to decide which version of `func` to call. The rules of overload resolution might sometimes result in ambiguous calls, especially with certain combinations of types.
+
+**Example of Ambiguity:**
+
+```cpp
+int a = 10;
+func(a);  // Ambiguous: Could match either func(int x) or func(int& x)
+```
+
+In this example, `a` is an `int`. The compiler tries to match `a` with both `func(int x)` and `func(int& x)`:
+
+- `func(int x)` matches because `a` is an `int`.
+- `func(int& x)` matches because `a` can be bound to an `int&` reference.
+
+### Specific Cases
+
+1. **Passing an lvalue (`int` variable)**:
+   When passing an lvalue, like `a`, both `func(int x)` and `func(int& x)` can be considered. This causes ambiguity because the compiler cannot decide which version is more appropriate without additional context.
+
+2. **Passing an rvalue**:
+   When passing an rvalue, like a literal `5`, the function `func(int x)` is chosen because rvalues are only matched by pass-by-value overloads.
+
+   ```cpp
+   func(5);  // Calls func(int x)
+   ```
+
+### Resolving Overload Ambiguity
+
+To resolve such ambiguity, you can:
+
+1. **Use Different Parameter Types:**
+   Use parameters that are clearly distinguishable. For example, use `const int&` or other types to make it clear which function should be called.
+
+   ```cpp
+   void func(int x) {
+       std::cout << "func(int x)" << std::endl;
+   }
+
+   void func(const int& x) {
+       std::cout << "func(const int& x)" << std::endl;
+   }
+   ```
+
+2. **Disambiguate with Static Casts:**
+   If you need to explicitly call one version of the function, you can use a cast to disambiguate:
+
+   ```cpp
+   func(static_cast<int&>(a));  // Calls func(int& x)
+   ```
+
+3. **Use Function Templates:**
+   If you need more flexibility, templates can help differentiate based on type properties:
+
+   ```cpp
+   template <typename T>
+   void func(T x) {
+       std::cout << "Template func(T x)" << std::endl;
+   }
+
+   template <>
+   void func<int>(int x) {
+       std::cout << "Specialized func<int>(int x)" << std::endl;
+   }
+
+   template <>
+   void func<int&>(int& x) {
+       std::cout << "Specialized func<int&>(int& x)" << std::endl;
+   }
+   ```
+
+   In this case, the specific template specialization will be used based on the argument type.
+
+## Preference Order
+
+In C++, when multiple template functions are available, the compiler prefers **template specializations** over **general template functions** if the specialization provides a more precise match for the function call. 
+
+### Explanation:
+
+- **Template Specializations**: These are specific implementations of a template for certain types or conditions. They offer a more tailored solution for specific cases.
+
+- **General Template Functions**: These serve as a catch-all for types that are not covered by specializations. They provide a generic implementation applicable to any type.
+
+### Preference Rule:
+
+When the compiler encounters a function call, it first checks if there are any template specializations that exactly match the type of the argument. If a specialization matches, it is chosen over the general template function, which provides a more generic implementation.
+
+#### Example:
+
+```cpp
+template <typename T>
+void func(T x) {
+    std::cout << "General template func(T)" << std::endl;
+}
+
+template <>
+void func<int>(int x) {
+    std::cout << "Specialized template func<int>" << std::endl;
+}
+
+int main() {
+    int a = 5;
+    func(a);  // Calls func<int>(int) because the specialization matches the type 'int'
+}
+```
+
+In this example, `func<int>(int)` is preferred over `func(T)` because the specialization for `int` provides a more specific match for the argument type.
