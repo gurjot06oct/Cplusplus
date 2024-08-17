@@ -159,3 +159,38 @@ Constructors in C++ are fundamental to object-oriented programming, but there ar
       T member;
   };
   ```
+
+### 9. **Using an Initializer List with a Constructor**
+
+- **Purpose**: The most common way to initialize class members is through an initializer list in the constructor. This method is efficient because it initializes the members directly rather than assigning values to them later.
+
+- **Example**:
+
+  ```cpp
+  #include <iostream>
+
+  class MyClass {
+  private:
+      int a;
+      double b;
+      std::string c;
+
+  public:
+      // Constructor with an initializer list
+      MyClass(int x, double y, std::string z) : a(x), b(y), c(z) {
+          // The members a, b, and c are initialized before the body of the constructor
+      }
+
+      void display() {
+          std::cout << "a: " << a << ", b: " << b << ", c: " << c << std::endl;
+      }
+  };
+
+  int main() {
+      MyClass obj = {10, 20.5, "Hello"};
+      obj.display(); // Output: a: 10, b: 20.5, c: Hello
+      return 0;
+  }
+  ```
+
+  Here, `a`, `b`, and `c` are initialized directly in the initializer list, which is more efficient than assigning them in the constructor body.
