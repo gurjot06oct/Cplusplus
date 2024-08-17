@@ -1,121 +1,292 @@
-### Introduction to Exception Handling
+# Exception Handling in C++
 
-Exception handling is a mechanism in C++ (and many other programming languages) that allows you to handle runtime errors or exceptional situations in a structured and controlled manner. Here’s a detailed exploration of the introduction to exception handling:
+In C++, exceptions are runtime anomalies or abnormal conditions that a program encounters during its execution. Exception handling is the process of managing these exceptions, allowing control to transfer from the point where the exception occurred to another part of the code.
 
-- **Definition of Exceptions**:
+Using exception handling in C++, we can ensure that our program continues running despite encountering errors.
 
-  - Exceptions are events that disrupt the normal flow of program execution due to unforeseen conditions (like runtime errors, resource exhaustion, etc.).
-  - They provide a way to transfer control from one part of the program to another in response to exceptional circumstances.
+## What is a C++ Exception?
 
-- **Importance of Handling Exceptions**:
+An exception is an unexpected problem that arises during the execution of a program, causing it to terminate abruptly. Exceptions occur at runtime.
 
-  - Exception handling promotes robust and reliable code by separating error-handling code from normal code paths.
-  - It helps in maintaining clean and readable code by centralizing error-checking logic.
-  - Allows for graceful recovery from errors and prevents crashes that could result from unhandled exceptions.
+### Types of C++ Exceptions
 
-- **Overview of C++ Exception Handling Mechanisms**:
+There are two types of exceptions in C++:
 
-  - In C++, exceptions are managed using three keywords: `try`, `throw`, and `catch`.
-  - **`try` block**: Contains the code where exceptions might occur. It's followed by one or more `catch` blocks.
+1. **Synchronous**: These occur due to errors in the input data or the program's inability to handle the current data type, such as division by zero.
+2. **Asynchronous**: These are beyond the program’s control, such as hardware failures or keyboard interrupts.
 
-  ```cpp
-  try {
-      // Code that might throw exceptions
-      // E.g., allocating memory, accessing files, etc.
-  } catch (ExceptionType1& e) {
-      // Handler for ExceptionType1
-  } catch (ExceptionType2& e) {
-      // Handler for ExceptionType2
-  } catch (...) {
-      // Catch-all handler for any other exceptions
-  }
-  ```
+## C++ try, catch, and throw
 
-  - **`throw` statement**: Used to throw an exception explicitly when a specific error condition occurs.
+C++ provides built-in features for exception handling using the keywords `try`, `catch`, and `throw`, each serving a distinct purpose.
 
-  ```cpp
-  if (condition) {
-      throw MyException("Error message");
-  }
-  ```
+### Syntax of try-catch in C++
 
-  - **`catch` block**: Handles exceptions thrown within the corresponding `try` block. It can catch exceptions of specific types or catch all exceptions using ellipsis (`...`).
+```cpp
+try {
+    // Code that might throw an exception
+    throw SomeExceptionType("Error message");
+}
+catch (ExceptionName e1) {
+    // Catch block to handle the exception
+}
+```
 
-  ```cpp
-  try {
-      // Code that might throw exceptions
-      if (errorCondition) {
-          throw MyException("Error message");
-      }
-  } catch (MyException& e) {
-      // Handler for MyException
-      std::cerr << "Exception caught: " << e.what() << std::endl;
-  } catch (std::exception& e) {
-      // Handler for other standard exceptions
-      std::cerr << "Standard exception caught: " << e.what() << std::endl;
-  } catch (...) {
-      // Catch-all handler
-      std::cerr << "Unknown exception caught" << std::endl;
-  }
-  ```
+### Explanation
 
-- **Exception Propagation**:
+1. **try**: The `try` keyword represents a block of code that may throw an exception. It’s followed by one or more `catch` blocks. If an exception occurs, the `try` block throws that exception.
+2. **catch**: The `catch` statement represents a block of code that is executed when a particular exception is thrown from the `try` block. The code to handle the exception is written inside the `catch` block.
+3. **throw**: An exception in C++ can be thrown using the `throw` keyword. When a program encounters a `throw` statement, it immediately terminates the current function and starts looking for a matching `catch` block.
 
-  - If an exception is thrown in a function and not caught within that function, it propagates up the call stack until it is caught or the program terminates.
-  - This propagation allows for centralized error handling at higher levels of the program structure.
+**Note**: Multiple `catch` statements can be used to handle different types of exceptions thrown by the `try` block.
 
-- **Termination Handler (`terminate`)**:
-  - If an exception is thrown and not caught anywhere in the program, `std::terminate` function is called by default, which usually terminates the program.
-  - Custom `terminate` handlers can be defined to perform specific actions before termination.
+## Advantages of Exception Handling in C++
 
-### Basic Concepts
+1. **Separation of Error Handling Code from Normal Code**: Traditional error handling using if-else conditions mixes error-handling code with normal code, making it less readable and maintainable. With try/catch blocks, error-handling code is separated from normal code.
+2. **Functions/Methods Handle Only Selected Exceptions**: A function can throw many exceptions but choose to handle only some of them. Unhandled exceptions are passed to the caller.
+3. **Grouping of Error Types**: Both basic types and objects can be thrown as exceptions in C++. We can create a hierarchy of exception objects, group exceptions in namespaces or classes, and categorize them according to their types.
 
-Exception handling in C++ involves several fundamental concepts that are crucial for understanding its mechanisms and usage:
+## Examples of Exception Handling in C++
 
-- **What is an Exception?**
+### Example 1
 
-  - An exception is an object (derived from `std::exception` or its subclasses) that represents an exceptional condition or error during program execution.
-  - It encapsulates details about the error, such as an error message or context-specific information.
+This example demonstrates the use of `try`, `catch`, and `throw` in exception handling.
 
-- **Throwing an Exception**:
+```cpp
+#include <iostream>
+#include <stdexcept>
+using namespace std;
 
-  - To signal that an exceptional condition has occurred, you use the `throw` keyword followed by an expression that evaluates to an exception object.
+int main() {
+    try {
+        int numerator = 10;
+        int denominator = 0;
+        int res;
 
-  ```cpp
-  if (errorCondition) {
-      throw MyException("Error message");
-  }
-  ```
+        if (denominator == 0) {
+            throw runtime_error("Division by zero not allowed!");
+        }
 
-  - The type of the thrown object can be any type, but it is commonly derived from `std::exception` or its subclasses for standardization and compatibility with the standard library.
+        res = numerator / denominator;
+        cout << "Result after division: " << res << endl;
+    } catch (const exception& e) {
+        cout << "Exception: " << e.what() << endl;
+    }
 
-- **Catching an Exception**:
+    return 0;
+}
+```
 
-  - Exceptions thrown within a `try` block can be caught and handled by corresponding `catch` blocks.
-  - Each `catch` block specifies the type of exception it can handle.
+**Output:**
 
-  ```cpp
-  try {
-      // Code that might throw exceptions
-      if (errorCondition) {
-          throw MyException("Error message");
-      }
-  } catch (MyException& e) {
-      // Handler for MyException
-      std::cerr << "Exception caught: " << e.what() << std::endl;
-  } catch (std::exception& e) {
-      // Handler for other standard exceptions
-      std::cerr << "Standard exception caught: " << e.what() << std::endl;
-  } catch (...) {
-      // Catch-all handler
-      std::cerr << "Unknown exception caught" << std::endl;
-  }
-  ```
+```
+Exception: Division by zero not allowed!
+```
 
-  - If an exception of a specific type is thrown within the `try` block, control transfers to the corresponding `catch` block that matches the type of the thrown exception.
+### Example 2
 
-- **The `try` Block**:
-  - A `try` block identifies a block of code where exceptions might occur and where exception-handling code is present.
-  - It is followed by one or more `catch` blocks that handle specific types of exceptions or a catch-all block to handle any type of exception not caught by preceding `catch` blocks.
+This example shows a simple flow of `try`/`catch` blocks.
 
-Understanding these basic concepts forms the foundation for effectively using exception handling in C++. It enables developers to write robust and resilient code that gracefully handles errors and exceptions during runtime.
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x = -1;
+
+    cout << "Before try \n";
+
+    try {
+        cout << "Inside try \n";
+        if (x < 0) {
+            throw x;
+            cout << "After throw (Never executed) \n";
+        }
+    } catch (int x) {
+        cout << "Exception Caught \n";
+    }
+
+    cout << "After catch (Will be executed) \n";
+    return 0;
+}
+```
+
+**Output:**
+
+```
+Before try
+Inside try
+Exception Caught
+After catch (Will be executed)
+```
+
+## Properties of Exception Handling in C++
+
+### Property 1: Catch-All Block
+
+The `catch(...)` block can catch all types of exceptions.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    try {
+        throw 10;
+    } catch (char* excp) {
+        cout << "Caught " << excp;
+    } catch (...) {
+        cout << "Default Exception\n";
+    }
+    return 0;
+}
+```
+
+**Output:**
+
+```
+Default Exception
+```
+
+### Property 2: No Implicit Type Conversion for Primitive Types
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    try {
+        throw 'a';
+    } catch (int x) {
+        cout << "Caught " << x;
+    } catch (...) {
+        cout << "Default Exception\n";
+    }
+    return 0;
+}
+```
+
+**Output:**
+
+```
+Default Exception
+```
+
+### Property 3: Uncaught Exceptions Terminate Program
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    try {
+        throw 'a';
+    } catch (int x) {
+        cout << "Caught ";
+    }
+    return 0;
+}
+```
+
+**Output:**
+
+```
+terminate called after throwing an instance of 'char'
+```
+
+### Property 4: Dynamic Exception Specification
+
+Dynamic exception specifications are deprecated since C++11, but here is an example for educational purposes.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void fun(int* ptr, int x) throw(int*, int) {
+    if (ptr == NULL)
+        throw ptr;
+    if (x == 0)
+        throw x;
+}
+
+int main() {
+    try {
+        fun(NULL, 0);
+    } catch (...) {
+        cout << "Caught exception from fun()";
+    }
+    return 0;
+}
+```
+
+**Output:**
+
+```
+Caught exception from fun()
+```
+
+### Property 5: Nested try/catch Blocks and Re-throwing Exceptions
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    try {
+        try {
+            throw 20;
+        } catch (int n) {
+            cout << "Handle Partially ";
+            throw;
+        }
+    } catch (int n) {
+        cout << "Handle remaining ";
+    }
+    return 0;
+}
+```
+
+**Output:**
+
+```
+Handle Partially Handle remaining
+```
+
+### Property 6: Objects Destruction Before Control Transfer
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Test {
+public:
+    Test() { cout << "Constructor of Test " << endl; }
+    ~Test() { cout << "Destructor of Test " << endl; }
+};
+
+int main() {
+    try {
+        Test t1;
+        throw 10;
+    } catch (int i) {
+        cout << "Caught " << i << endl;
+    }
+    return 0;
+}
+```
+
+**Output:**
+
+```
+Constructor of Test
+Destructor of Test
+Caught 10
+```
+
+## Limitations of Exception Handling in C++
+
+1. **Code Structure and Flow**: Exceptions can create multiple invisible exit points in the code, making it hard to read and debug.
+2. **Resource Leaks**: Improper handling of exceptions can lead to resource leaks.
+3. **Learning Curve**: Writing exception-safe code can be challenging.
+4. **Lack of Standard Practices**: There is no standard in C++ for exception handling practices, leading to variations.
+
+By understanding and utilizing these concepts and examples, you can effectively manage exceptions in C++, ensuring robust and maintainable code.
