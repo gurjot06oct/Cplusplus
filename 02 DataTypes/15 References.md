@@ -1,4 +1,4 @@
-** References in C++**
+# **References in C++**
 
 In the realm of C++ programming, references stand as a versatile and powerful feature that plays a crucial role in enhancing both the clarity and efficiency of code. They provide a mechanism for creating aliases or alternative names for variables, allowing programmers to manipulate data in ways that are both intuitive and performant.
 

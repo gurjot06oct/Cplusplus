@@ -5,7 +5,7 @@ In C++, the `static` keyword can also be used with member functions of a class t
 - They are independent of any object of the class.
 - They can be called even if no objects of the class exist.
 - They can be accessed using the class name through the scope resolution operator.
-- They can access static data members and static member functions inside or outside of the class.
+- They can access only static data members and static member functions inside or outside of the class.
 - They have a scope inside the class and cannot access the current object pointer.
 - They can be used to determine how many objects of the class have been created.
 

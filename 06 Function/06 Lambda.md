@@ -189,4 +189,54 @@ int main() {
 - **Mutable lambdas** are useful when you need to modify captured values within the lambda function.
 - The changes made to the captured variables inside a mutable lambda do not affect the original variables outside the lambda.
 
-Would you like further clarification or more examples on this topic?
+## Type Defining
+In C++, if you want to store a lambda function in a variable, you can use the `auto` keyword, which automatically deduces the type of the lambda. However, if you need to explicitly define the type of the lambda, you can use `std::function`, provided that the lambda is convertible to a `std::function` (i.e., it doesn't capture by reference). 
+
+### 1. Using `auto`
+The simplest way is to use `auto`, which lets the compiler deduce the type:
+
+```cpp
+auto lambda = [](int x, int y) {
+    return x + y;
+};
+```
+
+### 2. Using `std::function`
+If you want to explicitly specify the type, you can use `std::function`. This is particularly useful when you want to store a lambda that matches a specific function signature, or when you want to pass the lambda around as a function pointer.
+
+```cpp
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+int main() {
+    std::function<int(int, int)> lambda = [](int x, int y) {
+        return x + y;
+    };
+
+    cout << "Sum: " << lambda(5, 3) << endl;
+
+    return 0;
+}
+```
+
+### Explanation:
+- **auto:** The type of the lambda is automatically deduced by the compiler.
+- **std::function<int(int, int)>:** This declares a `std::function` object that can hold any callable entity (including lambdas, function pointers, etc.) that takes two `int` parameters and returns an `int`.
+
+### Note on Lambda Captures:
+If your lambda captures variables by value or reference, the lambda's type is unique and cannot be directly assigned to a `std::function` without some overhead. Here’s how it looks:
+
+```cpp
+int a = 10;
+auto lambda = [a](int x, int y) {
+    return x + y + a;
+};
+
+std::function<int(int, int)> func = lambda;
+```
+
+In this example, `func` can store the lambda even though it captures the variable `a` by value. 
+
+Would you like to explore more advanced usages of lambdas or any other related topics?
