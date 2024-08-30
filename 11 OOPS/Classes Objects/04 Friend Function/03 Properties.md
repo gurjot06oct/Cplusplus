@@ -27,7 +27,7 @@ public:
 
 - We have the declaration of class `FriendA`. It contains a private member `friendAID` and a public member function `displayFriendBInfo`.
 - The constructor initializes the private member `friendAID` with a value of 101.
-- The `displayFriendBInfo` function attempts to access information held by FriendB using an object of class `FriendB`. However, this results in a compiler error because `FriendA` does not recognize `FriendB` as a friend, preventing access to its private members.
+- The `displayFriendBInfo` function demonstrates accessing the information held by FriendB using an object of class `FriendB`.
 
 ### 2. FriendB Class Definition and Declaration
 
@@ -45,13 +45,13 @@ public:
         // Compiler Error! FriendA does not recognize FriendB as a friend, so it cannot access its private members
         cout << "FriendA ID accessed by FriendB: " << objFriendA.friendAID << endl;
     }
-};
+};private
 ```
 
 - We have the declaration of class `FriendB`. It contains a private member `info` and a public member function `displayFriendAID`.
 - The constructor initializes the private member `info` with a value of "Confidential Information".
 - The `friend` keyword is used to declare class `FriendA` as a friend of class `FriendB`. This grants class `FriendA` access to the private members of class `FriendB`.
-- The `displayFriendAID` function demonstrates accessing the ID of FriendA using an object of class `FriendA`.
+- The `displayFriendAID` function attempts to access the ID of FriendA using an object of class `FriendA`. However, this results in a compiler error because `FriendA` does not recognize `FriendB` as a friend, preventing access to its private members.
 
 ### 3. Main Function
 
@@ -59,17 +59,17 @@ public:
 int main() {
     FriendA alice;
     FriendB bob;
-    bob.displayFriendAID(alice); // No compiler error here
-    alice.displayFriendBInfo(bob); // Compiler Error! FriendB's member 'info' is private and cannot be accessed by FriendA
+    bob.displayFriendAID(alice); // Compiler Error! FriendA's member 'info' is private and cannot be accessed by FriendB
+    alice.displayFriendBInfo(bob);  // No compiler error here
     return 0;
 }
 ```
 
 - In the `main` function, objects of classes `FriendA` (Alice) and `FriendB` (Bob) are created.
-- `bob.displayFriendAID(alice);` demonstrates accessing the ID of FriendA using an object of class `FriendB`.
-- `alice.displayFriendBInfo(bob);` attempts to access information held by FriendB using an object of class `FriendA`, resulting in a compiler error due to the private accessibility of `info` in class `FriendB`.
+- `bob.displayFriendAID(alice);` attempts to access ID held by FriendA using an object of class `FriendB`, resulting in a compiler error due to the private accessibility of `friendAID` in class `FriendA`.
+- `alice.displayFriendBInfo(bob);` demonstrates accessing the information held by FriendB using an object of class `FriendA`.
 
-In this example, `class FriendA` has a member function `displayFriendAID()` that tries to access the private member `y` of `class B` using a `class FriendB` object. However, because `class FriendA` is not declared as a friend of `class FriendB`, it cannot access its private members. This demonstrates that friendship is not mutual, and even though `class FriendB` is a friend of `class FriendA`, the reverse is not automatically true.
+In this example, `class FriendB` has a member function `displayFriendAID()` that tries to access the private member of `class FriendA` using a `class FriendB` object. However, because `class FriendB` is not declared as a friend of `class FriendA`, it cannot access its private members. This demonstrates that friendship is not mutual, and even though `class FriendA` is a friend of `class FriendB`, the reverse is not automatically true.
 
 ## **Friendship is not Inherited:**
 
