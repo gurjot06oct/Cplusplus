@@ -1,8 +1,8 @@
-### Constructors in Multiple Inheritance
+## Constructors in Multiple Inheritance
 
 In C++, when dealing with multiple inheritance, the constructors of the base classes and the derived class are called in a specific sequence to ensure proper initialization of all inherited components. Let's break down the concept of constructors in multiple inheritance with clearer naming and examples:
 
-#### Concept
+### Concept
 
 **Constructor:** A constructor is a special member function of a class that is automatically invoked when an object of that class is created. It initializes the object's state and allocates memory as needed.
 
