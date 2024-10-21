@@ -1,6 +1,4 @@
 #include <iostream>
-#include <stdexcept>
-#include <numeric>
 #include <sstream>
 
 class Fraction {
@@ -8,17 +6,35 @@ private:
     int numerator;
     int denominator;
 
+    int gcd(int a, int b)
+    {
+        if (a == 0)
+            return b;
+        return gcd(b % a, a);
+    }
+
     // Private helper function to reduce fraction
     void reduce() {
-        int gcd = std::gcd(numerator, denominator);
-        numerator /= gcd;
-        denominator /= gcd;
+        int GCD = gcd(numerator, denominator);
+        numerator /= GCD;
+        denominator /= GCD;
 
         // Keep denominator positive
         if (denominator < 0) {
             numerator = -numerator;
             denominator = -denominator;
         }
+    }
+    int expo(int base, int pow) const {
+        int result = 1;
+        if(pow==1) return base;
+        while(pow) {
+            if (pow & 1) 
+                result = result * base;
+            base = base * base;
+            pow >>= 1;
+        }
+        return result;
     }
 
 public:
@@ -82,6 +98,15 @@ public:
         int num = numerator * other.denominator;
         int denom = denominator * other.numerator;
         return Fraction(num, denom);
+    }
+
+    // Exponentiation
+    Fraction operator^(int n) const {
+        if (n == 0){
+            return Fraction(1,1);
+        };
+        if(n<0) return Fraction(expo(denominator,-n), expo(numerator,-n));
+        return Fraction(expo(numerator,n), expo(denominator,n));
     }
 
     // Unary minus operator
@@ -150,7 +175,7 @@ public:
     }
 
     // Convert fraction to double
-    double toDouble() const {
+    operator double() const {
         return static_cast<double>(numerator) / denominator;
     }
 
@@ -198,7 +223,7 @@ int main() {
         std::cout << "You entered: " << f3 << std::endl;
 
         // Convert to double
-        std::cout << "Fraction 1 as double: " << f1.toDouble() << std::endl;
+        std::cout << "Fraction 1 as double: " << static_cast<double>(f1) << std::endl;
 
         // Inverse
         Fraction inv = f1.inverse();

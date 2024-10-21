@@ -88,14 +88,12 @@ public:
         return is;
     }
 
+    operator double()const{
+        return modulus();
+    }
     // Get modulus (magnitude) of the complex number
     double modulus() const {
         return std::sqrt(real * real + imag * imag);
-    }
-
-    // Get argument (phase angle) of the complex number
-    double argument() const {
-        return std::atan2(imag, real);
     }
 
     // Conjugate of the complex number
@@ -131,10 +129,7 @@ int main() {
 
         // Modulus
         std::cout << "Modulus of Num1: " << num1.modulus() << std::endl;
-
-        // Argument
-        std::cout << "Argument of Num1: " << num1.argument() << std::endl;
-
+        
         // Conjugate
         Complex conj = num1.conjugate();
         std::cout << "Conjugate of Num1: " << conj << std::endl;
