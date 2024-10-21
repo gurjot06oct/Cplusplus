@@ -1,6 +1,6 @@
 #include <iostream>
 #include <sstream>
-
+using namespace std;
 class Fraction {
 private:
     int numerator;
@@ -50,7 +50,7 @@ public:
     };
 
     // Constructors
-    Fraction(int num = 0, int denom = 1) : numerator(num), denominator(denom) {
+    Fraction(int num=0, int denom=1) : numerator(num), denominator(denom)  {
         if (denominator == 0) throw DivisionByZeroException();
         reduce();
     }
@@ -70,7 +70,11 @@ public:
         denominator = other.denominator;
         return *this;
     }
-
+    Fraction& operator=(const int& value) {
+        numerator = value;
+        denominator = 1;
+        return *this;
+    }
     // Addition
     Fraction operator+(const Fraction& other) const {
         int num = numerator * other.denominator + other.numerator * denominator;
@@ -118,12 +122,18 @@ public:
     bool operator==(const Fraction& other) const {
         return numerator == other.numerator && denominator == other.denominator;
     }
+    bool operator==(const int& value) const {
+        return numerator == value && denominator == 1;
+    }
 
     // Inequality check
     bool operator!=(const Fraction& other) const {
         return !(*this == other);
     }
-
+    bool operator!=(const int& value) const {
+        return !(*this == value);
+    }
+    
     // Less than
     bool operator<(const Fraction& other) const {
         return numerator * other.denominator < other.numerator * denominator;
@@ -144,6 +154,41 @@ public:
         return !(*this < other);
     }
 
+    // Overload the addition assignment operator (+=)
+    Fraction& operator+=(const Fraction& other) {
+        numerator = numerator * other.denominator + denominator * other.numerator;
+        denominator *= other.denominator;
+        reduce();
+        return *this;
+    }
+
+    // Overload the subtraction assignment operator (-=)
+    Fraction& operator-=(const Fraction& other) {
+        numerator = numerator * other.denominator - denominator * other.numerator;
+        denominator *= other.denominator;
+        reduce();
+        return *this;
+    }
+
+    // Overload the multiplication assignment operator (*=)
+    Fraction& operator*=(const Fraction& other) {
+        numerator *= other.numerator;
+        denominator *= other.denominator;
+        reduce();
+        return *this;
+    }
+
+    // Overload the division assignment operator (/=)
+    Fraction& operator/=(const Fraction& other) {
+        if (other.numerator == 0) {
+            throw std::invalid_argument("Division by zero is not allowed.");
+        }
+        numerator *= other.denominator;
+        denominator *= other.numerator;
+        reduce();
+        return *this;
+    }
+    
     // Overload stream insertion operator for output
     friend std::ostream& operator<<(std::ostream& os, const Fraction& fraction) {
         if (fraction.denominator == 1)
@@ -174,8 +219,8 @@ public:
         return is;
     }
 
-    // Convert fraction to double
-    operator double() const {
+    // Convert fraction to double (explicit only)
+    explicit operator double() const {
         return static_cast<double>(numerator) / denominator;
     }
 
@@ -191,51 +236,96 @@ public:
     }
 };
 
-// Main function for testing
 int main() {
+    // Test Constructors
+    Fraction f1;  // Default constructor (should be 0/1)
+    Fraction f2(3, 4);  // Constructor with parameters (3/4)
+    Fraction f3(f2);  // Copy constructor (copy of f2)
+    
+    cout << "f1: " << f1 << endl;  // Output: 0
+    cout << "f2: " << f2 << endl;  // Output: 3/4
+    cout << "f3 (copy of f2): " << f3 << endl;  // Output: 3/4
+
+    // Test assignment operator
+    f1 = f2;
+    cout << "After assignment, f1: " << f1 << endl;  // Output: 3/4
+    
+    // Test arithmetic operations
+    Fraction f4 = f2 + Fraction(1, 4);  // 3/4 + 1/4 = 1
+    cout << "f2 + 1/4 = " << f4 << endl;  // Output: 1
+
+    Fraction f5 = f2 - Fraction(1, 2);  // 3/4 - 1/2 = 1/4
+    cout << "f2 - 1/2 = " << f5 << endl;  // Output: 1/4
+
+    Fraction f6 = f2 * Fraction(2, 3);  // 3/4 * 2/3 = 1/2
+    cout << "f2 * 2/3 = " << f6 << endl;  // Output: 1/2
+
+    Fraction f7 = f2 / Fraction(3, 2);  // 3/4 / 3/2 = 1/2
+    cout << "f2 / 3/2 = " << f7 << endl;  // Output: 1/2
+
+    // Test exponentiation
+    Fraction f8 = f2 ^ 2;  // (3/4)^2 = 9/16
+    cout << "f2 ^ 2 = " << f8 << endl;  // Output: 9/16
+
+    Fraction f9 = f2 ^ -2;  // (3/4)^(-2) = 16/9
+    cout << "f2 ^ -2 = " << f9 << endl;  // Output: 16/9
+
+    // Test unary minus
+    Fraction f10 = -f2;  // Negation
+    cout << "-f2 = " << f10 << endl;  // Output: -3/4
+
+    // Test compound assignment operators
+    f2 += Fraction(1, 4);  // f2 += 1/4
+    cout << "f2 += 1/4, f2: " << f2 << endl;  // Output: 1
+
+    f2 -= Fraction(1, 4);  // f2 -= 1/4
+    cout << "f2 -= 1/4, f2: " << f2 << endl;  // Output: 3/4
+
+    f2 *= Fraction(2, 3);  // f2 *= 2/3
+    cout << "f2 *= 2/3, f2: " << f2 << endl;  // Output: 1/2
+
+    f2 /= Fraction(1, 2);  // f2 /= 1/2
+    cout << "f2 /= 1/2, f2: " << f2 << endl;  // Output: 1
+
+    // Test comparison operators
+    cout << boolalpha;
+    cout << "f2 == 1: " << (f2 == 1) << endl;  // Output: true
+    cout << "f2 != 1: " << (f2 != 1) << endl;  // Output: false
+    cout << "f5 < f6: " << (f5 < f6) << endl;  // Output: true
+    cout << "f5 > f6: " << (f5 > f6) << endl;  // Output: false
+    cout << "f5 <= f6: " << (f5 <= f6) << endl;  // Output: true
+    cout << "f5 >= f6: " << (f5 >= f6) << endl;  // Output: false
+
+    // Test double conversion
+    double d = static_cast<double>(f2);
+    cout << "f2 as double: " << d << endl;  // Output: 1.0
+
+    // Test inverse and abs
+    Fraction f11 = f6.inverse();  // Inverse of 1/2 should be 2/1
+    cout << "Inverse of f6: " << f11 << endl;  // Output: 2
+
+    Fraction f12 = f10.abs();  // Absolute value of -3/4 is 3/4
+    cout << "Absolute value of f10: " << f12 << endl;  // Output: 3/4
+
+    // Test input
+    Fraction f13;
+    cout << "Enter a fraction (e.g., 3/5): ";
+    cin >> f13;
+    cout << "You entered: " << f13 << endl;
+
+    // Test exception handling
     try {
-        Fraction f1(3, 4);
-        Fraction f2(5, 6);
-        Fraction f3;
-
-        std::cout << "Fraction 1: " << f1 << std::endl;
-        std::cout << "Fraction 2: " << f2 << std::endl;
-
-        // Addition
-        Fraction sum = f1 + f2;
-        std::cout << "Sum: " << sum << std::endl;
-
-        // Subtraction
-        Fraction diff = f1 - f2;
-        std::cout << "Difference: " << diff << std::endl;
-
-        // Multiplication
-        Fraction prod = f1 * f2;
-        std::cout << "Product: " << prod << std::endl;
-
-        // Division
-        Fraction quot = f1 / f2;
-        std::cout << "Quotient: " << quot << std::endl;
-
-        // Input Fraction
-        std::cout << "Enter a fraction (e.g., 5/7 or 3): ";
-        std::cin >> f3;
-        std::cout << "You entered: " << f3 << std::endl;
-
-        // Convert to double
-        std::cout << "Fraction 1 as double: " << static_cast<double>(f1) << std::endl;
-
-        // Inverse
-        Fraction inv = f1.inverse();
-        std::cout << "Inverse of Fraction 1: " << inv << std::endl;
-
-        // Absolute value
-        Fraction absVal = f1.abs();
-        std::cout << "Absolute value of Fraction 1: " << absVal << std::endl;
-
-    } catch (const std::exception& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+        Fraction f14(1, 0);  // This should throw a DivisionByZeroException
+    } catch (const Fraction::DivisionByZeroException& e) {
+        cout << "Caught exception: " << e.what() << endl;
     }
 
+    try {
+        Fraction f15;
+        stringstream ss("3/x");  // Invalid input
+        ss >> f15;
+    } catch (const Fraction::InvalidFractionException& e) {
+        cout << "Caught exception: " << e.what() << endl;
+    }
     return 0;
 }

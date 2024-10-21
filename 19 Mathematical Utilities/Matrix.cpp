@@ -4,7 +4,6 @@ class Matrix {
 private:
     T** data;  // Pointer to hold the dynamic 2D array
     int rows, cols;
-
     // Helper function for calculating determinant (recursive)
     T calculateDeterminant(T** mat, int n) const {
         if (n == 1) return mat[0][0];
@@ -41,68 +40,9 @@ private:
         return det;
     }
 
-    // Gaussian elimination to find rank
-    int gaussianElimination(Matrix<T>& temp) const {
-        int rank = temp.rows;
-        int row = 0, col = 0;
-
-        while (row < rank && col < rank) {
-            if (temp[row][col] == 0) {
-                bool found = false;
-                for (int i = row + 1; i < rank; ++i) {
-                    if (temp[i][col] != 0) {
-                        for (int j = 0; j < rank; ++j) {
-                            T tempVal = temp[row][j];
-                            temp[row][j] = temp[i][j];
-                            temp[i][j] = tempVal;
-                        }
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found) {
-                    col++;
-                    continue;
-                }
-            }
-
-            T inv = 1 / temp[row][col];
-            for (int i = col; i < rank; ++i) {
-                temp[row][i] *= inv;
-            }
-
-            for (int i = 0; i < rank; ++i) {
-                if (i != row && temp[i][col] != 0) {
-                    T factor = temp[i][col];
-                    for (int j = col; j < rank; ++j) {
-                        temp[i][j] -= factor * temp[row][j];
-                    }
-                }
-            }
-            row++;
-            col++;
-        }
-
-        // Count non-zero rows
-        int nonZeroRows = 0;
-        for (int i = 0; i < rank; ++i) {
-            bool isNonZero = false;
-            for (int j = 0; j < rank; ++j) {
-                if (temp[i][j] != 0) {
-                    isNonZero = true;
-                    break;
-                }
-            }
-            if (isNonZero) {
-                nonZeroRows++;
-            }
-        }
-
-        return nonZeroRows;
-    }
 public:
-    // Constructor
+    // Constructors
+    Matrix() : rows(0), cols(0) {}
     Matrix(int r, int c) : rows(r), cols(c) {
         // Allocate memory for the dynamic 2D array
         data = new T*[rows];
@@ -200,19 +140,29 @@ public:
         return result;
     }
 
-    // Scalar Multiplication: Matrix A * scalar
-    Matrix operator*(T scalar) const {
-        Matrix<T> result(rows, cols);
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
+    // Scalar * Matrix (Matrix * Scalar)
+    template <typename U>
+    Matrix<T> operator*(U scalar) const {
+        Matrix<T> result(rows, cols);  // Create a new matrix for the result
+
+        // Multiply each element of the matrix by the scalar
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
                 result[i][j] = data[i][j] * scalar;
             }
         }
-        return result;
+        return result;  // Return the resulting matrix
+    }
+
+    // Scalar * Matrix (Matrix * Scalar - friend function)
+    template <typename U>
+    friend Matrix<T> operator*(U scalar, const Matrix<T>& mat) {
+        return mat * scalar;  // Reuse the already defined operator
     }
 
     // Scalar Division: Matrix A / scalar
-    Matrix operator/(T scalar) const {
+    template <typename U>
+    Matrix operator/(U scalar) const {
         if (scalar == 0) {
             throw std::invalid_argument("Matrix Division by zero");
         }
@@ -260,6 +210,11 @@ public:
             }
         }
         return true;
+    }
+    
+    // Inequality: Matrix A != Matrix B
+    bool operator!=(const Matrix& other) const {
+        return !(*this == other);
     }
 
     // Overload assignment operator (=)
@@ -315,6 +270,122 @@ public:
         return *this;
     }
 
+    Matrix toREF() const {
+        Matrix<T> temp(rows,cols);
+        int row = 0;
+        for (int col = 0; col < cols && row < rows; col++) {
+            // Find the pivot row (largest absolute value in column)
+            int pivotRow = row;
+            for (int i = row + 1; i < rows; i++) {
+                if (abs(temp[i][col]) > abs(temp[pivotRow][col])) {
+                    pivotRow = i;
+                }
+            }
+
+            // If the pivot is zero, skip this column
+            if (temp[pivotRow][col] == 0) {
+                continue;
+            }
+
+            // Swap the current row with the pivot row
+            if (pivotRow != row) {
+                temp.swapRows(row,pivotRow);
+            }
+
+            // Make the pivot element 1 by dividing the entire row by the pivot
+            T pivot = temp[row][col];
+            for (int i = 0; i < cols; i++) {
+                temp[row][i] /= pivot;
+            }
+
+            // Eliminate all elements below the pivot in the current column
+            for (int i = row + 1; i < rows; i++) {
+                if (temp[i][col] != 0) {
+                    T factor = temp[i][col];
+                    for (int j = 0; j < cols; j++) {
+                        temp[i][j] -= factor * temp[row][j];
+                    }
+                }
+            }
+
+            // Move to the next row
+            row++;
+        }
+        return temp;
+    }
+
+    void toRREF() {
+        // First, convert to Row Echelon Form (REF)
+        Matrix<T> temp = toREF();
+
+        int row = rows - 1;
+        for (int col = cols - 1; col >= 0 && row >= 0; col--) {
+            // Find the row with a non-zero entry in the current column
+            if (temp[row][col] != 0) {
+                // Make the leading entry in the current row 1 (already done in REF)
+                T pivot = temp[row][col];
+
+                // Eliminate all elements above the pivot in the current column
+                for (int i = row - 1; i >= 0; i--) {
+                    if (temp[i][col] != 0) {
+                        T factor = temp[i][col];
+                        for (int j = 0; j < cols; j++) {
+                            temp[i][j] -= factor * temp[row][j];
+                        }
+                    }
+                }
+                row--;  // Move to the previous row
+            }
+        }
+    }
+
+    // Rank calculation using Gaussian elimination
+    int rank() const {
+        // First, convert the matrix to Row Echelon Form (REF)
+        Matrix<T> temp = toREF();
+
+        int _rank = 0;
+        // Count the number of non-zero rows in the REF
+        for (int row = 0; row < rows; row++) {
+            bool isNonZeroRow = false;
+            for (int col = 0; col < cols; col++) {
+                if ((*this)[row][col] != 0) {
+                    isNonZeroRow = true;
+                    break;
+                }
+            }
+            if (isNonZeroRow) {
+                _rank++;
+            }
+        }
+        return _rank;
+    }
+
+
+    void swapRows(int row1, int row2) {
+        if (row1 < 0 || row2 < 0 || row1 >= rows || row2 >= rows) {
+            throw std::invalid_argument("Invalid row indices.");
+            return;
+        }
+
+        // Swap entire rows
+        for (int col = 0; col < cols; col++) {
+            std::swap(data[row1][col], data[row2][col]);
+        }
+    }
+
+    void swapColumns(int col1, int col2) {
+        if (col1 < 0 || col2 < 0 || col1 >= cols || col2 >= cols) {
+            throw std::invalid_argument("Invalid row indices.");
+            return;
+        }
+
+        // Swap entire columns
+        for (int row = 0; row < rows; row++) {
+            std::swap(data[row][col1], data[row][col2]);
+        }
+    }
+
     // Overload operator^ for matrix exponentiation (binary exponentiation)
     Matrix operator^(int n) const {
         if (rows != cols) {
@@ -325,7 +396,7 @@ public:
         Matrix<T> result(rows, cols);
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < cols; ++j) {
-                result[i][j] = (i == j) ? 1 : 0;  // Identity matrix
+                result[i][j] = i == j;  // Identity matrix
             }
         }
 
@@ -358,37 +429,62 @@ public:
     }
 
     // Utility function to calculate the inverse of the matrix
-    Matrix<T> inverse() const {
+    Matrix inverse() const {
         if (rows != cols) {
             throw std::invalid_argument("Matrix must be square to compute inverse.");
         }
+        int n = rows;  // Assume 'rows' is the size of the matrix (n x n)
 
-        T det = determinant();
-        if (det == 0) {
-            throw std::invalid_argument("Matrix is singular and cannot be inverted.");
-        }
+        // Create a copy of the original matrix (A) and the identity matrix (I)
+        Matrix augmentedA(*this);  // Copy of the original matrix A
+        Matrix I(n, n);            // Identity matrix I
+        I.setIdentity();           // Initialize I as the identity matrix
 
-        Matrix<T> adj = adjoint();
-        Matrix<T> inv(rows, cols);
+        // Perform Gaussian elimination to convert A to the identity matrix
+        for (int i = 0; i < n; i++) {
+            // Find the pivot row and swap if necessary
+            int maxRow = i;
+            for (int j = i + 1; j < n; j++) {
+                if (std::abs(augmentedA[j][i]) > std::abs(augmentedA[maxRow][i])) {
+                    maxRow = j;
+                }
+            }
 
-        // Divide adjoint by determinant to get inverse
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
-                inv[i][j] = adj[i][j] / det;
+            // If pivot is zero, the matrix is singular (no inverse)
+            if (augmentedA[maxRow][i] == 0) {
+                throw std::invalid_argument("Matrix is singular and cannot be inverted.");
+            }
+
+            // Swap the current row with the pivot row
+            augmentedA.swapRows(i, maxRow);
+            I.swapRows(i, maxRow);  // Also swap corresponding rows in identity matrix
+
+            // Normalize the pivot row
+            double pivot = augmentedA[i][i];
+            for (int j = 0; j < n; j++) {
+                augmentedA[i][j] /= pivot;
+                I[i][j] /= pivot;  // Perform the same row operation on I
+            }
+
+            // Eliminate other rows
+            for (int j = 0; j < n; j++) {
+                if (i != j) {
+                    double factor = augmentedA[j][i];
+                    for (int k = 0; k < n; k++) {
+                        augmentedA[j][k] -= factor * augmentedA[i][k];
+                        I[j][k] -= factor * I[i][k];  // Apply same elimination to I
+                    }
+                }
             }
         }
-
-        return inv;
-    }
-
-    // Rank calculation using Gaussian elimination
-    int rank() const {
-        Matrix<T> temp = *this;
-        return gaussianElimination(temp);
+        return I;
     }
 
     // Trace: Sum of diagonal elements
     T trace() const {
+        if (rows != cols) {
+            throw std::invalid_argument("Matrix must be square to compute trace.");
+        }
         T sum = 0;
         for (int i = 0; i < rows; ++i) {
             sum += data[i][i];
@@ -397,7 +493,7 @@ public:
     }
 
     // Adjoint of the matrix (adj(A))
-    Matrix<T> adjoint() const {
+    Matrix adjoint() const {
         if (rows != cols) {
             throw std::invalid_argument("Matrix must be square to compute adjoint.");
         }
@@ -437,22 +533,28 @@ public:
         return submatrix.determinant();
     }
 
+    void setIdentity() {
+        // Ensure that the matrix is square (for identity matrix)
+        if (rows != cols) {
+            throw std::invalid_argument("Matrix must be square to set identity.");
+        }
+
+        // Set all elements to 0 initially
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                data[i][j] = 0;
+            }
+        }
+
+        // Set the diagonal elements to 1
+        for (int i = 0; i < rows; i++) {
+            data[i][i] = 1;
+        }
+    }
+
     // Check if the matrix is square
     bool isSquare() const {
         return rows == cols;
-    }
-
-    // Check if the matrix is symmetric (A == A^T)
-    bool isSymmetric() const {
-        if (!isSquare()) return false;
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
-                if (data[i][j] != data[j][i]) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     // Check if the matrix is an identity matrix
@@ -461,6 +563,19 @@ public:
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < cols; ++j) {
                 if ((i == j && data[i][j] != 1) || (i != j && data[i][j] != 0)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Check if the matrix is symmetric (A == A^T)
+    bool isSymmetric() const {
+        if (!isSquare()) return false;
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                if (data[i][j] != data[j][i]) {
                     return false;
                 }
             }
@@ -507,63 +622,8 @@ public:
         return true;
     }
 
-    // Check if the matrix is singular (determinant is 0)
-    bool isSingular() const {
-        return determinant() == 0;
-    }
-
-        // Rotate the matrix by 90, 180, or 270 degrees
-    void rotate(int degrees) {
-        if (!isSquare()) {
-            std::cout << "Matrix must be square for rotation!" << std::endl;
-            return;
-        }
-
-        if (degrees == 90) {
-            transpose();
-            reverseRows();
-        } else if (degrees == 180) {
-            reverseRows();
-            reverseColumns();
-        } else if (degrees == 270) {
-            transpose();
-            reverseColumns();
-        } else {
-            std::cout << "Invalid rotation degree!" << std::endl;
-        }
-    }
-
-    // Resize the matrix (new number of rows and columns)
-    void resize(int newRows, int newCols) {
-        T** newData = new T*[newRows];
-        for (int i = 0; i < newRows; ++i) {
-            newData[i] = new T[newCols];
-        }
-
-        // Copy existing elements (fits within new size)
-        int copyRows = std::min(newRows, rows);
-        int copyCols = std::min(newCols, cols);
-
-        for (int i = 0; i < copyRows; ++i) {
-            for (int j = 0; j < copyCols; ++j) {
-                newData[i][j] = data[i][j];
-            }
-        }
-
-        // Clean up old data
-        for (int i = 0; i < rows; ++i) {
-            delete[] data[i];
-        }
-        delete[] data;
-
-        // Update matrix dimensions
-        rows = newRows;
-        cols = newCols;
-        data = newData;
-    }
-
     // Flatten the matrix into a 1D array
-    T* flatten() const {
+    T*& flatten() const {
         T* flatArray = new T[rows * cols];
         int k = 0;
         for (int i = 0; i < rows; ++i) {
@@ -575,90 +635,21 @@ public:
     }
 
     // Reshape the matrix while keeping the data
-    bool reshape(int newRows, int newCols) {
-        if (rows * cols != newRows * newCols) {
-            std::cout << "Cannot reshape: number of elements must remain the same!" << std::endl;
-            return false;
+    Matrix<T> reshape(int newRows, int newCols) const {
+        Matrix<T> temp(newRows,newCols);
+        if ((rows * cols) != (newRows * newCols)) {
+            throw std::invalid_argument("Cannot reshape: number of elements must remain the same!");
+            return temp;
         }
-
-        T* flatData = flatten();
-        resize(newRows, newCols);
 
         int k = 0;
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < cols; ++j) {
-                data[i][j] = flatData[k++];
+                temp[k/newCols][k%newCols] = data[i][j];
+                k++;
             }
         }
-
-        delete[] flatData;
-        return true;
-    }
-
-    // Concatenate matrices horizontally (side by side)
-    Matrix<T> concatenateHorizontally(const Matrix<T>& other) const {
-        if (rows != other.rows) {
-            std::cout << "Matrix dimensions must match for horizontal concatenation!" << std::endl;
-            throw std::invalid_argument("Row dimensions do not match!");
-        }
-
-        Matrix<T> result(rows, cols + other.cols);
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
-                result.data[i][j] = data[i][j];
-            }
-            for (int j = 0; j < other.cols; ++j) {
-                result.data[i][cols + j] = other.data[i][j];
-            }
-        }
-        return result;
-    }
-
-    // Concatenate matrices vertically (one on top of the other)
-    Matrix<T> concatenateVertically(const Matrix<T>& other) const {
-        if (cols != other.cols) {
-            std::cout << "Matrix dimensions must match for vertical concatenation!" << std::endl;
-            throw std::invalid_argument("Column dimensions do not match!");
-        }
-
-        Matrix<T> result(rows + other.rows, cols);
-        for (int i = 0; i < rows; ++i) {
-            for (int j = 0; j < cols; ++j) {
-                result.data[i][j] = data[i][j];
-            }
-        }
-        for (int i = 0; i < other.rows; ++i) {
-            for (int j = 0; j < other.cols; ++j) {
-                result.data[rows + i][j] = other.data[i][j];
-            }
-        }
-        return result;
-    }
-
-    void reverseRows() {
-        for (int i = 0; i < rows; ++i) {
-            int left = 0, right = cols - 1;
-            while (left < right) {
-                T temp = data[i][left];
-                data[i][left] = data[i][right];
-                data[i][right] = temp;
-                left++;
-                right--;
-            }
-        }
-    }
-
-    void reverseColumns() {
-        for (int i = 0; i < cols; ++i) {
-            int top = 0, bottom = rows - 1;
-            while (top < bottom) {
-                T temp = data[top][i];
-                data[top][i] = data[bottom][i];
-                data[bottom][i] = temp;
-                top++;
-                bottom--;
-            }
-        }
+        return temp;
     }
 
     // Friend function to overload the input (>>) operator
@@ -683,7 +674,8 @@ public:
         return out;
     }
 };
-
 int main() {
+    Matrix<int> some(3,3);
+    some.setIdentity();
     return 0;
 }

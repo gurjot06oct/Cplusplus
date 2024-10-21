@@ -75,7 +75,7 @@ public:
 
     // Overload insertion operator for output
     friend std::ostream& operator<<(std::ostream& os, const Complex& num) {
-        os << num.real << " + " << num.imag << "i";
+        os << num.real << (num.imag >= 0 ? " + ": " - ") << std::abs(num.imag) << "i";
         return os;
     }
 
@@ -88,9 +88,10 @@ public:
         return is;
     }
 
-    operator double()const{
+    operator double() const{
         return modulus();
     }
+    
     // Get modulus (magnitude) of the complex number
     double modulus() const {
         return std::sqrt(real * real + imag * imag);
